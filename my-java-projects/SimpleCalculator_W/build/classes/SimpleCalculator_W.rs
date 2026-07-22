@@ -1,0 +1,10 @@
+com.mycompany.simplecalculator.SimpleCalculator_W$8
+com.mycompany.simplecalculator.SimpleCalculator_W$9
+com.mycompany.simplecalculator.SimpleCalculator_W$6
+com.mycompany.simplecalculator.SimpleCalculator_W$7
+com.mycompany.simplecalculator.SimpleCalculator_W$4
+com.mycompany.simplecalculator.SimpleCalculator_W
+com.mycompany.simplecalculator.SimpleCalculator_W$5
+com.mycompany.simplecalculator.SimpleCalculator_W$2
+com.mycompany.simplecalculator.SimpleCalculator_W$3
+com.mycompany.simplecalculator.SimpleCalculator_W$1
