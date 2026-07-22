@@ -1,0 +1,49 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    font-family: body-font;
+}
+
+:root {
+    --primary-color: #18635c;
+    --primary-hover: #13504a;
+    --dark-color: #2b1b54;
+    --light-purple: #554A73;
+    --accent-yellow: #ffb703;
+    --accent-red: #e04b4b;
+    --white-color: #fff;
+    --semiblack-color: #2b1b54;
+    --grey-color: #d1d5db;
+    --label-color: #7b8393;
+}
+
+@font-face {
+    font-family: title-font;
+    src: url(Poppins/Poppins-Bold.ttf);
+}
+
+@font-face {
+    font-family: sub-title-font;
+    src: url(Poppins/Poppins-Medium.ttf);
+}
+
+@font-face {
+    font-family: body-font;
+    src: url(Poppins/Poppins-Regular.ttf);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: title-font;
+    margin: 0px;
+    padding: 0px;
+}
+
+p {
+    margin: 0px;
+    padding: 0px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
