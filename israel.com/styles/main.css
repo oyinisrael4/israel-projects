@@ -22,6 +22,7 @@
     padding: 70px;
     position: relative;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .signin-section .signin-left .signin-form-wrapper {
@@ -187,7 +188,7 @@
     flex: 1;
     height: 100%;
     overflow: hidden;
-    
+
 }
 
 .signin-section .signin-right .signin-bg-img {
@@ -205,28 +206,28 @@
     }
 
     .signin-section .signin-right {
-        flex: 0 0 25%;      
+        flex: 0 0 25%;
         width: 100%;
-        height: auto;       
+        height: auto;
     }
 
     .signin-section .signin-left {
         width: 100%;
-        min-width: 0;        
-        flex: 1;  
-        min-height: 0;           
+        min-width: 0;
+        flex: 1;
+        min-height: 0;
         height: auto;
-        overflow-y: auto;  
-        justify-content: flex-start; 
-        padding-top: 40px; 
+        overflow-y: auto;
+        justify-content: flex-start;
+        padding-top: 40px;
     }
 
     .signin-section .signin-left .signin-footer-wrapper {
-        margin-top: 30px;   
+        margin-top: 30px;
     }
 
     .signin-section .signin-left .signin-footer-wrapper .copyright-text {
-        position: static;   
+        position: static;
         bottom: auto;
     }
 }
@@ -238,7 +239,7 @@
     }
 
     .signin-section .signin-left .signin-form-wrapper {
-    min-width: 0;
+        min-width: 0;
     }
 
 }
@@ -249,19 +250,19 @@
     }
 
     .signin-section .signin-left .signin-footer-wrapper .copyright-text {
-    font-size: 12px;
+        font-size: 12px;
     }
 
 }
 
 @media all and (max-width: 350px) {
     .signin-section .signin-left .signin-form-wrapper .signin-footer {
-    font-size: 13x;
+        font-size: 13x;
     }
-    
+
     .signin-section .signin-left .signin-form-wrapper .signup-footer {
-    font-family: body-font;
-    font-size: 13px
+        font-family: body-font;
+        font-size: 13px
     }
 
 
