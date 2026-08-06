@@ -5,13 +5,15 @@ body {
 }
 
 :root {
-    --primary-color: #003495;
-    --secondary-color: #FF6600;
+    --primary-color: #f4a046;
+    --secondary-color: #614c31;
     --white-color: #fff;
     --semiblack-color: #444;
     --gray-color: #ccc;
-    --input-bg-color: #F5F5F4;
+    --input-bg-color: #f3f0ed;
     --black-color: #000;
+    --footer-color: #6f481d;
+    --border:#5d5d5d;
 }
 
 @font-face {
