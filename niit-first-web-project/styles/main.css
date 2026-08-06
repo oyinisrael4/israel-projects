@@ -260,53 +260,12 @@ header .header-wrapper .header-contact-container .btn i {
 }
 
 
-/* .landing-page-bg .overlay-bg .side-icon-bar {
-    position: absolute;
-    right: 0px;
-    top: 32%;
-    display: flex;
-    flex-direction: column;
-    z-index: 60;
-}
-
-.landing-page-bg .overlay-bg .side-icon-bar .side-icon {
-    width: 35px;
-    height: 35px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.landing-page-bg .overlay-bg .side-icon-bar .side-icon i {
-    color: var(--white-color);
-    font-size: 15px;
-}
-
-.landing-page-bg .overlay-bg .side-icon-bar .side-icon-1 {
-    background: #3d5aa1;
-}
-
-.landing-page-bg .overlay-bg .side-icon-bar .side-icon-2 {
-    background: #7b5eea;
-}
-
-.landing-page-bg .overlay-bg .side-icon-bar .side-icon-3 {
-    background: #4dc7c2;
-}
-
-.landing-page-bg .overlay-bg .side-icon-bar .side-icon-4 {
-    background: var(--primary-color);
-} */
-
-
 .index-content-container {
     position: absolute;
     right: 0px;
     left: 0px;
     top: 100%;
     display: flex;
-    /* align-items: center; */
     flex-direction: column;
     justify-content: center;
 }
@@ -743,8 +702,6 @@ header .header-wrapper .header-contact-container .btn i {
 
 /* SERVICES */
 
-
-
 .index-content-container .content-container.services-content-container {
     background-color: var(--black-color);
     padding: 90px 0px;
@@ -774,15 +731,12 @@ header .header-wrapper .header-contact-container .btn i {
     border: 1px solid var(--primary-color);
     background-color: var(--secondary-color);
     border-radius: 3px;
-
-
 }
 
 .services-wrapper .services-header .services-tag i {
     color: var(--primary-color);
     font-size: 14px;
 }
-
 
 .services-wrapper .services-header .services-tag span {
     font-family: sub-title-font;
@@ -828,7 +782,6 @@ header .header-wrapper .header-contact-container .btn i {
     height: 50px;
     padding: 0px 5px 0px 26px;
     background: var(--primary-color);
-    border: none;
     border-radius: 6px;
     color: var(--black-color);
     font-family: sub-title-font;
@@ -841,7 +794,6 @@ header .header-wrapper .header-contact-container .btn i {
     cursor: pointer;
     border: 1px solid transparent;
     transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-
 }
 
 .services-wrapper .services-header .services-actions .services-btn:hover {
@@ -963,7 +915,6 @@ header .header-wrapper .header-contact-container .btn i {
     flex: 1;
 }
 
-
 .services-wrapper .services-cards-container .services-card .services-card-content .services-card-title-row {
     display: flex;
     align-items: center;
@@ -998,7 +949,6 @@ header .header-wrapper .header-contact-container .btn i {
 
 .services-wrapper .services-cards-container .services-card:hover .services-card-content .services-card-title-row .services-card-arrow {
     background: var(--black-color);
-
 }
 
 .services-wrapper .services-cards-container .services-card .services-card-content .services-card-title-row .services-card-arrow i {
@@ -1042,7 +992,6 @@ header .header-wrapper .header-contact-container .btn i {
 .services-wrapper .services-cards-container .services-card:hover .services-card-content p {
     color: var(--black-color);
 }
-
 
 .services-wrapper .services-footer {
     display: flex;
@@ -1446,7 +1395,6 @@ header .header-wrapper .header-contact-container .btn i {
     display: flex;
     align-items: center;
     gap: 14px;
-
 }
 
 .how-we-works-wrapper .how-we-works-footer .how-we-works-footer-top .how-we-works-avatars {
@@ -1489,7 +1437,6 @@ header .header-wrapper .header-contact-container .btn i {
     font-size: 15px;
     color: var(--black-color);
     margin-left: 6px;
-
 }
 
 .how-we-works-wrapper .how-we-works-footer .how-we-works-footer-actions {
@@ -1522,7 +1469,6 @@ header .header-wrapper .header-contact-container .btn i {
     background: var(--black-color);
     color: var(--white-color);
 }
-
 
 .how-we-works-wrapper .how-we-works-footer .how-we-works-footer-actions .how-we-works-btn-dark {
     background: var(--black-color);
@@ -1664,7 +1610,6 @@ header .header-wrapper .header-contact-container .btn i {
     padding-bottom: 24px;
 }
 
-
 .team-wrapper .how-we-works-cards .team-card .team-card-divider {
     width: 100%;
     height: 1px;
@@ -1712,17 +1657,13 @@ header .header-wrapper .header-contact-container .btn i {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    transition: background 0.25s ease;
 }
-
-
 
 .team-wrapper .how-we-works-cards .team-card .team-card-socials .team-card-social-icon i {
     color: var(--primary-color);
     font-size: 14px;
     transition: color 0.25s ease;
 }
-
 
 .team-wrapper .how-we-works-cards .team-card .team-card-socials .team-card-social-icon:hover i {
     color: var(--semiblack-color);
@@ -1753,7 +1694,6 @@ header .header-wrapper .header-contact-container .btn i {
     margin-right: auto;
     border: 1px solid var(--border);
     margin-bottom: 12px;
-
 }
 
 .team-wrapper .how-we-works-footer .team-footer-badge {
@@ -1873,7 +1813,6 @@ header .header-wrapper .header-contact-container .btn i {
     width: 80%;
     height: 80%;
     object-fit: contain;
-
 }
 
 .appointment-wrapper .appointment-left .appointment-info-card {
@@ -1905,14 +1844,11 @@ header .header-wrapper .header-contact-container .btn i {
     justify-content: center;
     flex-shrink: 0;
     transition: background 0.2s ease;
-
 }
 
 .appointment-wrapper .appointment-info-card .appointment-info-item:hover .appointment-info-icon {
     background: var(--white-color);
 }
-
-
 
 .appointment-wrapper .appointment-info-card .appointment-info-item .appointment-info-icon i {
     color: var(--black-color);
@@ -2106,7 +2042,6 @@ header .header-wrapper .header-contact-container .btn i {
     display: flex;
     align-items: center;
     gap: 16px;
-
 }
 
 .testimonial-wrapper .testimonial-badges .testimonial-badge .testimonial-badge-icon {
@@ -2262,7 +2197,6 @@ header .header-wrapper .header-contact-container .btn i {
     margin-top: 4px;
 }
 
-
 .testimonial-wrapper .testimonial-dots {
     display: flex;
     align-items: center;
@@ -2344,8 +2278,7 @@ header .header-wrapper .header-contact-container .btn i {
     background: var(--primary-color);
     border-radius: 50%;
     padding: 8px;
-    transition: color 0.3s ease;
-
+    transition: color 0.3s ease, background 0.3s ease;
 }
 
 .testimonial-wrapper .testimonial-logos .testimonial-logo-item:hover i {
@@ -2362,7 +2295,6 @@ header .header-wrapper .header-contact-container .btn i {
 
 /* END OF TESTIMONIALS */
 
-/* BLOG CSS */
 /* BLOG CSS */
 
 .testimonial-wrapper .testimonial-top .blog-btn-wrapper {
@@ -2409,7 +2341,6 @@ header .header-wrapper .header-contact-container .btn i {
     font-size: 16px;
     color: var(--black-color);
     transition: transform 0.6s ease;
-    ;
 }
 
 .testimonial-wrapper .testimonial-top .blog-btn-wrapper .blog-btn:hover .blog-btn-icon i {
@@ -2593,10 +2524,6 @@ header .header-wrapper .header-contact-container .btn i {
     width: 33.33%;
 }
 
-.footer-wrapper .footer-links-card .footer-contact-column {
-    width: 33.33%;
-}
-
 .footer-wrapper .footer-links-card h3 {
     font-family: title-font;
     font-size: 20px;
@@ -2635,6 +2562,7 @@ header .header-wrapper .header-contact-container .btn i {
 }
 
 .footer-wrapper .footer-links-card .footer-contact-column {
+    width: 33.33%;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -2647,7 +2575,6 @@ header .header-wrapper .header-contact-container .btn i {
     cursor: pointer;
     transition: all 0.2s ease;
 }
-
 
 .footer-wrapper .footer-links-card .footer-contact-column .footer-contact-item .footer-contact-icon {
     width: 46px;
@@ -2763,8 +2690,6 @@ header .header-wrapper .header-contact-container .btn i {
     font-size: 16px;
 }
 
-
-
 .footer-wrapper .footer-bottom .footer-bottom-links {
     display: flex;
     align-items: center;
@@ -2781,7 +2706,5 @@ header .header-wrapper .header-contact-container .btn i {
 .footer-wrapper .footer-bottom .footer-bottom-links a:hover {
     color: var(--white-color);
 }
-
-
 
 /* END OF FOOTER CSS */
