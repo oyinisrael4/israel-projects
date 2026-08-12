@@ -2877,3 +2877,62 @@ header .header-wrapper .header-contact-container .btn i {
 
 /* END OF PROJECTS PAGE */
 
+
+.projects-wrapper .projects-cards-container .project-card.blog-card {
+    width: 49%;
+}
+
+.projects-wrapper .projects-cards-container .project-card .project-card-info.blog-card-info-wrapper{
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 8px;
+}
+
+.projects-wrapper .projects-cards-container .project-card .project-card-info.blog-card-info-wrapper .blog-card-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.projects-wrapper .projects-cards-container .project-card .project-card-info .blog-card-date {
+    position: relative;
+    margin-left: -10px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+}
+
+.projects-wrapper .projects-cards-container .project-card .project-card-info .blog-card-date i {
+    color: var(--primary-color);
+    font-size: 30px;
+}
+
+.projects-wrapper .projects-cards-container .project-card .project-card-info .blog-card-date span {
+    font-family: sub-title-font;
+    font-size: 16px;
+    color: var(--white-color);
+}
+
+
+
+.projects-wrapper .projects-cards-container .project-card .project-card-info .blog-card-info h3 {
+    font-family: title-font;
+    font-size: 19px;
+    color: var(--white-color);
+    transition: all 0.6s ease;
+}
+
+.projects-wrapper .projects-cards-container .project-card:hover .project-card-info .blog-card-info h3 {
+    color: var(--primary-color);
+}
+
+.projects-wrapper .projects-cards-container .project-card .project-card-info .blog-card-info .project-card-arrow:hover {
+    background: var(--black-color);
+}
+
+.projects-wrapper .projects-cards-container .project-card .project-card-info .blog-card-info .project-card-arrow:hover i {
+    color: var(--white-color);
+}
