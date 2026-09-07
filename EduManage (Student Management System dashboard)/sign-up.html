@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="styles/icons-1.11.3/font/bootstrap-icons.css" type="text/css" rel="stylesheet" />
+    <link href="styles/constants.css" type="text/css" rel="stylesheet" />
+    <link href="styles/main.css" type="text/css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="all-images/icon-images/icon.png" />
+    <title>NIIT - Sign Up</title>
+</head>
+
+<body>
+
+    <!-- Alert Modal Container (from reference webtesting.com) -->
+    <div class="alert-overlay" id="alert"></div>
+
+    <div class="login-page-wrapper">
+        <div class="login-card">
+
+            <div class="login-form-panel">
+                <div class="login-form-inner">
+
+                    <div class="login-logo-wrapper">
+                        <img src="all-images/icon-images/niit-logo.png" alt="NIIT" />
+                    </div>
+
+                    <div class="login-heading-wrapper">
+                        <h1>Sign Up</h1>
+                        <p>Already have an account? <a href="login.html">Sign In</a></p>
+                    </div>
+
+                    <form class="login-form" id="signupForm">
+                        <div class="login-input-wrapper">
+                            <label for="fullName">Fullname</label>
+                            <input type="text" id="fullName" placeholder="Enter your fullname" />
+                        </div>
+
+                        <div class="login-input-wrapper">
+                            <label for="emailAddress">Email Address</label>
+                            <input type="email" id="emailAddress" placeholder="Enter your email" />
+                        </div>
+
+                        <div class="login-input-wrapper">
+                            <label for="phoneNumber">Phone Number</label>
+                            <input type="tel" id="phoneNumber" placeholder="Enter your phone number" />
+                        </div>
+
+                        <div class="login-input-wrapper">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" placeholder="Enter your password" />
+                        </div>
+
+                        <button type="submit" id="submitBtnId" class="btn login-submit-btn">Sign Up</button>
+                    </form>
+
+                    <div class="login-social-row">
+                        <span>Or Sign Up with</span>
+                        <div class="login-social-wrapper">
+                            <button type="button" class="login-social-btn login-social-btn-facebook"
+                                title="Login with Facebook">
+                                <i class="bi bi-facebook"></i>
+                            </button>
+                            <button type="button" class="login-social-btn login-social-btn-twitter"
+                                title="Login with Twitter">
+                                <i class="bi bi-twitter"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="login-hero-panel">
+                <div class="login-hero-shape"></div>
+                <div class="login-hero-content">
+                    <h2>Join<br>NIIT.</h2>
+                    <p>Create your account to manage students, teachers, attendance, and everything else happening at your school.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="JS/api.js"></script>
+    <script src="JS/auth.js"></script>
+</body>
+
+</html>

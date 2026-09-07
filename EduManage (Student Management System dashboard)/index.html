@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="styles/icons-1.11.3/font/bootstrap-icons.css" type="text/css" rel="stylesheet" />
+    <link href="styles/constants.css" type="text/css" rel="stylesheet" />
+    <link href="styles/main.css" type="text/css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="all-images/icon-images/icon.png" />
+    <title>NIIT - Dashboard</title>
+</head>
+
+<body>
+
+    <div class="app-layout-container">
+
+        <aside class="sidebar-wrapper">
+            <div class="sidebar-logo-wrapper">
+                <img src="all-images/icon-images/niit-logo.png" alt="NIIT" />
+            </div>
+
+            <div class="sidebar-profile-card">
+                <div class="sidebar-profile-card-image">
+                    <img src="all-images/icon-images/admin-avatar.png" alt="Jone Copper">
+                </div>
+                <div class="sidebar-profile-card-text">
+                    <h4>Jone Copper</h4>
+                    <p>Admin</p>
+                </div>
+                <i class="bi bi-chevron-right"></i>
+            </div>
+
+            <nav class="sidebar-nav-wrapper">
+                <ul class="sidebar-nav-list">
+                    <li class="sidebar-nav-item sidebar-nav-item-active">
+                        <a class="sidebar-nav-link" href="index.html">
+                            <i class="bi bi-grid-1x2-fill"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="staffs.html">
+                            <i class="bi bi-person-badge-fill"></i>
+                            <span>Staffs</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="students.html">
+                            <i class="bi bi-people-fill"></i>
+                            <span>Students</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="#">
+                            <i class="bi bi-list-ul"></i>
+                            <span>Programme</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="#">
+                            <i class="bi bi-pencil-square"></i>
+                            <span>Examinations</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="payments.html">
+                            <i class="bi bi-cash-coin"></i>
+                            <span>Payments</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="#">
+                            <i class="bi bi-bar-chart-line-fill"></i>
+                            <span>Report</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content-wrapper">
+
+            <header class="topbar-wrapper">
+                <div class="topbar-search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Search">
+                </div>
+
+                <div class="topbar-actions-wrapper">
+                    <button class="topbar-icon-btn" title="Theme">
+                        <i class="bi bi-sun-fill"></i>
+                    </button>
+                    <button class="topbar-icon-btn" title="Language">
+                        <i class="bi bi-globe2"></i>
+                    </button>
+                    <button class="topbar-icon-btn topbar-notification-btn" title="Notifications">
+                        <i class="bi bi-bell-fill"></i>
+                        <span class="topbar-notification-dot"></span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="dashboard-content-container">
+                <div class="dashboard-content-wrapper">
+
+                    <div class="page-heading-wrapper">
+                        <div class="page-heading-tag">
+                            <i class="bi bi-grid-1x2-fill"></i>
+                            <span>Dashboard</span>
+                        </div>
+                        <h1 class="page-heading-title">Admin Dashboard</h1>
+                        <p class="page-heading-description">
+                            Admin <i class="bi bi-arrow-right"></i> Manage staffs, students, programmes, and
+                            everything else happening across the institute from one place.
+                        </p>
+                    </div>
+
+                    <div class="stats-row-container">
+                        <div class="teacher-profile-card">
+                            <div class="teacher-profile-card-image">
+                                <img src="all-images/icon-images/teacher-avatar.png" alt="Courtney Henry">
+                            </div>
+                            <h3 class="teacher-profile-card-name">Courtney Henry</h3>
+                            <p class="teacher-profile-card-meta">Class: 1-A, V-B</p>
+                            <p class="teacher-profile-card-meta">Physics</p>
+                            <button class="btn teacher-profile-card-btn" title="Edit Profile">
+                                <span>Edit Profile</span>
+                            </button>
+                        </div>
+
+                        <div class="stat-card-grid">
+                            <div class="stat-card stat-card-primary">
+                                <div class="stat-card-icon"><i class="bi bi-person-fill"></i></div>
+                                <p class="stat-card-label">Total Students</p>
+                                <h3 class="stat-card-value">3,500</h3>
+                            </div>
+
+                            <div class="stat-card stat-card-secondary">
+                                <div class="stat-card-icon"><i class="bi bi-journal-check"></i></div>
+                                <p class="stat-card-label">Total Staffs</p>
+                                <h3 class="stat-card-value">3,500</h3>
+                            </div>
+
+                            <div class="stat-card stat-card-black">
+                                <div class="stat-card-icon"><i class="bi bi-mortarboard-fill"></i></div>
+                                <p class="stat-card-label">Total Programmes</p>
+                                <h3 class="stat-card-value">3,500</h3>
+                            </div>
+
+                            <div class="stat-card stat-card-footer">
+                                <div class="stat-card-icon"><i class="bi bi-wallet2"></i></div>
+                                <p class="stat-card-label">Total Students</p>
+                                <h3 class="stat-card-value">3,500</h3>
+                            </div>
+                        </div>
+
+                        <div class="attendance-card">
+                            <div class="attendance-card-header">
+                                <h3 class="attendance-card-title">Attendance</h3>
+                                <select class="attendance-card-select">
+                                    <option>Yearly</option>
+                                    <option>Monthly</option>
+                                    <option>Weekly</option>
+                                </select>
+                            </div>
+
+                            <div class="attendance-card-body">
+                                <div class="attendance-legend-list">
+                                    <div class="attendance-legend-item">
+                                        <i
+                                            class="bi bi-circle-fill attendance-legend-icon attendance-legend-icon-present"></i>
+                                        <div class="attendance-legend-text">
+                                            <h4>200</h4>
+                                            <p>Present</p>
+                                        </div>
+                                    </div>
+                                    <div class="attendance-legend-item">
+                                        <i
+                                            class="bi bi-circle-fill attendance-legend-icon attendance-legend-icon-half"></i>
+                                        <div class="attendance-legend-text">
+                                            <h4>300</h4>
+                                            <p>Half Day</p>
+                                        </div>
+                                    </div>
+                                    <div class="attendance-legend-item">
+                                        <i
+                                            class="bi bi-circle-fill attendance-legend-icon attendance-legend-icon-late"></i>
+                                        <div class="attendance-legend-text">
+                                            <h4>172</h4>
+                                            <p>Late</p>
+                                        </div>
+                                    </div>
+                                    <div class="attendance-legend-item">
+                                        <i
+                                            class="bi bi-circle-fill attendance-legend-icon attendance-legend-icon-absent"></i>
+                                        <div class="attendance-legend-text">
+                                            <h4>500</h4>
+                                            <p>Absent</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="attendance-donut-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panels-row-container">
+                        <div class="notice-panel-card">
+                            <div class="panel-card-header">
+                                <h3 class="panel-card-title">Notice Board</h3>
+                                <i class="bi bi-three-dots-vertical panel-card-menu-icon"></i>
+                            </div>
+
+                            <div class="notice-panel-list">
+                                <div class="notice-panel-item">
+                                    <div class="notice-panel-item-avatar">
+                                        <img src="all-images/icon-images/profile-1.png" alt="Admin">
+                                    </div>
+                                    <div class="notice-panel-item-text">
+                                        <h4>Admin</h4>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetti</p>
+                                        <span>25 Jan 2024</span>
+                                    </div>
+                                </div>
+
+                                <div class="notice-panel-item">
+                                    <div class="notice-panel-item-avatar">
+                                        <img src="all-images/icon-images/profile-2.png" alt="Kathryn Murphy">
+                                    </div>
+                                    <div class="notice-panel-item-text">
+                                        <h4>Kathryn Murphy</h4>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesett ing
+                                            industry Lorem Ipsum is simply dummy text of the printing and
+                                            typesetting industry.</p>
+                                        <span>25 Jan 2024</span>
+                                    </div>
+                                </div>
+
+                                <div class="notice-panel-item">
+                                    <div class="notice-panel-item-avatar">
+                                        <img src="all-images/icon-images/profile-3.png" alt="Admin">
+                                    </div>
+                                    <div class="notice-panel-item-text">
+                                        <h4>Admin</h4>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetti</p>
+                                        <span>25 Jan 2024</span>
+                                    </div>
+                                </div>
+
+                                <div class="notice-panel-item">
+                                    <div class="notice-panel-item-avatar">
+                                        <img src="all-images/icon-images/profile-4.png" alt="John Doe">
+                                    </div>
+                                    <div class="notice-panel-item-text">
+                                        <h4>John Doe</h4>
+                                        <p>Lorem Ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                        <span>25 Jan 2024</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="events-panel-card">
+                            <div class="panel-card-header">
+                                <h3 class="panel-card-title">Upcoming Events</h3>
+                            </div>
+
+                            <div class="events-panel-list">
+                                <div class="events-panel-item events-panel-item-primary">
+                                    <div class="events-panel-item-text">
+                                        <h4>09:00 - 09:45 <small>AM</small></h4>
+                                        <p>Marketing Strategy Kickoff</p>
+                                        <span>Lead by <b>Robert Fox</b></span>
+                                    </div>
+                                    <button class="btn events-panel-view-btn" title="View">
+                                        <span>View</span>
+                                    </button>
+                                </div>
+
+                                <div class="events-panel-item events-panel-item-secondary">
+                                    <div class="events-panel-item-text">
+                                        <h4>11:15 - 12:00 <small>AM</small></h4>
+                                        <p>Product Design Brainstorm</p>
+                                        <span>Lead by <b>Leslie Alexander</b></span>
+                                    </div>
+                                    <button class="btn events-panel-view-btn" title="View">
+                                        <span>View</span>
+                                    </button>
+                                </div>
+
+                                <div class="events-panel-item events-panel-item-black">
+                                    <div class="events-panel-item-text">
+                                        <h4>02:00 - 03:00 <small>PM</small></h4>
+                                        <p>Client Feedback Review</p>
+                                        <span>Lead by <b>Courtney Henry</b></span>
+                                    </div>
+                                    <button class="btn events-panel-view-btn" title="View">
+                                        <span>View</span>
+                                    </button>
+                                </div>
+
+                                <div class="events-panel-item events-panel-item-primary">
+                                    <div class="events-panel-item-text">
+                                        <h4>04:15 - 05:00 <small>PM</small></h4>
+                                        <p>Sprint Planning & Task Allocation</p>
+                                        <span>Lead by <b>Eleanor Pena</b></span>
+                                    </div>
+                                    <button class="btn events-panel-view-btn" title="View">
+                                        <span>View</span>
+                                    </button>
+                                </div>
+
+                                <div class="events-panel-item events-panel-item-secondary">
+                                    <div class="events-panel-item-text">
+                                        <h4>01:15 - 02:00 <small>PM</small></h4>
+                                        <p>Client Feedback Review</p>
+                                        <span>Lead by <b>John</b></span>
+                                    </div>
+                                    <button class="btn events-panel-view-btn" title="View">
+                                        <span>View</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tables-row-container">
+                        <div class="marks-panel-card">
+                            <div class="panel-card-header">
+                                <h3 class="panel-card-title">Students</h3>
+                                <i class="bi bi-three-dots-vertical panel-card-menu-icon"></i>
+                            </div>
+
+                            <div class="marks-table-wrapper">
+                                <table class="marks-table">
+                                    <thead>
+                                        <tr>
+                                            <th>SN <i class="bi bi-arrow-down-up"></i></th>
+                                            <th>User Name <i class="bi bi-arrow-down-up"></i></th>
+                                            <th>Programme <i class="bi bi-arrow-down-up"></i></th>
+                                            <th>Contact <i class="bi bi-arrow-down-up"></i></th>
+                                            <th>Status <i class="bi bi-arrow-down-up"></i></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="marks-table-admission-no">1</td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/student-1.png" alt="Arlene McCoy">
+                                                    <div>
+                                                        <h4>Arlene McCoy</h4>
+                                                        <p>Student ID: AD33578</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Web Development</td>
+                                            <td>0803 123 4567</td>
+                                            <td><span class="status-badge status-badge-active">Active</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="marks-table-admission-no">2</td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/student-2.png" alt="Wade Warren">
+                                                    <div>
+                                                        <h4>Wade Warren</h4>
+                                                        <p>Student ID: AD45231</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Data Analysis</td>
+                                            <td>0805 234 5678</td>
+                                            <td><span class="status-badge status-badge-active">Active</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="marks-table-admission-no">3</td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/student-3.png"
+                                                        alt="Brooklyn Simmons">
+                                                    <div>
+                                                        <h4>Brooklyn Simmons</h4>
+                                                        <p>Student ID: AD67452</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Cybersecurity</td>
+                                            <td>0810 345 6789</td>
+                                            <td><span class="status-badge status-badge-active">Active</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="marks-table-admission-no">4</td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/student-4.png" alt="Theresa Webb">
+                                                    <div>
+                                                        <h4>Theresa Webb</h4>
+                                                        <p>Student ID: AD76133</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Software Engineering</td>
+                                            <td>0813 456 7890</td>
+                                            <td><span class="status-badge status-badge-inactive">Inactive</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="marks-table-admission-no">5</td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/student-5.png"
+                                                        alt="Darlene Robertson">
+                                                    <div>
+                                                        <h4>Darlene Robertson</h4>
+                                                        <p>Student ID: AD98214</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Networking</td>
+                                            <td>0816 567 8901</td>
+                                            <td><span class="status-badge status-badge-inactive">Inactive</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="marks-table-footer">
+                                <p>Showing 1 to 5 of 5 entries</p>
+                                <div class="marks-table-pagination">
+                                    <button class="marks-table-page-btn" title="First">
+                                        <i class="bi bi-chevron-double-left"></i>
+                                    </button>
+                                    <button class="marks-table-page-btn" title="Previous">
+                                        <i class="bi bi-chevron-left"></i>
+                                    </button>
+                                    <button class="marks-table-page-btn marks-table-page-btn-active">1</button>
+                                    <button class="marks-table-page-btn" title="Next">
+                                        <i class="bi bi-chevron-right"></i>
+                                    </button>
+                                    <button class="marks-table-page-btn" title="Last">
+                                        <i class="bi bi-chevron-double-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="leave-panel-card">
+                            <div class="panel-card-header">
+                                <h3 class="panel-card-title">Leave Status</h3>
+                                <select class="attendance-card-select">
+                                    <option>Yearly</option>
+                                    <option>Monthly</option>
+                                </select>
+                            </div>
+
+                            <div class="leave-panel-list">
+                                <div class="leave-panel-item">
+                                    <div class="leave-panel-item-text">
+                                        <h4>Emergency Leave</h4>
+                                        <p>Date: 10/10/24</p>
+                                    </div>
+                                    <span class="status-badge status-badge-pending">Pending</span>
+                                </div>
+
+                                <div class="leave-panel-item">
+                                    <div class="leave-panel-item-text">
+                                        <h4>Medical Leave</h4>
+                                        <p>Date: 10/10/24</p>
+                                    </div>
+                                    <span class="status-badge status-badge-accepted">Accepted</span>
+                                </div>
+
+                                <div class="leave-panel-item">
+                                    <div class="leave-panel-item-text">
+                                        <h4>Now Well</h4>
+                                        <p>Date: 10/10/24</p>
+                                    </div>
+                                    <span class="status-badge status-badge-pending">Pending</span>
+                                </div>
+
+                                <div class="leave-panel-item">
+                                    <div class="leave-panel-item-text">
+                                        <h4>Medical Leave</h4>
+                                        <p>Date: 10/10/24</p>
+                                    </div>
+                                    <span class="status-badge status-badge-accepted">Accepted</span>
+                                </div>
+
+                                <div class="leave-panel-item">
+                                    <div class="leave-panel-item-text">
+                                        <h4>Emergency Leave</h4>
+                                        <p>Date: 10/10/24</p>
+                                    </div>
+                                    <span class="status-badge status-badge-accepted">Accepted</span>
+                                </div>
+
+                                <div class="leave-panel-item">
+                                    <div class="leave-panel-item-text">
+                                        <h4>Now Well</h4>
+                                        <p>Date: 10/10/24</p>
+                                    </div>
+                                    <span class="status-badge status-badge-pending">Pending</span>
+                                </div>
+
+                                <div class="leave-panel-item">
+                                    <div class="leave-panel-item-text">
+                                        <h4>Medical Leave</h4>
+                                        <p>Date: 10/10/24</p>
+                                    </div>
+                                    <span class="status-badge status-badge-accepted">Accepted</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <footer class="dashboard-footer-wrapper">
+                        <p>© 2026 Made With <i class="bi bi-heart-fill"></i> by NIIT.</p>
+                    </footer>
+
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

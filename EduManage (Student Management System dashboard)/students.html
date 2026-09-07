@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="styles/icons-1.11.3/font/bootstrap-icons.css" type="text/css" rel="stylesheet" />
+    <link href="styles/constants.css" type="text/css" rel="stylesheet" />
+    <link href="styles/main.css" type="text/css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="all-images/icon-images/icon.png" />
+    <title>NIIT - Students</title>
+</head>
+
+<body>
+
+    <div class="app-layout-container">
+
+        <aside class="sidebar-wrapper">
+            <div class="sidebar-logo-wrapper">
+                <img src="all-images/icon-images/niit-logo.png" alt="NIIT" />
+            </div>
+
+            <div class="sidebar-profile-card">
+                <div class="sidebar-profile-card-image">
+                    <img src="all-images/icon-images/admin-avatar.png" alt="Jone Copper">
+                </div>
+                <div class="sidebar-profile-card-text">
+                    <h4>Jone Copper</h4>
+                    <p>Admin</p>
+                </div>
+                <i class="bi bi-chevron-right"></i>
+            </div>
+
+            <nav class="sidebar-nav-wrapper">
+                <ul class="sidebar-nav-list">
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="index.html">
+                            <i class="bi bi-grid-1x2-fill"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="staffs.html">
+                            <i class="bi bi-person-badge-fill"></i>
+                            <span>Staffs</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item sidebar-nav-item-active">
+                        <a class="sidebar-nav-link" href="students.html">
+                            <i class="bi bi-people-fill"></i>
+                            <span>Students</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="#">
+                            <i class="bi bi-list-ul"></i>
+                            <span>Programme</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="#">
+                            <i class="bi bi-pencil-square"></i>
+                            <span>Examinations</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="payments.html">
+                            <i class="bi bi-cash-coin"></i>
+                            <span>Payments</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="#">
+                            <i class="bi bi-bar-chart-line-fill"></i>
+                            <span>Report</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content-wrapper">
+
+            <header class="topbar-wrapper">
+                <div class="topbar-search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Search Student Here...">
+                </div>
+
+                <div class="topbar-actions-wrapper">
+                    <button class="topbar-icon-btn" title="Theme">
+                        <i class="bi bi-sun-fill"></i>
+                    </button>
+                    <button class="topbar-icon-btn" title="Language">
+                        <i class="bi bi-globe2"></i>
+                    </button>
+                    <button class="topbar-icon-btn topbar-notification-btn" title="Notifications">
+                        <i class="bi bi-bell-fill"></i>
+                        <span class="topbar-notification-dot"></span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="dashboard-content-container">
+                <div class="dashboard-content-wrapper">
+
+                    <div class="page-heading-wrapper">
+                        <div class="page-heading-tag">
+                            <i class="bi bi-people-fill"></i>
+                            <span>Students</span>
+                        </div>
+                        <h1 class="page-heading-title">Students</h1>
+                        <p class="page-heading-description">
+                            Admin <i class="bi bi-arrow-right"></i> Manage student records, programmes, and
+                            enrollment status.
+                        </p>
+                    </div>
+
+                    <div class="page-section-wrapper">
+                        <div class="roster-panel-card">
+                            <div class="roster-panel-header">
+                                <div class="roster-panel-heading">
+                                    <h3>All Students</h3>
+                                    <p class="roster-count-text" id="studentCount">5 students</p>
+                                </div>
+                                <div class="roster-panel-actions panel-card-header-actions">
+                                    <div class="roster-filter-wrapper">
+                                        <i class="bi bi-funnel"></i>
+                                        <select class="roster-filter-select" id="programmeFilter">
+                                            <option value="all">All Programmes</option>
+                                        </select>
+                                        <i class="bi bi-chevron-down roster-filter-chevron"></i>
+                                    </div>
+                                    <button type="button" id="addStudentBtn" class="panel-add-btn">
+                                        <i class="bi bi-plus-lg"></i>
+                                        <span>Add Student</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="roster-table-wrapper">
+                                <table class="marks-table" id="studentTable">
+                                    <thead>
+                                        <tr>
+                                            <th>SN <i class="bi bi-arrow-down-up"></i></th>
+                                            <th>User Name <i class="bi bi-arrow-down-up"></i></th>
+                                            <th>Programme <i class="bi bi-arrow-down-up"></i></th>
+                                            <th>Contact <i class="bi bi-arrow-down-up"></i></th>
+                                            <th>Status <i class="bi bi-arrow-down-up"></i></th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr data-programme="Web Development" data-search="arlene mccoy ad33578">
+                                            <td class="marks-table-admission-no">1</td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/student-1.png"
+                                                        alt="Arlene McCoy">
+                                                    <div>
+                                                        <h4>Arlene McCoy</h4>
+                                                        <p>Student ID: AD33578</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Web Development</td>
+                                            <td>0803 123 4567</td>
+                                            <td><span class="status-badge status-badge-active">Active</span></td>
+                                            <td><button class="table-view-btn" type="button">View</button></td>
+                                        </tr>
+                                        <tr data-programme="Data Analysis" data-search="wade warren ad45231">
+                                            <td class="marks-table-admission-no">2</td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/student-2.png"
+                                                        alt="Wade Warren">
+                                                    <div>
+                                                        <h4>Wade Warren</h4>
+                                                        <p>Student ID: AD45231</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Data Analysis</td>
+                                            <td>0805 234 5678</td>
+                                            <td><span class="status-badge status-badge-active">Active</span></td>
+                                            <td><button class="table-view-btn" type="button">View</button></td>
+                                        </tr>
+                                        <tr data-programme="Cybersecurity" data-search="brooklyn simmons ad67452">
+                                            <td class="marks-table-admission-no">3</td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/student-3.png"
+                                                        alt="Brooklyn Simmons">
+                                                    <div>
+                                                        <h4>Brooklyn Simmons</h4>
+                                                        <p>Student ID: AD67452</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Cybersecurity</td>
+                                            <td>0810 345 6789</td>
+                                            <td><span class="status-badge status-badge-active">Active</span></td>
+                                            <td><button class="table-view-btn" type="button">View</button></td>
+                                        </tr>
+                                        <tr data-programme="Software Engineering" data-search="theresa webb ad76133">
+                                            <td class="marks-table-admission-no">4</td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/student-4.png"
+                                                        alt="Theresa Webb">
+                                                    <div>
+                                                        <h4>Theresa Webb</h4>
+                                                        <p>Student ID: AD76133</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Software Engineering</td>
+                                            <td>0813 456 7890</td>
+                                            <td><span class="status-badge status-badge-inactive">Inactive</span></td>
+                                            <td><button class="table-view-btn" type="button">View</button></td>
+                                        </tr>
+                                        <tr data-programme="Networking" data-search="darlene robertson ad98214">
+                                            <td class="marks-table-admission-no">5</td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/student-5.png"
+                                                        alt="Darlene Robertson">
+                                                    <div>
+                                                        <h4>Darlene Robertson</h4>
+                                                        <p>Student ID: AD98214</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Networking</td>
+                                            <td>0816 567 8901</td>
+                                            <td><span class="status-badge status-badge-inactive">Inactive</span></td>
+                                            <td><button class="table-view-btn" type="button">View</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <footer class="dashboard-footer-wrapper">
+                        <p>© 2026 Made With <i class="bi bi-heart-fill"></i> by NIIT.</p>
+                    </footer>
+
+                </div>
+            </div>
+
+        </main>
+
+    <!-- Add Student Slide-Over Drawer with Blurred Backdrop (Former Design coming out from right) -->
+    <div class="side-drawer-overlay" id="studentModalOverlay">
+        <div class="form-page-left">
+            <div class="form-page-header">
+                <div class="form-page-header-title">
+                    <div class="form-page-header-icon"><i class="bi bi-person-plus-fill"></i></div>
+                    <h2>Create New Student</h2>
+                </div>
+                <button type="button" class="form-page-close-btn" id="studentModalCloseBtn">
+                    <i class="bi bi-x-lg"></i>
+                    <span>Close</span>
+                </button>
+            </div>
+
+            <div class="form-page-body">
+                <p class="form-page-intro">
+                    You are about to create a new student. Please complete the form below with
+                    accurate details to successfully create new student.
+                </p>
+
+                <form class="form-page-form" id="addStudentForm">
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <i class="bi bi-person-vcard"></i>
+                            <span>Student Basic Info</span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="studentFirstName">First Name: *</label>
+                            <input type="text" id="studentFirstName" required />
+                        </div>
+
+                        <div class="form-field">
+                            <label for="studentLastName">Last Name: *</label>
+                            <input type="text" id="studentLastName" required />
+                        </div>
+
+                        <div class="form-field">
+                            <label for="studentEmail">Email Address: *</label>
+                            <input type="email" id="studentEmail" required />
+                        </div>
+
+                        <div class="form-field">
+                            <label for="studentPhone">Phone Number: *</label>
+                            <input type="tel" id="studentPhone" required />
+                        </div>
+
+                        <div class="form-field">
+                            <label for="studentAddress">Home Address: *</label>
+                            <input type="text" id="studentAddress" required />
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <i class="bi bi-mortarboard-fill"></i>
+                            <span>Academic Info</span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="studentProgramme">Select Programme: *</label>
+                            <select id="studentProgramme" required>
+                                <option value="" selected disabled>Select here</option>
+                                <option>Web Development</option>
+                                <option>Data Analysis</option>
+                                <option>Cybersecurity</option>
+                                <option>Software Engineering</option>
+                                <option>Networking</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="studentStatus">Select Status: *</label>
+                            <select id="studentStatus" required>
+                                <option value="" selected disabled>Select here</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="form-page-submit-btn">
+                        <i class="bi bi-check-lg"></i>
+                        <span>Submit</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="JS/students.js"></script>
+</body>
+
+
+</html>

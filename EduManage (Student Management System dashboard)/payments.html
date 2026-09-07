@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="styles/icons-1.11.3/font/bootstrap-icons.css" type="text/css" rel="stylesheet" />
+    <link href="styles/constants.css" type="text/css" rel="stylesheet" />
+    <link href="styles/main.css" type="text/css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="all-images/icon-images/icon.png" />
+    <title>NIIT - Payments</title>
+</head>
+
+<body>
+
+    <div class="app-layout-container">
+
+        <aside class="sidebar-wrapper">
+            <div class="sidebar-logo-wrapper">
+                <img src="all-images/icon-images/niit-logo.png" alt="NIIT" />
+            </div>
+
+            <div class="sidebar-profile-card">
+                <div class="sidebar-profile-card-image">
+                    <img src="all-images/icon-images/admin-avatar.png" alt="Jone Copper">
+                </div>
+                <div class="sidebar-profile-card-text">
+                    <h4>Jone Copper</h4>
+                    <p>Admin</p>
+                </div>
+                <i class="bi bi-chevron-right"></i>
+            </div>
+
+            <nav class="sidebar-nav-wrapper">
+                <ul class="sidebar-nav-list">
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="index.html">
+                            <i class="bi bi-grid-1x2-fill"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="staffs.html">
+                            <i class="bi bi-person-badge-fill"></i>
+                            <span>Staffs</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="students.html">
+                            <i class="bi bi-people-fill"></i>
+                            <span>Students</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="#">
+                            <i class="bi bi-list-ul"></i>
+                            <span>Programme</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="#">
+                            <i class="bi bi-pencil-square"></i>
+                            <span>Examinations</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item sidebar-nav-item-active">
+                        <a class="sidebar-nav-link" href="payments.html">
+                            <i class="bi bi-cash-coin"></i>
+                            <span>Payments</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="#">
+                            <i class="bi bi-bar-chart-line-fill"></i>
+                            <span>Report</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content-wrapper">
+
+            <header class="topbar-wrapper">
+                <div class="topbar-search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Search Payment Here..." id="paymentSearchInput">
+                </div>
+
+                <div class="topbar-actions-wrapper">
+                    <button class="topbar-icon-btn" title="Theme">
+                        <i class="bi bi-sun-fill"></i>
+                    </button>
+                    <button class="topbar-icon-btn" title="Language">
+                        <i class="bi bi-globe2"></i>
+                    </button>
+                    <button class="topbar-icon-btn topbar-notification-btn" title="Notifications">
+                        <i class="bi bi-bell-fill"></i>
+                        <span class="topbar-notification-dot"></span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="dashboard-content-container">
+                <div class="dashboard-content-wrapper">
+
+                    <div class="page-heading-wrapper">
+                        <div class="page-heading-tag">
+                            <i class="bi bi-cash-coin"></i>
+                            <span>Payments</span>
+                        </div>
+                        <h1 class="page-heading-title">Payments</h1>
+                        <p class="page-heading-description">
+                            Admin <i class="bi bi-arrow-right"></i> Manage student payment records, generate payment
+                            links, and track payment status.
+                        </p>
+                    </div>
+
+                    <div class="page-section-wrapper">
+                        <div class="roster-panel-card">
+                            <div class="roster-panel-header">
+                                <div class="roster-panel-heading">
+                                    <h3>All Payments</h3>
+                                    <p class="roster-count-text" id="paymentCount">3 payments</p>
+                                </div>
+                                <div class="roster-panel-actions panel-card-header-actions">
+                                    <div class="roster-filter-wrapper">
+                                        <i class="bi bi-funnel"></i>
+                                        <select class="roster-filter-select" id="statusFilter">
+                                            <option value="all">All Status</option>
+                                            <option value="Paid">Paid</option>
+                                            <option value="Pending">Pending</option>
+                                        </select>
+                                        <i class="bi bi-chevron-down roster-filter-chevron"></i>
+                                    </div>
+                                    <button class="panel-add-btn" id="addPaymentBtn" type="button">
+                                        <i class="bi bi-plus-lg"></i>
+                                        <span>Add Payment</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="roster-table-wrapper">
+                                <table class="marks-table" id="paymentTable">
+                                    <thead>
+                                        <tr>
+                                            <th>SN <i class="bi bi-arrow-down-up"></i></th>
+                                            <th>Student Name <i class="bi bi-arrow-down-up"></i></th>
+                                            <th>Programme <i class="bi bi-arrow-down-up"></i></th>
+                                            <th>Payment Link <i class="bi bi-arrow-down-up"></i></th>
+                                            <th>Status <i class="bi bi-arrow-down-up"></i></th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="paymentTableBody">
+                                        <tr data-status="Paid" data-search="arlene mccoy ad33578">
+                                            <td class="marks-table-admission-no">1</td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/student-1.png" alt="Arlene McCoy">
+                                                    <div>
+                                                        <h4>Arlene McCoy</h4>
+                                                        <p>Student ID: AD33578</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Web Development</td>
+                                            <td>
+                                                <a href="payment-link.html?id=AD33578" target="_blank"
+                                                    class="payment-link-cell" title="Open or copy payment link"
+                                                    onclick="handlePaymentLinkClick(this, event, 'AD33578')">
+                                                    <i class="bi bi-link-45deg"></i>
+                                                    <span>pay.niit.edu/AD33578</span>
+                                                </a>
+                                            </td>
+                                            <td><span class="status-badge status-badge-active">Paid</span></td>
+                                            <td><button class="table-view-btn" type="button">View</button></td>
+                                        </tr>
+                                        <tr data-status="Pending" data-search="wade warren ad45231">
+                                            <td class="marks-table-admission-no">2</td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/student-2.png" alt="Wade Warren">
+                                                    <div>
+                                                        <h4>Wade Warren</h4>
+                                                        <p>Student ID: AD45231</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Data Analysis</td>
+                                            <td>
+                                                <a href="payment-link.html?id=AD45231" target="_blank"
+                                                    class="payment-link-cell" title="Open or copy payment link"
+                                                    onclick="handlePaymentLinkClick(this, event, 'AD45231')">
+                                                    <i class="bi bi-link-45deg"></i>
+                                                    <span>pay.niit.edu/AD45231</span>
+                                                </a>
+                                            </td>
+                                            <td><span class="status-badge status-badge-pending">Pending</span></td>
+                                            <td><button class="table-view-btn" type="button">View</button></td>
+                                        </tr>
+                                        <tr data-status="Paid" data-search="brooklyn simmons ad67452">
+                                            <td class="marks-table-admission-no">3</td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/student-3.png"
+                                                        alt="Brooklyn Simmons">
+                                                    <div>
+                                                        <h4>Brooklyn Simmons</h4>
+                                                        <p>Student ID: AD67452</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Cybersecurity</td>
+                                            <td>
+                                                <a href="payment-link.html?id=AD67452" target="_blank"
+                                                    class="payment-link-cell" title="Open or copy payment link"
+                                                    onclick="handlePaymentLinkClick(this, event, 'AD67452')">
+                                                    <i class="bi bi-link-45deg"></i>
+                                                    <span>pay.niit.edu/AD67452</span>
+                                                </a>
+                                            </td>
+                                            <td><span class="status-badge status-badge-active">Paid</span></td>
+                                            <td><button class="table-view-btn" type="button">View</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <footer class="dashboard-footer-wrapper">
+                        <p>© 2026 Made With <i class="bi bi-heart-fill"></i> by NIIT.</p>
+                    </footer>
+
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- Add Payment Modal -->
+    <div class="payment-modal-overlay" id="paymentModalOverlay">
+        <div class="payment-modal">
+            <div class="payment-modal-header">
+                <div class="payment-modal-header-title">
+                    <div class="payment-modal-header-icon"><i class="bi bi-cash-coin"></i></div>
+                    <h2>Add Payment</h2>
+                </div>
+                <button class="payment-modal-close-btn" id="paymentModalCloseBtn" type="button">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="payment-modal-body">
+                <p class="payment-modal-intro">
+                    Enter a valid Student ID below. The student's details will be fetched automatically and a unique
+                    payment link will be generated.
+                </p>
+                <form id="addPaymentForm" onsubmit="handleAddPayment(event)">
+                    <div class="payment-modal-field">
+                        <label for="studentIdInput">Student ID: *</label>
+                        <div class="payment-modal-input-row">
+                            <input type="text" id="studentIdInput" placeholder="e.g. AD33578" required />
+                            <button type="button" class="payment-modal-fetch-btn" id="fetchStudentBtn"
+                                onclick="fetchStudentDetails()">
+                                <i class="bi bi-search"></i>
+                                <span>Fetch</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Student preview card (hidden by default) -->
+                    <div class="payment-modal-preview" id="studentPreview" style="display: none;">
+                        <div class="payment-modal-preview-row">
+                            <span class="payment-modal-preview-label">Name:</span>
+                            <span class="payment-modal-preview-value" id="previewName">—</span>
+                        </div>
+                        <div class="payment-modal-preview-row">
+                            <span class="payment-modal-preview-label">Programme:</span>
+                            <span class="payment-modal-preview-value" id="previewProgramme">—</span>
+                        </div>
+                        <div class="payment-modal-preview-row">
+                            <span class="payment-modal-preview-label">Payment Link:</span>
+                            <span class="payment-modal-preview-value payment-link-accent" id="previewLink">—</span>
+                        </div>
+                    </div>
+
+                    <!-- Error message -->
+                    <div class="payment-modal-error" id="studentError" style="display: none;">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        <span>Student ID not found. Please check and try again.</span>
+                    </div>
+
+                    <button type="submit" class="payment-modal-submit-btn" id="submitPaymentBtn" disabled>
+                        <i class="bi bi-check-lg"></i>
+                        <span>Add Payment</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Copied toast -->
+    <div class="payment-copied-toast" id="copiedToast">
+        <i class="bi bi-check-circle-fill"></i>
+        <span>Payment link copied!</span>
+    </div>
+
+    <!-- Official Payment Receipt Modal with Blurred Backdrop -->
+    <div class="inpage-modal-overlay" id="receiptModalOverlay">
+        <div class="inpage-modal receipt-modal-wrapper">
+            <div class="inpage-modal-header">
+                <div class="inpage-modal-header-title">
+                    <div class="inpage-modal-header-icon">
+                        <i class="bi bi-receipt-cutoff"></i>
+                    </div>
+                    <h2>Official Payment Receipt</h2>
+                </div>
+                <button class="inpage-modal-close-btn" id="receiptModalCloseBtn" type="button">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="inpage-modal-body">
+                <div class="receipt-card">
+                    <div class="receipt-card-header">
+                        <div class="receipt-logo-block">
+                            <img src="all-images/icon-images/niit-logo.png" alt="NIIT Logo" />
+                            <p>NIIT Institute of Information Technology</p>
+                        </div>
+                        <div class="receipt-meta-block">
+                            <span class="receipt-tag" id="receiptStatusTag">Paid</span>
+                            <div class="receipt-number" id="receiptNumber">NIIT-REC-33578</div>
+                            <div class="receipt-date" id="receiptDate">Sep 7, 2026</div>
+                        </div>
+                    </div>
+
+                    <div class="receipt-student-details">
+                        <div class="receipt-student-item">
+                            <span>Student Name</span>
+                            <span id="receiptStudentName">Arlene McCoy</span>
+                        </div>
+                        <div class="receipt-student-item">
+                            <span>Student ID</span>
+                            <span id="receiptStudentId">AD33578</span>
+                        </div>
+                        <div class="receipt-student-item">
+                            <span>Programme</span>
+                            <span id="receiptProgramme">Web Development</span>
+                        </div>
+                        <div class="receipt-student-item">
+                            <span>Payment Method</span>
+                            <span>Paystack (Online)</span>
+                        </div>
+                    </div>
+
+                    <table class="receipt-breakdown-table">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tuition & Enrollment Fee</td>
+                                <td>₦120,000</td>
+                            </tr>
+                            <tr>
+                                <td>Tech Lab & Practicals</td>
+                                <td>₦20,000</td>
+                            </tr>
+                            <tr>
+                                <td>Portal Access & Examination Levy</td>
+                                <td>₦10,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="receipt-total-row">
+                        <span class="receipt-total-label">Total Amount Paid</span>
+                        <span class="receipt-total-value" id="receiptAmount">₦150,000</span>
+                    </div>
+
+                    <div class="receipt-paid-stamp" id="receiptPaidStamp">
+                        <i class="bi bi-patch-check-fill"></i>
+                        <span>OFFICIALLY VERIFIED & PAID</span>
+                    </div>
+                </div>
+
+                <div class="receipt-actions">
+                    <button type="button" class="receipt-print-btn" id="printReceiptBtn">
+                        <i class="bi bi-printer"></i>
+                        <span>Print Receipt</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="JS/payments.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="styles/icons-1.11.3/font/bootstrap-icons.css" type="text/css" rel="stylesheet" />
+    <link href="styles/constants.css" type="text/css" rel="stylesheet" />
+    <link href="styles/main.css" type="text/css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="all-images/icon-images/icon.png" />
+    <title>NIIT EduManage - Secure Payment Checkout</title>
+
+    <style>
+        .pay-page-body {
+            background: #f4f6fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .pay-header {
+            background: var(--white-color);
+            border-bottom: 1px solid #e5e9f2;
+            padding: 18px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .pay-header-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .pay-header-brand img {
+            height: 38px;
+        }
+
+        .pay-header-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-family: sub-title-font;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .pay-container {
+            max-width: 860px;
+            margin: 40px auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .pay-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .pay-grid {
+                grid-template-columns: 1fr;
+            }
+            .pay-header {
+                padding: 14px 20px;
+            }
+        }
+
+        .pay-card {
+            background: var(--white-color);
+            border-radius: 14px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid #edf0f7;
+            padding: 28px;
+        }
+
+        .pay-card-title {
+            font-family: title-font;
+            font-size: 18px;
+            color: var(--primary-color);
+            margin-bottom: 6px;
+        }
+
+        .pay-card-subtitle {
+            font-family: body-font;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 22px;
+        }
+
+        .pay-student-profile {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 22px;
+            border: 1px solid #eef2f8;
+        }
+
+        .pay-student-profile img {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .pay-student-info h3 {
+            font-family: title-font;
+            font-size: 16px;
+            color: var(--black-color);
+            margin-bottom: 3px;
+        }
+
+        .pay-student-info p {
+            font-family: body-font;
+            font-size: 12px;
+            color: #777;
+        }
+
+        .pay-student-info span.pill {
+            display: inline-block;
+            background: rgba(0, 52, 149, 0.08);
+            color: var(--primary-color);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: sub-title-font;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .pay-breakdown-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 16px 0;
+            margin-bottom: 20px;
+        }
+
+        .pay-breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            font-family: body-font;
+            font-size: 13px;
+            color: var(--semiblack-color);
+        }
+
+        .pay-breakdown-row span:last-child {
+            font-family: sub-title-font;
+            font-weight: 600;
+            color: var(--black-color);
+        }
+
+        .pay-total-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            background: linear-gradient(135deg, rgba(0, 52, 149, 0.05), rgba(255, 102, 0, 0.05));
+            border-radius: 10px;
+            border: 1px solid rgba(0, 52, 149, 0.1);
+            margin-bottom: 24px;
+        }
+
+        .pay-total-card p {
+            font-family: body-font;
+            font-size: 12px;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pay-total-card h2 {
+            font-family: title-font;
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .pay-provider-box {
+            border: 2px solid var(--primary-color);
+            background: #f9fbff;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .pay-provider-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .pay-provider-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            background: #00c3f7;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .pay-provider-title h4 {
+            font-family: title-font;
+            font-size: 14px;
+            color: var(--black-color);
+            margin-bottom: 2px;
+        }
+
+        .pay-provider-title p {
+            font-family: body-font;
+            font-size: 11px;
+            color: #666;
+        }
+
+        .pay-checkout-btn {
+            width: 100%;
+            height: 52px;
+            background: linear-gradient(90deg, #09a5db 0%, #00c3f7 100%);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-family: title-font;
+            font-size: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(0, 195, 247, 0.35);
+            transition: all 0.25s ease;
+        }
+
+        .pay-checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(0, 195, 247, 0.45);
+        }
+
+        .pay-security-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: body-font;
+            font-size: 11px;
+            color: #888;
+            margin-top: 14px;
+        }
+
+        /* ─── Simulated Paystack Modal ──────────────────────────────────── */
+        .paystack-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(5px);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .paystack-modal-overlay.active {
+            display: flex;
+        }
+
+        .paystack-card {
+            width: 100%;
+            max-width: 440px;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: paystackSlideUp 0.3s ease-out;
+        }
+
+        @keyframes paystackSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .paystack-header {
+            background: #011b33;
+            color: #fff;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .paystack-header-title h3 {
+            font-family: title-font;
+            font-size: 15px;
+            margin-bottom: 2px;
+        }
+
+        .paystack-header-title p {
+            font-family: body-font;
+            font-size: 12px;
+            color: #8fa8bf;
+        }
+
+        .paystack-close-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .paystack-tabs {
+            display: flex;
+            background: #f7f9fa;
+            border-bottom: 1px solid #e5e9f0;
+        }
+
+        .paystack-tab-btn {
+            flex: 1;
+            padding: 12px 10px;
+            border: none;
+            background: transparent;
+            font-family: sub-title-font;
+            font-size: 12px;
+            color: #666;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .paystack-tab-btn.active {
+            color: #00c3f7;
+            border-bottom: 2px solid #00c3f7;
+            background: #fff;
+        }
+
+        .paystack-body {
+            padding: 24px;
+        }
+
+        .paystack-field {
+            margin-bottom: 14px;
+        }
+
+        .paystack-field label {
+            display: block;
+            font-family: body-font;
+            font-size: 11px;
+            color: #666;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .paystack-field input {
+            width: 100%;
+            height: 42px;
+            border: 1px solid #dbe2ea;
+            border-radius: 6px;
+            padding: 0 12px;
+            font-family: body-font;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .paystack-field input:focus {
+            border-color: #00c3f7;
+        }
+
+        .paystack-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .paystack-pay-btn {
+            width: 100%;
+            height: 46px;
+            background: #3bb75e;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-family: title-font;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+
+        .paystack-pay-btn:hover {
+            background: #2ea34f;
+        }
+
+        .pay-success-state {
+            display: none;
+            text-align: center;
+            padding: 20px 10px;
+        }
+
+        .pay-success-icon {
+            width: 64px;
+            height: 64px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 16px;
+        }
+
+        .pay-footer {
+            background: var(--white-color);
+            border-top: 1px solid #e5e9f2;
+            padding: 16px 20px;
+            text-align: center;
+            font-family: body-font;
+            font-size: 12px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body class="pay-page-body">
+
+    <!-- Header -->
+    <header class="pay-header">
+        <div class="pay-header-brand">
+            <img src="all-images/icon-images/niit-logo.png" alt="NIIT EduManage" />
+        </div>
+        <div class="pay-header-badge">
+            <i class="bi bi-shield-check"></i>
+            <span>Verified Payment Portal</span>
+        </div>
+    </header>
+
+    <!-- Main Payment Container -->
+    <main class="pay-container">
+        <div class="pay-grid">
+
+            <!-- Left: Student Info & Fee Breakdown -->
+            <div class="pay-card">
+                <h1 class="pay-card-title">Tuition & Enrollment Payment</h1>
+                <p class="pay-card-subtitle">Review student enrollment details and fee breakdown before proceeding to checkout.</p>
+
+                <!-- Student Profile Box -->
+                <div class="pay-student-profile">
+                    <img src="all-images/icon-images/student-1.png" alt="Student Avatar" id="checkoutAvatar" />
+                    <div class="pay-student-info">
+                        <h3 id="checkoutStudentName">Arlene McCoy</h3>
+                        <p id="checkoutStudentId">Student ID: AD33578</p>
+                        <span class="pill" id="checkoutProgramme">Web Development</span>
+                    </div>
+                </div>
+
+                <!-- Breakdown -->
+                <div class="pay-breakdown-list">
+                    <div class="pay-breakdown-row">
+                        <span>Tuition & Coursework Materials</span>
+                        <span>₦120,000</span>
+                    </div>
+                    <div class="pay-breakdown-row">
+                        <span>Tech Lab & Practical Resources</span>
+                        <span>₦20,000</span>
+                    </div>
+                    <div class="pay-breakdown-row">
+                        <span>Portal Access & Exam Fee</span>
+                        <span>₦10,000</span>
+                    </div>
+                </div>
+
+                <div class="pay-total-card">
+                    <div>
+                        <p>Total Amount Due</p>
+                        <h2 id="checkoutAmount">₦150,000</h2>
+                    </div>
+                    <span class="status-badge status-badge-pending" id="checkoutStatusBadge">Pending</span>
+                </div>
+
+                <p style="font-family: body-font; font-size: 12px; color: #777; margin: 0;">
+                    <i class="bi bi-info-circle"></i> Once completed, a verified digital receipt will be generated instantly and updated in your student record.
+                </p>
+            </div>
+
+            <!-- Right: Payment Method & Paystack CTA -->
+            <div class="pay-card">
+                <h2 class="pay-card-title" style="font-size: 16px;">Payment Method</h2>
+                <p class="pay-card-subtitle">Fast, secure payment processed by Paystack.</p>
+
+                <div class="pay-provider-box">
+                    <div class="pay-provider-left">
+                        <div class="pay-provider-icon">
+                            <i class="bi bi-lightning-charge-fill"></i>
+                        </div>
+                        <div class="pay-provider-title">
+                            <h4>Pay with Paystack</h4>
+                            <p>Cards, Bank Transfer & USSD</p>
+                        </div>
+                    </div>
+                    <i class="bi bi-check-circle-fill" style="color: var(--primary-color); font-size: 20px;"></i>
+                </div>
+
+                <button class="pay-checkout-btn" type="button" id="openPaystackBtn">
+                    <i class="bi bi-lock-fill"></i>
+                    <span>Proceed to Pay ₦150,000</span>
+                </button>
+
+                <div class="pay-security-note">
+                    <i class="bi bi-shield-lock-fill"></i>
+                    <span>256-bit SSL Bank Grade Encryption</span>
+                </div>
+
+                <div style="text-align: center; margin-top: 24px;">
+                    <a href="payments.html" style="font-family: sub-title-font; font-size: 13px; color: var(--primary-color);">
+                        <i class="bi bi-arrow-left"></i> Return to Payments Dashboard
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="pay-footer">
+        <p>© 2026 NIIT EduManage. All Rights Reserved. Secure Payment Gateway powered by Paystack.</p>
+    </footer>
+
+    <!-- Paystack Simulation Modal -->
+    <div class="paystack-modal-overlay" id="paystackModal">
+        <div class="paystack-card">
+            <div class="paystack-header">
+                <div class="paystack-header-title">
+                    <h3>NIIT EduManage Portal</h3>
+                    <p>Pay ₦150,000 to NIIT Nigeria</p>
+                </div>
+                <button class="paystack-close-btn" type="button" id="paystackCloseBtn">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="paystack-tabs">
+                <button class="paystack-tab-btn active" type="button"><i class="bi bi-credit-card"></i> Card</button>
+                <button class="paystack-tab-btn" type="button"><i class="bi bi-bank"></i> Transfer</button>
+                <button class="paystack-tab-btn" type="button"><i class="bi bi-phone"></i> USSD</button>
+            </div>
+
+            <div class="paystack-body" id="paystackFormView">
+                <div class="paystack-field">
+                    <label>Card Number</label>
+                    <input type="text" value="5399 4100 2341 8921" readonly />
+                </div>
+                <div class="paystack-row">
+                    <div class="paystack-field">
+                        <label>Valid Till</label>
+                        <input type="text" value="08 / 28" readonly />
+                    </div>
+                    <div class="paystack-field">
+                        <label>CVV</label>
+                        <input type="password" value="894" readonly />
+                    </div>
+                </div>
+
+                <button class="paystack-pay-btn" type="button" id="confirmPaystackPayBtn">
+                    Pay ₦150,000
+                </button>
+                <p style="text-align: center; font-family: body-font; font-size: 11px; color: #888; margin-top: 10px;">
+                    <i class="bi bi-shield-check"></i> Secured by Paystack
+                </p>
+            </div>
+
+            <!-- Success State -->
+            <div class="pay-success-state" id="paystackSuccessView">
+                <div class="pay-success-icon">
+                    <i class="bi bi-check-lg"></i>
+                </div>
+                <h3 style="font-family: title-font; font-size: 18px; color: var(--black-color); margin-bottom: 6px;">Payment Successful!</h3>
+                <p style="font-family: body-font; font-size: 13px; color: #555; margin-bottom: 16px;">
+                    Your payment of <strong>₦150,000</strong> has been confirmed. Ref: <span id="txnRef">NIIT-PAY-88219</span>
+                </p>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button class="btn" type="button" onclick="window.print()" style="background: var(--primary-color); color: #fff; border-radius: 8px; padding: 10px 18px; font-size: 13px;">
+                        <i class="bi bi-printer"></i> Print Receipt
+                    </button>
+                    <a href="payments.html" class="btn" style="background: #2e7d32; color: #fff; border-radius: 8px; padding: 10px 18px; font-size: 13px; display: inline-flex; align-items: center;">
+                        Back to Portal
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script to hydrate student data from URL param and control checkout modal -->
+    <script>
+        const studentDatabase = {
+            'AD33578': { name: 'Arlene McCoy', programme: 'Web Development', avatar: 'all-images/icon-images/student-1.png' },
+            'AD45231': { name: 'Wade Warren', programme: 'Data Analysis', avatar: 'all-images/icon-images/student-2.png' },
+            'AD67452': { name: 'Brooklyn Simmons', programme: 'Cybersecurity', avatar: 'all-images/icon-images/student-3.png' },
+            'AD76133': { name: 'Theresa Webb', programme: 'Software Engineering', avatar: 'all-images/icon-images/student-4.png' },
+            'AD98214': { name: 'Darlene Robertson', programme: 'Networking', avatar: 'all-images/icon-images/student-5.png' },
+        };
+
+        // Extract ID from URL (?id=AD33578)
+        const urlParams = new URLSearchParams(window.location.search);
+        const studentId = (urlParams.get('id') || 'AD33578').toUpperCase();
+        const student = studentDatabase[studentId] || {
+            name: 'Arlene McCoy',
+            programme: 'Web Development',
+            avatar: 'all-images/icon-images/student-1.png'
+        };
+
+        document.getElementById('checkoutStudentName').textContent = student.name;
+        document.getElementById('checkoutStudentId').textContent = `Student ID: ${studentId}`;
+        document.getElementById('checkoutProgramme').textContent = student.programme;
+        document.getElementById('checkoutAvatar').src = student.avatar;
+
+        // Paystack Modal controls
+        const paystackModal = document.getElementById('paystackModal');
+        const openBtn = document.getElementById('openPaystackBtn');
+        const closeBtn = document.getElementById('paystackCloseBtn');
+        const confirmPayBtn = document.getElementById('confirmPaystackPayBtn');
+        const formView = document.getElementById('paystackFormView');
+        const successView = document.getElementById('paystackSuccessView');
+
+        openBtn.addEventListener('click', () => {
+            paystackModal.classList.add('active');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            paystackModal.classList.remove('active');
+        });
+
+        confirmPayBtn.addEventListener('click', () => {
+            confirmPayBtn.innerHTML = '<i class="bi bi-arrow-repeat"></i> Processing...';
+            confirmPayBtn.disabled = true;
+
+            setTimeout(() => {
+                formView.style.display = 'none';
+                document.getElementById('txnRef').textContent = 'NIIT-PAY-' + Math.floor(10000 + Math.random() * 90000);
+                successView.style.display = 'block';
+
+                const badge = document.getElementById('checkoutStatusBadge');
+                if (badge) {
+                    badge.textContent = 'Paid';
+                    badge.className = 'status-badge status-badge-active';
+                }
+            }, 1200);
+        });
+    </script>
+</body>
+
+</html>

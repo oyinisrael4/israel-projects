@@ -15,10 +15,17 @@
     <link href="styles/icons-1.11.3/font/bootstrap-icons.css" type="text/css" rel="stylesheet" />
     <link href="styles/contants.css" type="text/css" rel="stylesheet" />
     <link href="styles/main.css" type="text/css" rel="stylesheet" />
+
+    <script src="JS/api.js"></script>
+    <script src="JS/auth.js"></script>
+
     <title>NIITITCORE | Sign UP</title>
 </head>
 
 <body>
+    <div class="alert-overlay" id="alert"></div>
+
+
     <section class="auth-section">
         <div class="auth-background">
             <div class="overlay-bg">
@@ -38,7 +45,7 @@
                             <div class="input-container">
                                 <div class="input-wrapper">
                                     <label>Fullname: <span>*</span></label>
-                                    <input type="text" class="text-field" id="fullname"
+                                    <input type="text" class="text-field" id="fullName"
                                         placeholder="Enter your fullname">
                                 </div>
 
@@ -61,7 +68,7 @@
                                         placeholder="Enter your password">
                                 </div>
 
-                                <button class="btn" title="Sign Up">Sign Up</button>
+                                <button class="btn" type="button" id="submitBtnId" title="Sign Up" onclick="signUpHandle();">Sign Up</button>
                             </div>
 
                             <p class="signin-footer">

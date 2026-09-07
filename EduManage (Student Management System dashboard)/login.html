@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="styles/icons-1.11.3/font/bootstrap-icons.css" type="text/css" rel="stylesheet" />
+    <link href="styles/constants.css" type="text/css" rel="stylesheet" />
+    <link href="styles/main.css" type="text/css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="all-images/icon-images/icon.png" />
+    <title>NIIT - Login</title>
+</head>
+
+<body>
+
+    <div class="alert-overlay" id="alert"></div>
+
+    <div class="login-page-wrapper">
+        <div class="login-card">
+
+            <div class="login-form-panel">
+                <div class="login-form-inner">
+
+                    <div class="login-logo-wrapper">
+                        <img src="all-images/icon-images/niit-logo.png" alt="NIIT" />
+                    </div>
+
+                    <div class="login-heading-wrapper">
+                        <h1>Login</h1>
+                        <p>New to NIIT? <a href="sign-up.html">Create your account</a></p>
+                    </div>
+
+                    <form class="login-form" id="loginForm">
+                        <div class="login-input-wrapper">
+                            <label for="username">Username or Email</label>
+                            <input type="text" id="username" placeholder="Enter your username or email" />
+                        </div>
+
+                        <div class="login-input-wrapper">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" placeholder="Enter your password" />
+                        </div>
+
+                        <div class="login-form-options">
+                            <label class="login-remember-wrapper">
+                                <input type="checkbox" id="rememberMe" />
+                                <span>Remember me</span>
+                            </label>
+                            <a href="forgot-password.html" class="login-forgot-link">Forgot password?</a>
+                        </div>
+
+                        <button type="submit" id="signInBtnId" class="btn login-submit-btn">Login</button>
+                    </form>
+
+                    <div class="login-social-row">
+                        <span>Or login with</span>
+                        <div class="login-social-wrapper">
+                            <button type="button" class="login-social-btn login-social-btn-facebook" title="Login with Facebook">
+                                <i class="bi bi-facebook"></i>
+                            </button>
+                            <button type="button" class="login-social-btn login-social-btn-twitter" title="Login with Twitter">
+                                <i class="bi bi-twitter"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="login-hero-panel">
+                <div class="login-hero-shape"></div>
+                <div class="login-hero-content">
+                    <h2>Welcome<br>Back.</h2>
+                    <p>Sign in to keep track of students, teachers, attendance, and everything else happening at your school today.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="JS/api.js"></script>
+    <script src="JS/auth.js"></script>
+</body>
+
+</html>
