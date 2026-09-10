@@ -2088,19 +2088,33 @@ body {
 
 .inpage-modal .inpage-modal-body {
     padding: 24px;
-    overflow-y: auto;
+    overflow-y: auto !important;
+    max-height: calc(88vh - 130px);
+    flex: 1 1 auto;
+    min-height: 0;
     display: flex;
     flex-direction: column;
     gap: 18px;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
 }
 
 .inpage-modal .inpage-modal-body::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
+}
+
+.inpage-modal .inpage-modal-body::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
 }
 
 .inpage-modal .inpage-modal-body::-webkit-scrollbar-thumb {
-    background: #e0e0e0;
-    border-radius: 3px;
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+.inpage-modal .inpage-modal-body::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
 }
 
 .inpage-modal .inpage-modal-intro {
@@ -2165,8 +2179,10 @@ body {
     align-items: center;
     justify-content: flex-end;
     gap: 12px;
-    padding-top: 10px;
-    border-top: 1px solid #f0f0f0;
+    padding: 14px 24px;
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+    background: var(--white-color);
 }
 
 .inpage-modal .inpage-cancel-btn {
@@ -2424,3 +2440,909 @@ body {
         display: none !important;
     }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ─── Programme Page Component ──────────────────────────────────────────
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card {
+    background: var(--white-color);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px;
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-panel-header .programme-panel-heading h3 {
+    font-family: title-font;
+    font-size: 18px;
+    color: var(--black-color);
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-panel-header .programme-panel-heading .programme-count-text {
+    font-family: body-font;
+    font-size: 13px;
+    color: var(--semiblack-color);
+    margin-top: 4px;
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-panel-header .programme-panel-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-panel-header .programme-panel-actions .programme-search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-panel-header .programme-panel-actions .programme-search-box i {
+    position: absolute;
+    left: 12px;
+    color: var(--semiblack-color);
+    font-size: 14px;
+    pointer-events: none;
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-panel-header .programme-panel-actions .programme-search-box input {
+    height: 38px;
+    padding: 0 14px 0 36px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--input-bg-color);
+    font-family: body-font;
+    font-size: 13px;
+    color: var(--black-color);
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+    width: 220px;
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-panel-header .programme-panel-actions .programme-search-box input:focus {
+    border-color: var(--primary-color);
+    background: var(--white-color);
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-panel-header .programme-panel-actions .programme-filter-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-panel-header .programme-panel-actions .programme-filter-wrapper i:first-child {
+    position: absolute;
+    left: 12px;
+    color: var(--semiblack-color);
+    font-size: 13px;
+    pointer-events: none;
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-panel-header .programme-panel-actions .programme-filter-wrapper .programme-filter-chevron {
+    position: absolute;
+    right: 12px;
+    color: var(--semiblack-color);
+    font-size: 12px;
+    pointer-events: none;
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-panel-header .programme-panel-actions .programme-filter-wrapper .programme-filter-select {
+    height: 38px;
+    padding: 0 32px 0 34px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--input-bg-color);
+    font-family: body-font;
+    font-size: 13px;
+    color: var(--black-color);
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-panel-header .programme-panel-actions .panel-add-btn {
+    height: 38px;
+    padding: 0 18px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border: none;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--white-color);
+    font-family: sub-title-font;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-panel-header .programme-panel-actions .panel-add-btn:hover {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+}
+
+/* ─── 3-Column Card Grid ("Block Block Block") ──────────────────────── */
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+@media (max-width: 1180px) {
+    .app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-grid-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ─── Individual Programme Card ─────────────────────────────────────── */
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-grid-container .programme-card {
+    background: var(--white-color);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-grid-container .programme-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.09);
+    border-color: #cbd5e1;
+}
+
+/* Cover Image */
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-grid-container .programme-card .programme-card-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #e9ecef;
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-grid-container .programme-card .programme-card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-grid-container .programme-card:hover .programme-card-image-wrapper img {
+    transform: scale(1.04);
+}
+
+/* Floating Category Badge */
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-grid-container .programme-card .programme-card-image-wrapper .programme-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0, 0, 0, 0.68);
+    backdrop-filter: blur(4px);
+    color: var(--white-color);
+    font-family: sub-title-font;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+    z-index: 2;
+}
+
+/* Floating Price Badge */
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-grid-container .programme-card .programme-card-image-wrapper .programme-price-badge {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: var(--white-color);
+    color: var(--primary-color);
+    font-family: title-font;
+    font-size: 13.5px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 2;
+}
+
+/* Card Body */
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-grid-container .programme-card .programme-card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 12px;
+}
+
+/* Metadata Row (Date / Clock / Views / Students) */
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-grid-container .programme-card .programme-card-body .programme-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: #777;
+    font-family: body-font;
+    font-size: 12px;
+    flex-wrap: wrap;
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-grid-container .programme-card .programme-card-body .programme-card-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-grid-container .programme-card .programme-card-body .programme-card-meta i {
+    font-size: 12px;
+    color: var(--secondary-color);
+}
+
+/* Card Title */
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-grid-container .programme-card .programme-card-body .programme-card-title {
+    font-family: title-font;
+    font-size: 16px;
+    color: var(--black-color);
+    line-height: 1.35;
+    margin: 0;
+}
+
+/* Card Description */
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-grid-container .programme-card .programme-card-body .programme-card-desc {
+    font-family: body-font;
+    font-size: 12.5px;
+    color: var(--semiblack-color);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 0;
+    flex: 1;
+}
+
+/* Card Footer */
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-grid-container .programme-card .programme-card-body .programme-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+}
+
+/* Signature Pill Button with Circular Arrow (as in reference screenshot) */
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-grid-container .programme-card .programme-card-body .programme-card-footer .programme-read-btn {
+    display: inline-flex;
+    align-items: center;
+    background: #E8A838;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: var(--white-color);
+    padding: 3px 4px 3px 18px;
+    border-radius: 30px;
+    border: none;
+    font-family: sub-title-font;
+    font-size: 13px;
+    cursor: pointer;
+    gap: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-grid-container .programme-card .programme-card-body .programme-card-footer .programme-read-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(230, 138, 0, 0.4);
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-grid-container .programme-card .programme-card-body .programme-card-footer .programme-read-btn .programme-btn-arrow-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: var(--white-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .programme-panel-card .programme-grid-container .programme-card .programme-card-body .programme-card-footer .programme-read-btn:hover .programme-btn-arrow-circle {
+    transform: rotate(45deg);
+    background: #000;
+}
+
+/* Empty State */
+.programme-empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: #888;
+}
+
+.programme-empty-state i {
+    font-size: 44px;
+    color: #ccc;
+    margin-bottom: 12px;
+    display: inline-block;
+}
+
+.programme-empty-state h4 {
+    font-family: title-font;
+    font-size: 16px;
+    color: var(--black-color);
+    margin-bottom: 6px;
+}
+
+.programme-empty-state p {
+    font-family: body-font;
+    font-size: 13px;
+}
+
+/* ─── Detail Modal Specific Layout ──────────────────────────────────── */
+.programme-detail-header-card {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #111;
+    height: 140px;
+    margin-bottom: 4px;
+}
+
+.programme-detail-header-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.45;
+}
+
+.programme-detail-header-content {
+    position: absolute;
+    bottom: 14px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.programme-detail-header-content h3 {
+    font-family: title-font;
+    font-size: 18px;
+    color: var(--white-color);
+    margin: 0;
+}
+
+.programme-detail-header-content p {
+    font-family: body-font;
+    font-size: 12px;
+    color: #f1f5f9;
+    margin-top: 2px;
+}
+
+.programme-detail-header-price {
+    background: var(--white-color);
+    color: var(--primary-color);
+    font-family: title-font;
+    font-size: 14px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.programme-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #eef2f6;
+}
+
+.programme-detail-grid-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.programme-detail-grid-item span:first-child {
+    font-family: body-font;
+    font-size: 11px;
+    color: #777;
+    text-transform: uppercase;
+}
+
+.programme-detail-grid-item span:last-child {
+    font-family: sub-title-font;
+    font-size: 13px;
+    color: var(--black-color);
+}
+
+.programme-section-title {
+    font-family: sub-title-font;
+    font-size: 13.5px;
+    color: var(--black-color);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+/* Enrolled Students Individual List */
+.programme-students-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.programme-student-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    background: #f8fafc;
+    border: 1px solid #eef2f6;
+    border-radius: 8px;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.programme-student-item:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+}
+
+.programme-student-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.programme-student-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #e2e8f0;
+    flex-shrink: 0;
+}
+
+.programme-student-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.programme-student-info h5 {
+    font-family: sub-title-font;
+    font-size: 13px;
+    color: var(--black-color);
+    margin: 0;
+}
+
+.programme-student-info p {
+    font-family: body-font;
+    font-size: 11.5px;
+    color: #64748b;
+    margin-top: 2px;
+}
+
+.programme-student-info .student-id-tag {
+    background: #e2e8f0;
+    color: #1e293b;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 10.5px;
+}
+
+.programme-student-status {
+    font-family: sub-title-font;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+.programme-student-status.status-active {
+    background: var(--success-bg);
+    color: var(--success-color);
+}
+
+.programme-no-students {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 22px;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    color: #64748b;
+    font-family: body-font;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+/* Delete Programme Button in Modal Footer */
+.programme-delete-btn {
+    height: 42px;
+    padding: 0 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(198, 40, 40, 0.35);
+    background: transparent;
+    color: var(--danger-color);
+    font-family: sub-title-font;
+    font-size: 13px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: all 0.2s ease;
+    margin-right: auto;
+}
+
+.programme-delete-btn:hover {
+    background: var(--danger-bg);
+    border-color: var(--danger-color);
+    color: var(--danger-color);
+}
+/* ═══════════════════════════════════════════════════════════════════════
+   ─── Admin / Instructor Card Grid Pages ─────────────────────────────────
+   Used by admin.html and instructor.html to list people as visual cards
+   instead of a table row — each card opens the Profile modal on click.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─── Grid wrapper (fills the roster-panel-card in place of a table) ──── */
+.roster-panel-card .people-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 1180px) {
+    .roster-panel-card .people-card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .roster-panel-card .people-card-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ─── Individual person card ────────────────────────────────────────── */
+.people-card-grid .person-card {
+    background: var(--white-color);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.people-card-grid .person-card:hover {
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+    border-color: var(--primary-color);
+}
+
+.people-card-grid .person-card .person-card-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.people-card-grid .person-card .person-card-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Thin colored bar under the avatar, echoing the reference design's
+   underline — doubles as a quick visual status/role accent */
+.people-card-grid .person-card .person-card-avatar-bar {
+    height: 3px;
+    border-radius: 2px;
+    margin-top: 8px;
+    background: var(--primary-color);
+}
+
+.people-card-grid .person-card .person-card-body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.people-card-grid .person-card .person-card-body h4 {
+    font-family: title-font;
+    font-size: 14px;
+    color: var(--black-color);
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.people-card-grid .person-card .person-card-body .person-card-role {
+    font-family: sub-title-font;
+    font-size: 12.5px;
+    color: var(--semiblack-color);
+}
+
+.people-card-grid .person-card .person-card-body .person-card-contact {
+    font-family: body-font;
+    font-size: 12px;
+    color: var(--semiblack-color);
+}
+
+.people-card-grid .person-card .person-card-body .person-card-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+}
+
+.people-card-grid .person-card .person-card-body .person-card-role-tag {
+    font-family: sub-title-font;
+    font-size: 10.5px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--semiblack-color);
+}
+
+/* ─── Empty roster-count-text small icon pairing (role/status funnel) ── */
+.roster-panel-actions .roster-filter-wrapper + .roster-filter-wrapper {
+    margin-left: -4px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ─── Profile View Modal (Administrative / Instructor Profile) ──────────
+   Opens when a person-card is clicked on admin.html / instructor.html.
+   Re-uses the .inpage-modal overlay/close mechanics already established
+   for other modals in the project, but swaps in a banner + avatar header
+   to match the reference "Administrative Profile" design.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.inpage-modal-overlay .inpage-modal.profile-modal {
+    max-width: 620px;
+}
+
+/* ─── Banner strip behind the header (photo-style gradient stand-in) ─── */
+.profile-modal .profile-modal-banner {
+    height: 130px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 130%);
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* ─── Avatar overlapping the banner + white ring, like the reference ── */
+.profile-modal .profile-modal-avatar {
+    width: 92px;
+    height: 92px;
+    border-radius: 12px;
+    border: 4px solid var(--white-color);
+    overflow: hidden;
+    position: absolute;
+    left: 24px;
+    bottom: -40px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+    background: var(--white-color);
+}
+
+.profile-modal .profile-modal-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ─── Name + status/last-login line, sits below the overlapping avatar ─ */
+.profile-modal .profile-modal-identity {
+    padding: 48px 24px 4px 24px;
+}
+
+.profile-modal .profile-modal-identity h2 {
+    font-family: title-font;
+    font-size: 19px;
+    color: var(--black-color);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.profile-modal .profile-modal-identity .profile-modal-subline {
+    margin-top: 6px;
+    font-family: body-font;
+    font-size: 12.5px;
+    color: var(--semiblack-color);
+}
+
+.profile-modal .profile-modal-identity .profile-modal-subline b {
+    font-family: sub-title-font;
+    color: var(--black-color);
+}
+
+/* ─── Section label with the colored underline from the reference ───── */
+.profile-modal .profile-modal-section-title {
+    font-family: sub-title-font;
+    font-size: 12.5px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--primary-color);
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--primary-color);
+    margin-bottom: 4px;
+}
+
+/* ─── Read-only field boxes (label above, bordered value below) ──────── */
+.profile-modal .profile-field-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.profile-modal .profile-field-grid .profile-field-full {
+    grid-column: 1 / -1;
+}
+
+.profile-modal .profile-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.profile-modal .profile-field label {
+    font-family: body-font;
+    font-size: 11.5px;
+    color: var(--semiblack-color);
+}
+
+.profile-modal .profile-field .profile-field-value {
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--input-bg-color);
+    font-family: body-font;
+    font-size: 13px;
+    color: var(--black-color);
+}
+
+/* ─── Students Brought (Counselor profiles only) ──────────────────────── */
+.profile-modal .profile-students-brought {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile-modal .profile-student-chip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--input-bg-color);
+}
+
+.profile-modal .profile-student-chip img {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.profile-modal .profile-student-chip .profile-student-chip-text h5 {
+    font-family: sub-title-font;
+    font-size: 12.5px;
+    color: var(--black-color);
+}
+
+.profile-modal .profile-student-chip .profile-student-chip-text p {
+    font-family: body-font;
+    font-size: 11.5px;
+    color: var(--semiblack-color);
+    margin-top: 1px;
+}
+
+.profile-modal .profile-students-brought-empty {
+    font-family: body-font;
+    font-size: 12.5px;
+    color: var(--semiblack-color);
+    font-style: italic;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ─── "Students Brought" picker (inside the Add Admin drawer) ───────────
+   Revealed only when Select Role = Counselor, so the person creating
+   the admin can tick which existing students that counselor brought in.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.form-section.students-brought-section {
+    display: none !important;
+}
+
+.form-section.students-brought-section.students-brought-visible {
+    display: flex !important;
+}
+
+.students-brought-section .students-brought-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.students-brought-section .students-brought-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.students-brought-section .students-brought-option:hover {
+    border-color: var(--primary-color);
+    background: var(--input-bg-color);
+}
+
+.students-brought-section .students-brought-option input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+.students-brought-section .students-brought-option img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.students-brought-section .students-brought-option span {
+    font-family: body-font;
+    font-size: 12.5px;
+    color: var(--black-color);
+}
+

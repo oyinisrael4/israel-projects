@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="styles/icons-1.11.3/font/bootstrap-icons.css" type="text/css" rel="stylesheet" />
+    <link href="styles/constants.css" type="text/css" rel="stylesheet" />
+    <link href="styles/main.css" type="text/css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="all-images/icon-images/icon.png" />
+    <title>NIIT - Admin</title>
+</head>
+
+<body>
+
+    <div class="app-layout-container">
+
+        <aside class="sidebar-wrapper">
+            <div class="sidebar-logo-wrapper">
+                <img src="all-images/icon-images/niit-logo.png" alt="NIIT" />
+            </div>
+
+            <div class="sidebar-profile-card">
+                <div class="sidebar-profile-card-image">
+                    <img src="all-images/icon-images/admin-avatar.png" alt="Jone Copper">
+                </div>
+                <div class="sidebar-profile-card-text">
+                    <h4>Jone Copper</h4>
+                    <p>Admin</p>
+                </div>
+                <i class="bi bi-chevron-right"></i>
+            </div>
+
+            <nav class="sidebar-nav-wrapper">
+                <ul class="sidebar-nav-list">
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="index.html">
+                            <i class="bi bi-grid-1x2-fill"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item sidebar-nav-item-active">
+                        <a class="sidebar-nav-link" href="admin.html">
+                            <i class="bi bi-person-badge-fill"></i>
+                            <span>Admin</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="instructor.html">
+                            <i class="bi bi-easel2-fill"></i>
+                            <span>Instructor</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="students.html">
+                            <i class="bi bi-people-fill"></i>
+                            <span>Students</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="programme.html">
+                            <i class="bi bi-list-ul"></i>
+                            <span>Programme</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="#">
+                            <i class="bi bi-pencil-square"></i>
+                            <span>Examinations</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="payments.html">
+                            <i class="bi bi-cash-coin"></i>
+                            <span>Payments</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="#">
+                            <i class="bi bi-bar-chart-line-fill"></i>
+                            <span>Report</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content-wrapper">
+
+            <header class="topbar-wrapper">
+                <div class="topbar-search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Search Admin Here...">
+                </div>
+
+                <div class="topbar-actions-wrapper">
+                    <button class="topbar-icon-btn" title="Theme">
+                        <i class="bi bi-sun-fill"></i>
+                    </button>
+                    <button class="topbar-icon-btn" title="Language">
+                        <i class="bi bi-globe2"></i>
+                    </button>
+                    <button class="topbar-icon-btn topbar-notification-btn" title="Notifications">
+                        <i class="bi bi-bell-fill"></i>
+                        <span class="topbar-notification-dot"></span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="dashboard-content-container">
+                <div class="dashboard-content-wrapper">
+
+                    <div class="page-heading-wrapper">
+                        <div class="page-heading-tag">
+                            <i class="bi bi-person-badge-fill"></i>
+                            <span>Admin</span>
+                        </div>
+                        <p class="page-heading-description">
+                            Admin <i class="bi bi-arrow-right"></i> Manage administrator accounts, roles, and
+                            access across the institute.
+                        </p>
+                    </div>
+
+                    <div class="page-section-wrapper">
+                        <div class="roster-panel-card">
+                            <div class="roster-panel-header">
+                                <div class="roster-panel-heading">
+                                    <h3>All Administrators</h3>
+                                    <p class="roster-count-text" id="adminCount">5 administrators</p>
+                                </div>
+                                <div class="roster-panel-actions panel-card-header-actions">
+                                    <div class="roster-filter-wrapper">
+                                        <i class="bi bi-funnel"></i>
+                                        <select class="roster-filter-select" id="roleFilter">
+                                            <option value="all">All Roles</option>
+                                        </select>
+                                        <i class="bi bi-chevron-down roster-filter-chevron"></i>
+                                    </div>
+                                    <div class="roster-filter-wrapper">
+                                        <i class="bi bi-toggle2-on"></i>
+                                        <select class="roster-filter-select" id="statusFilter">
+                                            <option value="all">All Status</option>
+                                            <option value="Active">Active</option>
+                                            <option value="Inactive">Inactive</option>
+                                        </select>
+                                        <i class="bi bi-chevron-down roster-filter-chevron"></i>
+                                    </div>
+                                    <button type="button" id="addAdminBtn" class="panel-add-btn">
+                                        <i class="bi bi-plus-lg"></i>
+                                        <span>Create New Admin</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="people-card-grid" id="adminGrid">
+
+                                <div class="person-card" data-id="admin-1" data-role="Super Admin"
+                                    data-status="Active" data-search="jone copper super admin">
+                                    <div>
+                                        <div class="person-card-avatar">
+                                            <img src="all-images/icon-images/admin-avatar.png" alt="Jone Copper">
+                                        </div>
+                                        <div class="person-card-avatar-bar"
+                                            style="background: var(--primary-color);"></div>
+                                    </div>
+                                    <div class="person-card-body">
+                                        <h4>Jone Copper</h4>
+                                        <p class="person-card-role">Super Admin</p>
+                                        <p class="person-card-contact">090 3427 5446</p>
+                                        <div class="person-card-meta-row">
+                                            <span class="person-card-role-tag">SUPER ADMIN</span>
+                                            <span class="status-badge status-badge-active">Active</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="person-card" data-id="admin-2" data-role="President"
+                                    data-status="Active" data-search="oladele philip president">
+                                    <div>
+                                        <div class="person-card-avatar">
+                                            <img src="all-images/icon-images/admin-3.png" alt="Oladele Philip">
+                                        </div>
+                                        <div class="person-card-avatar-bar"
+                                            style="background: var(--secondary-color);"></div>
+                                    </div>
+                                    <div class="person-card-body">
+                                        <h4>Oladele Philip</h4>
+                                        <p class="person-card-role">President</p>
+                                        <p class="person-card-contact">090 3427 5446</p>
+                                        <div class="person-card-meta-row">
+                                            <span class="person-card-role-tag">ADMIN</span>
+                                            <span class="status-badge status-badge-active">Active</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="person-card" data-id="admin-3" data-role="Registrar"
+                                    data-status="Active" data-search="kathryn murphy registrar">
+                                    <div>
+                                        <div class="person-card-avatar">
+                                            <img src="all-images/icon-images/profile-2.png" alt="Kathryn Murphy">
+                                        </div>
+                                        <div class="person-card-avatar-bar"
+                                            style="background: var(--footer-color);"></div>
+                                    </div>
+                                    <div class="person-card-body">
+                                        <h4>Kathryn Murphy</h4>
+                                        <p class="person-card-role">Registrar</p>
+                                        <p class="person-card-contact">080 9898 7876</p>
+                                        <div class="person-card-meta-row">
+                                            <span class="person-card-role-tag">ADMIN</span>
+                                            <span class="status-badge status-badge-active">Active</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="person-card" data-id="admin-4" data-role="Counselor"
+                                    data-status="Active" data-search="adebiyi abasi counselor">
+                                    <div>
+                                        <div class="person-card-avatar">
+                                            <img src="all-images/icon-images/admin-4.png" alt="Adebiyi Abasi">
+                                        </div>
+                                        <div class="person-card-avatar-bar"
+                                            style="background: var(--primary-color);"></div>
+                                    </div>
+                                    <div class="person-card-body">
+                                        <h4>Adebiyi Abasi</h4>
+                                        <p class="person-card-role">Counselor</p>
+                                        <p class="person-card-contact">080 6046 8880</p>
+                                        <div class="person-card-meta-row">
+                                            <span class="person-card-role-tag">COUNSELOR</span>
+                                            <span class="status-badge status-badge-active">Active</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="person-card" data-id="admin-5" data-role="Counselor"
+                                    data-status="Inactive" data-search="grace okafor counselor">
+                                    <div>
+                                        <div class="person-card-avatar">
+                                            <img src="all-images/icon-images/admin-5.png" alt="Grace Okafor">
+                                        </div>
+                                        <div class="person-card-avatar-bar"
+                                            style="background: var(--secondary-color);"></div>
+                                    </div>
+                                    <div class="person-card-body">
+                                        <h4>Grace Okafor</h4>
+                                        <p class="person-card-role">Counselor</p>
+                                        <p class="person-card-contact">080 3709 5149</p>
+                                        <div class="person-card-meta-row">
+                                            <span class="person-card-role-tag">COUNSELOR</span>
+                                            <span class="status-badge status-badge-inactive">Inactive</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <footer class="dashboard-footer-wrapper">
+                        <p>© 2026 Made With <i class="bi bi-heart-fill"></i> by NIIT.</p>
+                    </footer>
+
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- ═══ Create New Admin — Slide-Over Drawer ═══
+         The "Students Brought" section only appears once Select Role = Counselor
+         (toggled in JS/admin.js), so admins that aren't counselors never see it. -->
+    <div class="side-drawer-overlay" id="adminModalOverlay">
+        <div class="form-page-left">
+            <div class="form-page-header">
+                <div class="form-page-header-title">
+                    <div class="form-page-header-icon"><i class="bi bi-person-plus-fill"></i></div>
+                    <h2>Create New Admin</h2>
+                </div>
+                <button type="button" class="form-page-close-btn" id="adminModalCloseBtn">
+                    <i class="bi bi-x-lg"></i>
+                    <span>Close</span>
+                </button>
+            </div>
+
+            <div class="form-page-body">
+                <p class="form-page-intro">
+                    You are about to create a new admin. Please complete the form below with
+                    accurate details to successfully create a new admin.
+                </p>
+
+                <form class="form-page-form" id="addAdminForm">
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <i class="bi bi-person-vcard"></i>
+                            <span>Admin Basic Info</span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="adminTitle">Select Title: *</label>
+                            <select id="adminTitle" required>
+                                <option value="" selected disabled>Select here</option>
+                                <option>Mr</option>
+                                <option>Mrs</option>
+                                <option>Miss</option>
+                                <option>Dr</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="adminFirstName">First Name: *</label>
+                            <input type="text" id="adminFirstName" required />
+                        </div>
+
+                        <div class="form-field">
+                            <label for="adminLastName">Last Name: *</label>
+                            <input type="text" id="adminLastName" required />
+                        </div>
+
+                        <div class="form-field">
+                            <label for="adminEmail">Email Address: *</label>
+                            <input type="email" id="adminEmail" required />
+                        </div>
+
+                        <div class="form-field">
+                            <label for="adminPhone">Phone Number: *</label>
+                            <input type="tel" id="adminPhone" required />
+                        </div>
+
+                        <div class="form-field">
+                            <label for="adminAddress">Home Address: *</label>
+                            <input type="text" id="adminAddress" required />
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <i class="bi bi-shield-lock-fill"></i>
+                            <span>Administrative Info</span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="adminRole">Select Role: *</label>
+                            <select id="adminRole" required>
+                                <option value="" selected disabled>Select here</option>
+                                <option>Super Admin</option>
+                                <option>President</option>
+                                <option>Registrar</option>
+                                <option>Counselor</option>
+                                <option>Technologist</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="adminStatus">Select Status: *</label>
+                            <select id="adminStatus" required>
+                                <option value="" selected disabled>Select here</option>
+                                <option>Active</option>
+                                <option>Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Only shown when Select Role = Counselor -->
+                    <div class="form-section students-brought-section" id="studentsBroughtSection">
+                        <div class="form-section-title">
+                            <i class="bi bi-people-fill"></i>
+                            <span>Students Brought</span>
+                        </div>
+                        <p class="form-page-intro" style="margin: -8px 0 4px 0;">
+                            Tick the students this counselor has brought to the institute.
+                        </p>
+                        <div class="students-brought-list" id="studentsBroughtList">
+                            <label class="students-brought-option">
+                                <input type="checkbox" value="Arlene McCoy" data-id="AD33578">
+                                <img src="all-images/icon-images/student-1.png" alt="Arlene McCoy">
+                                <span>Arlene McCoy — AD33578</span>
+                            </label>
+                            <label class="students-brought-option">
+                                <input type="checkbox" value="Wade Warren" data-id="AD45231">
+                                <img src="all-images/icon-images/student-2.png" alt="Wade Warren">
+                                <span>Wade Warren — AD45231</span>
+                            </label>
+                            <label class="students-brought-option">
+                                <input type="checkbox" value="Brooklyn Simmons" data-id="AD67452">
+                                <img src="all-images/icon-images/student-3.png" alt="Brooklyn Simmons">
+                                <span>Brooklyn Simmons — AD67452</span>
+                            </label>
+                            <label class="students-brought-option">
+                                <input type="checkbox" value="Theresa Webb" data-id="AD76133">
+                                <img src="all-images/icon-images/student-4.png" alt="Theresa Webb">
+                                <span>Theresa Webb — AD76133</span>
+                            </label>
+                            <label class="students-brought-option">
+                                <input type="checkbox" value="Darlene Robertson" data-id="AD98214">
+                                <img src="all-images/icon-images/student-5.png" alt="Darlene Robertson">
+                                <span>Darlene Robertson — AD98214</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="form-page-submit-btn">
+                        <i class="bi bi-check-lg"></i>
+                        <span>Submit</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ Administrative Profile — View Modal ═══ -->
+    <div class="inpage-modal-overlay" id="profileModalOverlay">
+        <div class="inpage-modal profile-modal">
+            <div class="inpage-modal-header">
+                <div class="inpage-modal-header-title">
+                    <div class="inpage-modal-header-icon"><i class="bi bi-person-badge-fill"></i></div>
+                    <h2>Administrative Profile</h2>
+                </div>
+                <button type="button" class="inpage-modal-close-btn" id="profileModalCloseBtn">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="inpage-modal-body" style="padding: 0; gap: 0;">
+                <div class="profile-modal-banner">
+                    <div class="profile-modal-avatar">
+                        <img id="profileAvatar" src="" alt="">
+                    </div>
+                </div>
+
+                <div class="profile-modal-identity">
+                    <h2 id="profileName">—</h2>
+                    <p class="profile-modal-subline">
+                        Status: <b id="profileStatus">—</b> &nbsp;|&nbsp; Last Login: <b id="profileLastLogin">—</b>
+                    </p>
+                </div>
+
+                <div style="padding: 20px 24px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+                    <div>
+                        <p class="profile-modal-section-title">Basic Information</p>
+                        <div class="profile-field-grid">
+                            <div class="profile-field profile-field-full">
+                                <label>Full Name</label>
+                                <div class="profile-field-value" id="profileFullName">—</div>
+                            </div>
+                            <div class="profile-field profile-field-full">
+                                <label>Email Address</label>
+                                <div class="profile-field-value" id="profileEmail">—</div>
+                            </div>
+                            <div class="profile-field">
+                                <label>Position</label>
+                                <div class="profile-field-value" id="profilePosition">—</div>
+                            </div>
+                            <div class="profile-field">
+                                <label>Phone Number</label>
+                                <div class="profile-field-value" id="profilePhone">—</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="profileStudentsBroughtWrapper" style="display: none;">
+                        <p class="profile-modal-section-title">Students Brought</p>
+                        <div class="profile-students-brought" id="profileStudentsBrought"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="JS/admin.js"></script>
+</body>
+
+</html>

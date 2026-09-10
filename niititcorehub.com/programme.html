@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="styles/icons-1.11.3/font/bootstrap-icons.css" type="text/css" rel="stylesheet" />
+    <link href="styles/constants.css" type="text/css" rel="stylesheet" />
+    <link href="styles/main.css" type="text/css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="all-images/icon-images/icon.png" />
+    <title>NIIT - Programmes</title>
+</head>
+
+<body>
+
+    <div class="app-layout-container">
+
+        <aside class="sidebar-wrapper">
+            <div class="sidebar-logo-wrapper">
+                <img src="all-images/icon-images/niit-logo.png" alt="NIIT" />
+            </div>
+
+            <div class="sidebar-profile-card">
+                <div class="sidebar-profile-card-image">
+                    <img src="all-images/icon-images/admin-avatar.png" alt="Jone Copper">
+                </div>
+                <div class="sidebar-profile-card-text">
+                    <h4>Jone Copper</h4>
+                    <p>Admin</p>
+                </div>
+                <i class="bi bi-chevron-right"></i>
+            </div>
+
+            <nav class="sidebar-nav-wrapper">
+                <ul class="sidebar-nav-list">
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="index.html">
+                            <i class="bi bi-grid-1x2-fill"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="admin.html">
+                            <i class="bi bi-person-badge-fill"></i>
+                            <span>Admin</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="instructor.html">
+                            <i class="bi bi-easel2-fill"></i>
+                            <span>Instructor</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="students.html">
+                            <i class="bi bi-people-fill"></i>
+                            <span>Students</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item sidebar-nav-item-active">
+                        <a class="sidebar-nav-link" href="programme.html">
+                            <i class="bi bi-list-ul"></i>
+                            <span>Programme</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="#">
+                            <i class="bi bi-pencil-square"></i>
+                            <span>Examinations</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="payments.html">
+                            <i class="bi bi-cash-coin"></i>
+                            <span>Payments</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="#">
+                            <i class="bi bi-bar-chart-line-fill"></i>
+                            <span>Report</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content-wrapper">
+
+            <header class="topbar-wrapper">
+                <div class="topbar-search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Search Programme Here...">
+                </div>
+
+                <div class="topbar-actions-wrapper">
+                    <button class="topbar-icon-btn" title="Theme">
+                        <i class="bi bi-sun-fill"></i>
+                    </button>
+                    <button class="topbar-icon-btn" title="Language">
+                        <i class="bi bi-globe2"></i>
+                    </button>
+                    <button class="topbar-icon-btn topbar-notification-btn" title="Notifications">
+                        <i class="bi bi-bell-fill"></i>
+                        <span class="topbar-notification-dot"></span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="dashboard-content-container">
+                <div class="dashboard-content-wrapper">
+
+                    <div class="page-heading-wrapper">
+                        <div class="page-heading-tag">
+                            <i class="bi bi-list-ul"></i>
+                            <span>Programmes</span>
+                        </div>
+                        <p class="page-heading-description">
+                            Admin <i class="bi bi-arrow-right"></i> Manage course curriculum, pricing, duration, and
+                            student enrollments.
+                        </p>
+                    </div>
+
+                    <div class="page-section-wrapper">
+                        <div class="programme-panel-card">
+                            <div class="programme-panel-header">
+                                <div class="programme-panel-heading">
+                                    <h3>All Programmes</h3>
+                                    <p class="programme-count-text" id="programmeCount">6 programmes available</p>
+                                </div>
+                                <div class="programme-panel-actions">
+                                    <div class="programme-filter-wrapper">
+                                        <i class="bi bi-funnel"></i>
+                                        <select class="programme-filter-select" id="programmeCategoryFilter">
+                                            <option value="all">All Categories</option>
+                                            <option value="Software Development">Software Development</option>
+                                            <option value="Cybersecurity">Cybersecurity</option>
+                                            <option value="Data & AI">Data & AI</option>
+                                            <option value="Networking">Networking</option>
+                                            <option value="Design">UI/UX Design</option>
+                                        </select>
+                                        <i class="bi bi-chevron-down programme-filter-chevron"></i>
+                                    </div>
+                                    <button type="button" id="addProgrammeBtn" class="panel-add-btn">
+                                        <i class="bi bi-plus-lg"></i>
+                                        <span>Add Programme</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- 3-Column Card Grid ("Block Block Block") -->
+                            <div class="programme-grid-container" id="programmeGrid">
+                                <!-- Rendered dynamically by JS/programme.js -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <footer class="dashboard-footer-wrapper">
+                        <p>© 2026 Made With <i class="bi bi-heart-fill"></i> by NIIT.</p>
+                    </footer>
+
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- ─── Programme Details Modal ────────────────────────────────────── -->
+    <div class="inpage-modal-overlay" id="programmeDetailModal">
+        <div class="inpage-modal" style="max-width: 620px;">
+            <div class="inpage-modal-header">
+                <div class="inpage-modal-header-title">
+                    <div class="inpage-modal-header-icon">
+                        <i class="bi bi-journal-code"></i>
+                    </div>
+                    <h2>Programme Details</h2>
+                </div>
+                <button type="button" class="inpage-modal-close-btn" id="detailModalCloseBtn" title="Close">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="inpage-modal-body">
+                <div class="programme-detail-header-card">
+                    <img id="detailCoverImage" src="all-images/body-images/software-eng.jpg" alt="Cover">
+                    <div class="programme-detail-header-content">
+                        <div>
+                            <h3 id="detailTitle">Software Engineering & Full Stack</h3>
+                            <p id="detailSubtitle">PRG-SE101 • Software Development</p>
+                        </div>
+                        <div class="programme-detail-header-price" id="detailPrice">
+                            ₦250,000
+                        </div>
+                    </div>
+                </div>
+
+                <div class="programme-detail-grid">
+                    <div class="programme-detail-grid-item">
+                        <span>Duration</span>
+                        <span id="detailDuration">6 Months</span>
+                    </div>
+                    <div class="programme-detail-grid-item">
+                        <span>Curriculum</span>
+                        <span id="detailModules">8 Modules</span>
+                    </div>
+                    <div class="programme-detail-grid-item">
+                        <span>Enrolled</span>
+                        <span id="detailCapacity">45 / 50 Students</span>
+                    </div>
+                    <div class="programme-detail-grid-item">
+                        <span>Lead Instructor</span>
+                        <span id="detailInstructor">Courtney Henry</span>
+                    </div>
+                    <div class="programme-detail-grid-item">
+                        <span>Schedule</span>
+                        <span id="detailSchedule">Mon, Wed, Fri</span>
+                    </div>
+                    <div class="programme-detail-grid-item">
+                        <span>Course Code</span>
+                        <span id="detailCode">PRG-SE101</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="programme-curriculum-title">
+                        <i class="bi bi-info-circle-fill" style="color: var(--primary-color);"></i>
+                        About Programme
+                    </h4>
+                    <p class="inpage-modal-intro" id="detailDescription" style="margin-top: 6px;"></p>
+                </div>
+
+                <div class="programme-enrolled-section">
+                    <h4 class="programme-section-title">
+                        <i class="bi bi-people-fill" style="color: var(--primary-color);"></i>
+                        Enrolled Students (<span id="detailEnrolledCount">0</span>)
+                    </h4>
+                    <div class="programme-students-list" id="detailEnrolledStudentsList">
+                        <!-- Injected as individual student items via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="inpage-modal-footer">
+                <button type="button" class="programme-delete-btn" onclick="confirmDeleteProgramme()" title="Delete this programme">
+                    <i class="bi bi-trash3-fill"></i>
+                    <span>Delete</span>
+                </button>
+                <button type="button" class="inpage-cancel-btn" onclick="document.getElementById('detailModalCloseBtn').click()">Close</button>
+                <button type="button" class="inpage-submit-btn" onclick="openEditProgrammeModal()">
+                    <i class="bi bi-pencil-square"></i>
+                    <span>Edit Fee & Info</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── Edit Programme & Fee Modal ─────────────────────────────────── -->
+    <div class="inpage-modal-overlay" id="editProgrammeModal">
+        <div class="inpage-modal">
+            <div class="inpage-modal-header">
+                <div class="inpage-modal-header-title">
+                    <div class="inpage-modal-header-icon">
+                        <i class="bi bi-pencil-square"></i>
+                    </div>
+                    <h2>Edit Programme & Tuition Fee</h2>
+                </div>
+                <button type="button" class="inpage-modal-close-btn" id="editModalCloseBtn" title="Close">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="inpage-modal-body">
+                <p class="inpage-modal-intro">
+                    Update the programme details and tuition fee below. Changes will be updated immediately across the catalogue.
+                </p>
+
+                <form id="editProgrammeForm">
+                    <input type="hidden" id="editProgId" />
+
+                    <div class="inpage-form-grid">
+                        <div class="inpage-form-field form-field-full">
+                            <label for="editProgTitle">Programme Title: <span>*</span></label>
+                            <input type="text" id="editProgTitle" required />
+                        </div>
+
+                        <div class="inpage-form-field">
+                            <label for="editProgCode">Programme Code: <span>*</span></label>
+                            <input type="text" id="editProgCode" required />
+                        </div>
+
+                        <div class="inpage-form-field">
+                            <label for="editProgCategory">Category: <span>*</span></label>
+                            <select id="editProgCategory" required>
+                                <option value="Software Development">Software Development</option>
+                                <option value="Cybersecurity">Cybersecurity</option>
+                                <option value="Data & AI">Data & AI</option>
+                                <option value="Networking">Networking</option>
+                                <option value="Design">UI/UX Design</option>
+                            </select>
+                        </div>
+
+                        <div class="inpage-form-field">
+                            <label for="editProgPrice">Tuition Fee (₦): <span>*</span></label>
+                            <input type="text" id="editProgPrice" placeholder="e.g. ₦250,000" required />
+                        </div>
+
+                        <div class="inpage-form-field">
+                            <label for="editProgDuration">Duration: <span>*</span></label>
+                            <input type="text" id="editProgDuration" placeholder="e.g. 6 Months" required />
+                        </div>
+
+                        <div class="inpage-form-field">
+                            <label for="editProgModules">Modules Count: <span>*</span></label>
+                            <input type="text" id="editProgModules" placeholder="e.g. 8 Modules" required />
+                        </div>
+
+                        <div class="inpage-form-field">
+                            <label for="editProgCapacity">Max Student Capacity: <span>*</span></label>
+                            <input type="number" id="editProgCapacity" min="1" required />
+                        </div>
+
+                        <div class="inpage-form-field">
+                            <label for="editProgInstructor">Lead Instructor:</label>
+                            <input type="text" id="editProgInstructor" placeholder="e.g. Courtney Henry" />
+                        </div>
+
+                        <div class="inpage-form-field">
+                            <label for="editProgSchedule">Schedule:</label>
+                            <input type="text" id="editProgSchedule" placeholder="e.g. Mon, Wed, Fri • 10am - 1pm" />
+                        </div>
+
+                        <div class="inpage-form-field form-field-full">
+                            <label for="editProgDescription">Programme Description: <span>*</span></label>
+                            <input type="text" id="editProgDescription" required />
+                        </div>
+                    </div>
+
+                    <div class="inpage-modal-footer" style="margin-top: 18px;">
+                        <button type="button" class="programme-delete-btn" id="editModalDeleteBtn" title="Delete this programme">
+                            <i class="bi bi-trash3-fill"></i>
+                            <span>Delete Programme</span>
+                        </button>
+                        <button type="button" class="inpage-cancel-btn" id="editModalCancelBtn">Cancel</button>
+                        <button type="submit" class="inpage-submit-btn">
+                            <i class="bi bi-check-lg"></i>
+                            <span>Save Changes</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── Add Programme Modal ────────────────────────────────────────── -->
+    <div class="inpage-modal-overlay" id="addProgrammeModal">
+        <div class="inpage-modal">
+            <div class="inpage-modal-header">
+                <div class="inpage-modal-header-title">
+                    <div class="inpage-modal-header-icon">
+                        <i class="bi bi-plus-circle-fill"></i>
+                    </div>
+                    <h2>Create New Programme</h2>
+                </div>
+                <button type="button" class="inpage-modal-close-btn" id="addModalCloseBtn" title="Close">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="inpage-modal-body">
+                <p class="inpage-modal-intro">
+                    Enter the details of the new academic programme below to add it into the EduManage curriculum catalog.
+                </p>
+
+                <form id="addProgrammeForm">
+                    <div class="inpage-form-grid">
+                        <div class="inpage-form-field form-field-full">
+                            <label for="addProgTitle">Programme Title: <span>*</span></label>
+                            <input type="text" id="addProgTitle" placeholder="e.g. Cloud Architecture & Kubernetes" required />
+                        </div>
+
+                        <div class="inpage-form-field">
+                            <label for="addProgCode">Programme Code: <span>*</span></label>
+                            <input type="text" id="addProgCode" placeholder="e.g. PRG-CA501" required />
+                        </div>
+
+                        <div class="inpage-form-field">
+                            <label for="addProgCategory">Category: <span>*</span></label>
+                            <select id="addProgCategory" required>
+                                <option value="Software Development">Software Development</option>
+                                <option value="Cybersecurity">Cybersecurity</option>
+                                <option value="Data & AI">Data & AI</option>
+                                <option value="Networking">Networking</option>
+                                <option value="Design">UI/UX Design</option>
+                            </select>
+                        </div>
+
+                        <div class="inpage-form-field">
+                            <label for="addProgBadge">Award / Badge: <span>*</span></label>
+                            <select id="addProgBadge" required>
+                                <option value="Diploma">Diploma</option>
+                                <option value="Certificate">Certificate</option>
+                                <option value="Professional">Professional</option>
+                            </select>
+                        </div>
+
+                        <div class="inpage-form-field">
+                            <label for="addProgPrice">Tuition Fee (₦): <span>*</span></label>
+                            <input type="text" id="addProgPrice" placeholder="e.g. ₦200,000" required />
+                        </div>
+
+                        <div class="inpage-form-field">
+                            <label for="addProgDuration">Duration: <span>*</span></label>
+                            <input type="text" id="addProgDuration" placeholder="e.g. 6 Months" required />
+                        </div>
+
+                        <div class="inpage-form-field">
+                            <label for="addProgModules">Number of Modules: <span>*</span></label>
+                            <input type="text" id="addProgModules" placeholder="e.g. 6 Modules" required />
+                        </div>
+
+                        <div class="inpage-form-field">
+                            <label for="addProgCapacity">Max Capacity: <span>*</span></label>
+                            <input type="number" id="addProgCapacity" placeholder="e.g. 40" min="1" value="40" required />
+                        </div>
+
+                        <div class="inpage-form-field">
+                            <label for="addProgInstructor">Lead Instructor:</label>
+                            <input type="text" id="addProgInstructor" placeholder="e.g. Courtney Henry" />
+                        </div>
+
+                        <div class="inpage-form-field form-field-full">
+                            <label for="addProgSchedule">Schedule:</label>
+                            <input type="text" id="addProgSchedule" placeholder="e.g. Mon, Wed, Fri • 10:00 AM - 1:00 PM" />
+                        </div>
+
+                        <div class="inpage-form-field form-field-full">
+                            <label for="addProgDescription">Programme Description: <span>*</span></label>
+                            <input type="text" id="addProgDescription" placeholder="Brief 1-2 sentence overview of the course" required />
+                        </div>
+                    </div>
+
+                    <div class="inpage-modal-footer" style="margin-top: 18px;">
+                        <button type="button" class="inpage-cancel-btn" id="addModalCancelBtn">Cancel</button>
+                        <button type="submit" class="inpage-submit-btn">
+                            <i class="bi bi-plus-lg"></i>
+                            <span>Create Programme</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── Alert Notification Overlay Modal ────────────────────────────── -->
+    <div class="alert-overlay" id="alertOverlay">
+        <div class="alert-container">
+            <div class="image-wrapper">
+                <img src="all-images/icon-images/success.jpeg" alt="Success">
+            </div>
+            <h4 id="alertMessage">Action completed successfully</h4>
+            <button class="btn" type="button" id="alertCloseBtn" title="Okay, Thanks">Okay, Thanks</button>
+        </div>
+    </div>
+
+    <script src="JS/programme.js"></script>
+</body>
+
+</html>

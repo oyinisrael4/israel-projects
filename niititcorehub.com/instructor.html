@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="styles/icons-1.11.3/font/bootstrap-icons.css" type="text/css" rel="stylesheet" />
+    <link href="styles/constants.css" type="text/css" rel="stylesheet" />
+    <link href="styles/main.css" type="text/css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="all-images/icon-images/icon.png" />
+    <title>NIIT - Instructor</title>
+</head>
+
+<body>
+
+    <div class="app-layout-container">
+
+        <aside class="sidebar-wrapper">
+            <div class="sidebar-logo-wrapper">
+                <img src="all-images/icon-images/niit-logo.png" alt="NIIT" />
+            </div>
+
+            <div class="sidebar-profile-card">
+                <div class="sidebar-profile-card-image">
+                    <img src="all-images/icon-images/admin-avatar.png" alt="Jone Copper">
+                </div>
+                <div class="sidebar-profile-card-text">
+                    <h4>Jone Copper</h4>
+                    <p>Admin</p>
+                </div>
+                <i class="bi bi-chevron-right"></i>
+            </div>
+
+            <nav class="sidebar-nav-wrapper">
+                <ul class="sidebar-nav-list">
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="index.html">
+                            <i class="bi bi-grid-1x2-fill"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="admin.html">
+                            <i class="bi bi-person-badge-fill"></i>
+                            <span>Admin</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item sidebar-nav-item-active">
+                        <a class="sidebar-nav-link" href="instructor.html">
+                            <i class="bi bi-easel2-fill"></i>
+                            <span>Instructor</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="students.html">
+                            <i class="bi bi-people-fill"></i>
+                            <span>Students</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="programme.html">
+                            <i class="bi bi-list-ul"></i>
+                            <span>Programme</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="#">
+                            <i class="bi bi-pencil-square"></i>
+                            <span>Examinations</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="payments.html">
+                            <i class="bi bi-cash-coin"></i>
+                            <span>Payments</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="#">
+                            <i class="bi bi-bar-chart-line-fill"></i>
+                            <span>Report</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content-wrapper">
+
+            <header class="topbar-wrapper">
+                <div class="topbar-search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Search Instructor Here...">
+                </div>
+
+                <div class="topbar-actions-wrapper">
+                    <button class="topbar-icon-btn" title="Theme">
+                        <i class="bi bi-sun-fill"></i>
+                    </button>
+                    <button class="topbar-icon-btn" title="Language">
+                        <i class="bi bi-globe2"></i>
+                    </button>
+                    <button class="topbar-icon-btn topbar-notification-btn" title="Notifications">
+                        <i class="bi bi-bell-fill"></i>
+                        <span class="topbar-notification-dot"></span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="dashboard-content-container">
+                <div class="dashboard-content-wrapper">
+
+                    <div class="page-heading-wrapper">
+                        <div class="page-heading-tag">
+                            <i class="bi bi-easel2-fill"></i>
+                            <span>Instructor</span>
+                        </div>
+                        <p class="page-heading-description">
+                            Admin <i class="bi bi-arrow-right"></i> Manage tutors and lecturers, their
+                            programmes, and access across the institute.
+                        </p>
+                    </div>
+
+                    <div class="page-section-wrapper">
+                        <div class="roster-panel-card">
+                            <div class="roster-panel-header">
+                                <div class="roster-panel-heading">
+                                    <h3>All Instructors</h3>
+                                    <p class="roster-count-text" id="instructorCount">4 instructors</p>
+                                </div>
+                                <div class="roster-panel-actions panel-card-header-actions">
+                                    <div class="roster-filter-wrapper">
+                                        <i class="bi bi-funnel"></i>
+                                        <select class="roster-filter-select" id="roleFilter">
+                                            <option value="all">All Roles</option>
+                                        </select>
+                                        <i class="bi bi-chevron-down roster-filter-chevron"></i>
+                                    </div>
+                                    <div class="roster-filter-wrapper">
+                                        <i class="bi bi-toggle2-on"></i>
+                                        <select class="roster-filter-select" id="statusFilter">
+                                            <option value="all">All Status</option>
+                                            <option value="Active">Active</option>
+                                            <option value="Inactive">Inactive</option>
+                                        </select>
+                                        <i class="bi bi-chevron-down roster-filter-chevron"></i>
+                                    </div>
+                                    <button type="button" id="addInstructorBtn" class="panel-add-btn">
+                                        <i class="bi bi-plus-lg"></i>
+                                        <span>Create New Instructor</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="people-card-grid" id="instructorGrid">
+
+                                <div class="person-card" data-id="instructor-1" data-role="Tutor"
+                                    data-status="Active" data-search="courtney henry tutor web development">
+                                    <div>
+                                        <div class="person-card-avatar">
+                                            <img src="all-images/icon-images/teacher-avatar.png" alt="Courtney Henry">
+                                        </div>
+                                        <div class="person-card-avatar-bar"
+                                            style="background: var(--primary-color);"></div>
+                                    </div>
+                                    <div class="person-card-body">
+                                        <h4>Courtney Henry</h4>
+                                        <p class="person-card-role">Tutor — Web Development</p>
+                                        <p class="person-card-contact">080 3123 4567</p>
+                                        <div class="person-card-meta-row">
+                                            <span class="person-card-role-tag">TUTOR</span>
+                                            <span class="status-badge status-badge-active">Active</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="person-card" data-id="instructor-2" data-role="Tutor"
+                                    data-status="Inactive" data-search="robert fox tutor cybersecurity">
+                                    <div>
+                                        <div class="person-card-avatar">
+                                            <img src="all-images/icon-images/staff-1.png" alt="Robert Fox">
+                                        </div>
+                                        <div class="person-card-avatar-bar"
+                                            style="background: var(--footer-color);"></div>
+                                    </div>
+                                    <div class="person-card-body">
+                                        <h4>Robert Fox</h4>
+                                        <p class="person-card-role">Tutor — Cybersecurity</p>
+                                        <p class="person-card-contact">081 0345 6789</p>
+                                        <div class="person-card-meta-row">
+                                            <span class="person-card-role-tag">TUTOR</span>
+                                            <span class="status-badge status-badge-inactive">Inactive</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="person-card" data-id="instructor-3" data-role="Senior Lecturer"
+                                    data-status="Active" data-search="eleanor pena senior lecturer data analysis">
+                                    <div>
+                                        <div class="person-card-avatar">
+                                            <img src="all-images/icon-images/staff-2.png" alt="Eleanor Pena">
+                                        </div>
+                                        <div class="person-card-avatar-bar"
+                                            style="background: var(--secondary-color);"></div>
+                                    </div>
+                                    <div class="person-card-body">
+                                        <h4>Eleanor Pena</h4>
+                                        <p class="person-card-role">Senior Lecturer — Data Analysis</p>
+                                        <p class="person-card-contact">081 3456 7890</p>
+                                        <div class="person-card-meta-row">
+                                            <span class="person-card-role-tag">SENIOR LECTURER</span>
+                                            <span class="status-badge status-badge-active">Active</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="person-card" data-id="instructor-4" data-role="Lecturer"
+                                    data-status="Active" data-search="leslie alexander lecturer networking">
+                                    <div>
+                                        <div class="person-card-avatar">
+                                            <img src="all-images/icon-images/instructor-4.png" alt="Leslie Alexander">
+                                        </div>
+                                        <div class="person-card-avatar-bar"
+                                            style="background: var(--primary-color);"></div>
+                                    </div>
+                                    <div class="person-card-body">
+                                        <h4>Leslie Alexander</h4>
+                                        <p class="person-card-role">Lecturer — Networking</p>
+                                        <p class="person-card-contact">081 6567 8901</p>
+                                        <div class="person-card-meta-row">
+                                            <span class="person-card-role-tag">LECTURER</span>
+                                            <span class="status-badge status-badge-active">Active</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <footer class="dashboard-footer-wrapper">
+                        <p>© 2026 Made With <i class="bi bi-heart-fill"></i> by NIIT.</p>
+                    </footer>
+
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- ═══ Create New Instructor — Slide-Over Drawer ═══ -->
+    <div class="side-drawer-overlay" id="instructorModalOverlay">
+        <div class="form-page-left">
+            <div class="form-page-header">
+                <div class="form-page-header-title">
+                    <div class="form-page-header-icon"><i class="bi bi-person-plus-fill"></i></div>
+                    <h2>Create New Instructor</h2>
+                </div>
+                <button type="button" class="form-page-close-btn" id="instructorModalCloseBtn">
+                    <i class="bi bi-x-lg"></i>
+                    <span>Close</span>
+                </button>
+            </div>
+
+            <div class="form-page-body">
+                <p class="form-page-intro">
+                    You are about to create a new instructor. Please complete the form below with
+                    accurate details to successfully create a new instructor.
+                </p>
+
+                <form class="form-page-form" id="addInstructorForm">
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <i class="bi bi-person-vcard"></i>
+                            <span>Instructor Basic Info</span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="instructorTitle">Select Title: *</label>
+                            <select id="instructorTitle" required>
+                                <option value="" selected disabled>Select here</option>
+                                <option>Mr</option>
+                                <option>Mrs</option>
+                                <option>Miss</option>
+                                <option>Dr</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="instructorFirstName">First Name: *</label>
+                            <input type="text" id="instructorFirstName" required />
+                        </div>
+
+                        <div class="form-field">
+                            <label for="instructorLastName">Last Name: *</label>
+                            <input type="text" id="instructorLastName" required />
+                        </div>
+
+                        <div class="form-field">
+                            <label for="instructorEmail">Email Address: *</label>
+                            <input type="email" id="instructorEmail" required />
+                        </div>
+
+                        <div class="form-field">
+                            <label for="instructorPhone">Phone Number: *</label>
+                            <input type="tel" id="instructorPhone" required />
+                        </div>
+
+                        <div class="form-field">
+                            <label for="instructorAddress">Home Address: *</label>
+                            <input type="text" id="instructorAddress" required />
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <i class="bi bi-mortarboard-fill"></i>
+                            <span>Teaching Info</span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="instructorRole">Select Role: *</label>
+                            <select id="instructorRole" required>
+                                <option value="" selected disabled>Select here</option>
+                                <option>Tutor</option>
+                                <option>Lecturer</option>
+                                <option>Senior Lecturer</option>
+                                <option>Technologist</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="instructorProgramme">Select Programme: *</label>
+                            <select id="instructorProgramme" required>
+                                <option value="" selected disabled>Select here</option>
+                                <option>Web Development</option>
+                                <option>Data Analysis</option>
+                                <option>Cybersecurity</option>
+                                <option>Software Engineering</option>
+                                <option>Networking</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="instructorStatus">Select Status: *</label>
+                            <select id="instructorStatus" required>
+                                <option value="" selected disabled>Select here</option>
+                                <option>Active</option>
+                                <option>Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="form-page-submit-btn">
+                        <i class="bi bi-check-lg"></i>
+                        <span>Submit</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ Instructor Profile — View Modal ═══ -->
+    <div class="inpage-modal-overlay" id="profileModalOverlay">
+        <div class="inpage-modal profile-modal">
+            <div class="inpage-modal-header">
+                <div class="inpage-modal-header-title">
+                    <div class="inpage-modal-header-icon"><i class="bi bi-easel2-fill"></i></div>
+                    <h2>Instructor Profile</h2>
+                </div>
+                <button type="button" class="inpage-modal-close-btn" id="profileModalCloseBtn">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="inpage-modal-body" style="padding: 0; gap: 0;">
+                <div class="profile-modal-banner">
+                    <div class="profile-modal-avatar">
+                        <img id="profileAvatar" src="" alt="">
+                    </div>
+                </div>
+
+                <div class="profile-modal-identity">
+                    <h2 id="profileName">—</h2>
+                    <p class="profile-modal-subline">
+                        Status: <b id="profileStatus">—</b> &nbsp;|&nbsp; Last Login: <b id="profileLastLogin">—</b>
+                    </p>
+                </div>
+
+                <div style="padding: 20px 24px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+                    <div>
+                        <p class="profile-modal-section-title">Basic Information</p>
+                        <div class="profile-field-grid">
+                            <div class="profile-field profile-field-full">
+                                <label>Full Name</label>
+                                <div class="profile-field-value" id="profileFullName">—</div>
+                            </div>
+                            <div class="profile-field profile-field-full">
+                                <label>Email Address</label>
+                                <div class="profile-field-value" id="profileEmail">—</div>
+                            </div>
+                            <div class="profile-field">
+                                <label>Position</label>
+                                <div class="profile-field-value" id="profilePosition">—</div>
+                            </div>
+                            <div class="profile-field">
+                                <label>Phone Number</label>
+                                <div class="profile-field-value" id="profilePhone">—</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="JS/instructor.js"></script>
+</body>
+
+</html>

@@ -72,6 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const address = (document.getElementById("studentAddress")?.value || "").trim();
             const programme = (document.getElementById("studentProgramme")?.value || "").trim();
             const status = (document.getElementById("studentStatus")?.value || "Active").trim();
+            const broughtBy = (document.getElementById("studentBroughtBy")?.value || "").trim();
 
             if (!firstName || !lastName || !email || !phone || !programme) {
                 alert("Please fill in all required fields.");
@@ -83,10 +84,11 @@ document.addEventListener("DOMContentLoaded", function () {
             const randomAvatar = avatarPool[Math.floor(Math.random() * avatarPool.length)];
             const rowCount = studentTableBody.querySelectorAll("tr").length + 1;
             const statusClass = status.toLowerCase() === "active" ? "status-badge-active" : "status-badge-inactive";
-            const searchData = `${fullName} ${studentId} ${programme}`.toLowerCase();
+            const searchData = `${fullName} ${studentId} ${programme} ${broughtBy}`.toLowerCase();
 
             const newRow = document.createElement("tr");
             newRow.setAttribute("data-programme", programme);
+            newRow.setAttribute("data-brought-by", broughtBy);
             newRow.setAttribute("data-search", searchData);
             newRow.innerHTML = `
                 <td class="marks-table-admission-no">${rowCount}</td>
