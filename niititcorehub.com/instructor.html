@@ -47,6 +47,13 @@
                         </a>
                     </li>
 
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="counselor.html">
+                            <i class="bi bi-chat-heart-fill"></i>
+                            <span>Counselor</span>
+                        </a>
+                    </li>
+
                     <li class="sidebar-nav-item sidebar-nav-item-active">
                         <a class="sidebar-nav-link" href="instructor.html">
                             <i class="bi bi-easel2-fill"></i>
@@ -62,6 +69,13 @@
                     </li>
 
                     <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="parents.html">
+                            <i class="bi bi-house-heart-fill"></i>
+                            <span>Parents</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
                         <a class="sidebar-nav-link" href="programme.html">
                             <i class="bi bi-list-ul"></i>
                             <span>Programme</span>
@@ -69,7 +83,7 @@
                     </li>
 
                     <li class="sidebar-nav-item">
-                        <a class="sidebar-nav-link" href="#">
+                        <a class="sidebar-nav-link" href="examinations.html">
                             <i class="bi bi-pencil-square"></i>
                             <span>Examinations</span>
                         </a>
@@ -83,7 +97,7 @@
                     </li>
 
                     <li class="sidebar-nav-item">
-                        <a class="sidebar-nav-link" href="#">
+                        <a class="sidebar-nav-link" href="report.html">
                             <i class="bi bi-bar-chart-line-fill"></i>
                             <span>Report</span>
                         </a>
@@ -172,7 +186,7 @@
                                     </div>
                                     <div class="person-card-body">
                                         <h4>Courtney Henry</h4>
-                                        <p class="person-card-role">Tutor — Web Development</p>
+        <p class="person-card-role">Tutor — Diploma in Web Development</p>
                                         <p class="person-card-contact">080 3123 4567</p>
                                         <div class="person-card-meta-row">
                                             <span class="person-card-role-tag">TUTOR</span>
@@ -192,7 +206,7 @@
                                     </div>
                                     <div class="person-card-body">
                                         <h4>Robert Fox</h4>
-                                        <p class="person-card-role">Tutor — Cybersecurity</p>
+        <p class="person-card-role">Tutor — CyberOps &amp; Certified Ethical Hacking</p>
                                         <p class="person-card-contact">081 0345 6789</p>
                                         <div class="person-card-meta-row">
                                             <span class="person-card-role-tag">TUTOR</span>
@@ -212,7 +226,7 @@
                                     </div>
                                     <div class="person-card-body">
                                         <h4>Eleanor Pena</h4>
-                                        <p class="person-card-role">Senior Lecturer — Data Analysis</p>
+        <p class="person-card-role">Senior Lecturer — Data Analysis</p>
                                         <p class="person-card-contact">081 3456 7890</p>
                                         <div class="person-card-meta-row">
                                             <span class="person-card-role-tag">SENIOR LECTURER</span>
@@ -232,7 +246,7 @@
                                     </div>
                                     <div class="person-card-body">
                                         <h4>Leslie Alexander</h4>
-                                        <p class="person-card-role">Lecturer — Networking</p>
+        <p class="person-card-role">Lecturer — CCNA / CCNP &amp; IT Essentials</p>
                                         <p class="person-card-contact">081 6567 8901</p>
                                         <div class="person-card-meta-row">
                                             <span class="person-card-role-tag">LECTURER</span>
@@ -341,11 +355,24 @@
                             <label for="instructorProgramme">Select Programme: *</label>
                             <select id="instructorProgramme" required>
                                 <option value="" selected disabled>Select here</option>
-                                <option>Web Development</option>
+                                <option>Hardware &amp; Networking</option>
+                                <option>Desktop Publishing (MS Office Suite)</option>
+                                <option>MasterMind Series (MIS)</option>
+                                <option>CCNA / CCNP</option>
+                                <option>IT Essentials</option>
+                                <option>Diploma in .NET Technologies</option>
+                                <option>Diploma in Web Development</option>
                                 <option>Data Analysis</option>
-                                <option>Cybersecurity</option>
-                                <option>Software Engineering</option>
-                                <option>Networking</option>
+                                <option>Diploma in Java</option>
+                                <option>Diploma in Python</option>
+                                <option>Java with DevOps</option>
+                                <option>Graphics Design</option>
+                                <option>UI/UX Design</option>
+                                <option>Project Management (PMP)</option>
+                                <option>Multimedia</option>
+                                <option>Game Development</option>
+                                <option>CyberOps</option>
+                                <option>Certified Ethical Hacking</option>
                             </select>
                         </div>
 
@@ -370,7 +397,7 @@
 
     <!-- ═══ Instructor Profile — View Modal ═══ -->
     <div class="inpage-modal-overlay" id="profileModalOverlay">
-        <div class="inpage-modal profile-modal">
+        <div class="inpage-modal profile-modal" style="max-width: 760px; width: 92vw;">
             <div class="inpage-modal-header">
                 <div class="inpage-modal-header-title">
                     <div class="inpage-modal-header-icon"><i class="bi bi-easel2-fill"></i></div>

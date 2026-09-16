@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="styles/icons-1.11.3/font/bootstrap-icons.css" type="text/css" rel="stylesheet" />
+    <link href="styles/constants.css" type="text/css" rel="stylesheet" />
+    <link href="styles/main.css" type="text/css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="all-images/icon-images/icon.png" />
+    <title>NIIT - Parents & Guardians</title>
+</head>
+
+<body>
+
+    <div class="app-layout-container">
+
+        <aside class="sidebar-wrapper">
+            <div class="sidebar-logo-wrapper">
+                <img src="all-images/icon-images/niit-logo.png" alt="NIIT" />
+            </div>
+
+            <div class="sidebar-profile-card">
+                <div class="sidebar-profile-card-image">
+                    <img src="all-images/icon-images/admin-avatar.png" alt="Jone Copper">
+                </div>
+                <div class="sidebar-profile-card-text">
+                    <h4>Jone Copper</h4>
+                    <p>Admin</p>
+                </div>
+                <i class="bi bi-chevron-right"></i>
+            </div>
+
+            <nav class="sidebar-nav-wrapper">
+                <ul class="sidebar-nav-list">
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="index.html">
+                            <i class="bi bi-grid-1x2-fill"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="admin.html">
+                            <i class="bi bi-person-badge-fill"></i>
+                            <span>Admin</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="counselor.html">
+                            <i class="bi bi-chat-heart-fill"></i>
+                            <span>Counselor</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="instructor.html">
+                            <i class="bi bi-easel2-fill"></i>
+                            <span>Instructor</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="students.html">
+                            <i class="bi bi-people-fill"></i>
+                            <span>Students</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item sidebar-nav-item-active">
+                        <a class="sidebar-nav-link" href="parents.html">
+                            <i class="bi bi-house-heart-fill"></i>
+                            <span>Parents</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="programme.html">
+                            <i class="bi bi-list-ul"></i>
+                            <span>Programme</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="examinations.html">
+                            <i class="bi bi-pencil-square"></i>
+                            <span>Examinations</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="payments.html">
+                            <i class="bi bi-cash-coin"></i>
+                            <span>Payments</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="report.html">
+                            <i class="bi bi-bar-chart-line-fill"></i>
+                            <span>Report</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content-wrapper">
+
+            <header class="topbar-wrapper">
+                <div class="topbar-search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Search Parents & Guardians Here...">
+                </div>
+
+                <div class="topbar-actions-wrapper">
+                    <button class="topbar-icon-btn" title="Theme">
+                        <i class="bi bi-sun-fill"></i>
+                    </button>
+                    <button class="topbar-icon-btn" title="Language">
+                        <i class="bi bi-globe2"></i>
+                    </button>
+                    <button class="topbar-icon-btn topbar-notification-btn" title="Notifications">
+                        <i class="bi bi-bell-fill"></i>
+                        <span class="topbar-notification-dot"></span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="dashboard-content-container">
+                <div class="dashboard-content-wrapper">
+
+                    <div class="page-heading-wrapper">
+                        <div class="page-heading-tag">
+                            <i class="bi bi-house-heart-fill"></i>
+                            <span>Parents & Guardians</span>
+                        </div>
+                        <p class="page-heading-description">
+                            Admin <i class="bi bi-arrow-right"></i> Manage parent and guardian records, their linked
+                            students, and contact information.
+                        </p>
+                    </div>
+
+                    <div class="page-section-wrapper">
+                        <div class="roster-panel-card">
+                            <div class="roster-panel-header">
+                                <div class="roster-panel-heading">
+                                    <h3>All Parents & Guardians</h3>
+                                    <p class="roster-count-text" id="parentCount">5 records</p>
+                                </div>
+                                <div class="roster-panel-actions panel-card-header-actions">
+                                    <div class="roster-filter-wrapper">
+                                        <i class="bi bi-funnel"></i>
+                                        <select class="roster-filter-select" id="relationshipFilter">
+                                            <option value="all">All Relations</option>
+                                            <option value="Father">Father</option>
+                                            <option value="Mother">Mother</option>
+                                            <option value="Guardian">Guardian</option>
+                                        </select>
+                                        <i class="bi bi-chevron-down roster-filter-chevron"></i>
+                                    </div>
+                                    <button type="button" id="addParentBtn" class="panel-add-btn">
+                                        <i class="bi bi-plus-lg"></i>
+                                        <span>Add Parent / Guardian</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="roster-table-wrapper">
+                                <table class="marks-table" id="parentTable">
+                                    <thead>
+                                        <tr>
+                                            <th>SN <i class="bi bi-arrow-down-up"></i></th>
+                                            <th>Parent / Guardian <i class="bi bi-arrow-down-up"></i></th>
+                                            <th>Relationship <i class="bi bi-arrow-down-up"></i></th>
+                                            <th>Linked Student <i class="bi bi-arrow-down-up"></i></th>
+                                            <th>Contact <i class="bi bi-arrow-down-up"></i></th>
+                                            <th>Email <i class="bi bi-arrow-down-up"></i></th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr data-relationship="Father" data-search="mr james mccoy father arlene mccoy ad33578">
+                                            <td class="marks-table-admission-no">1</td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/admin-3.png" alt="Mr James McCoy">
+                                                    <div>
+                                                        <h4>Mr James McCoy</h4>
+                                                        <p>Added: Jan 2026</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="person-card-role-tag">FATHER</span></td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/student-1.png" alt="Arlene McCoy">
+                                                    <div>
+                                                        <h4>Arlene McCoy</h4>
+                                                        <p>AD33578</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>0812 345 6789</td>
+                                            <td>james.mccoy@gmail.com</td>
+                                            <td><button class="table-view-btn" type="button" data-parent="parent-1">View</button></td>
+                                        </tr>
+                                        <tr data-relationship="Mother" data-search="mrs patricia warren mother wade warren ad45231">
+                                            <td class="marks-table-admission-no">2</td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/profile-2.png" alt="Mrs Patricia Warren">
+                                                    <div>
+                                                        <h4>Mrs Patricia Warren</h4>
+                                                        <p>Added: Feb 2026</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="person-card-role-tag">MOTHER</span></td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/student-2.png" alt="Wade Warren">
+                                                    <div>
+                                                        <h4>Wade Warren</h4>
+                                                        <p>AD45231</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>0803 456 7890</td>
+                                            <td>pwarren@yahoo.com</td>
+                                            <td><button class="table-view-btn" type="button" data-parent="parent-2">View</button></td>
+                                        </tr>
+                                        <tr data-relationship="Guardian" data-search="mr charles simmons guardian brooklyn simmons ad67452">
+                                            <td class="marks-table-admission-no">3</td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/admin-4.png" alt="Mr Charles Simmons">
+                                                    <div>
+                                                        <h4>Mr Charles Simmons</h4>
+                                                        <p>Added: Mar 2026</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="person-card-role-tag">GUARDIAN</span></td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/student-3.png" alt="Brooklyn Simmons">
+                                                    <div>
+                                                        <h4>Brooklyn Simmons</h4>
+                                                        <p>AD67452</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>0816 567 8901</td>
+                                            <td>csimmons@outlook.com</td>
+                                            <td><button class="table-view-btn" type="button" data-parent="parent-3">View</button></td>
+                                        </tr>
+                                        <tr data-relationship="Father" data-search="mr henry webb father theresa webb ad76133">
+                                            <td class="marks-table-admission-no">4</td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/admin-5.png" alt="Mr Henry Webb">
+                                                    <div>
+                                                        <h4>Mr Henry Webb</h4>
+                                                        <p>Added: Apr 2026</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="person-card-role-tag">FATHER</span></td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/student-4.png" alt="Theresa Webb">
+                                                    <div>
+                                                        <h4>Theresa Webb</h4>
+                                                        <p>AD76133</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>0802 678 9012</td>
+                                            <td>henrywebb@niit.ng</td>
+                                            <td><button class="table-view-btn" type="button" data-parent="parent-4">View</button></td>
+                                        </tr>
+                                        <tr data-relationship="Mother" data-search="mrs grace robertson mother darlene robertson ad98214">
+                                            <td class="marks-table-admission-no">5</td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/profile-2.png" alt="Mrs Grace Robertson">
+                                                    <div>
+                                                        <h4>Mrs Grace Robertson</h4>
+                                                        <p>Added: May 2026</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="person-card-role-tag">MOTHER</span></td>
+                                            <td>
+                                                <div class="marks-table-student">
+                                                    <img src="all-images/icon-images/student-5.png" alt="Darlene Robertson">
+                                                    <div>
+                                                        <h4>Darlene Robertson</h4>
+                                                        <p>AD98214</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>0809 789 0123</td>
+                                            <td>gracerobertson@gmail.com</td>
+                                            <td><button class="table-view-btn" type="button" data-parent="parent-5">View</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <footer class="dashboard-footer-wrapper">
+                        <p>© 2026 Made With <i class="bi bi-heart-fill"></i> by NIIT.</p>
+                    </footer>
+
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- Add Parent / Guardian Slide-Over Drawer -->
+    <div class="side-drawer-overlay" id="parentModalOverlay">
+        <div class="form-page-left">
+            <div class="form-page-header">
+                <div class="form-page-header-title">
+                    <div class="form-page-header-icon"><i class="bi bi-person-plus-fill"></i></div>
+                    <h2>Add Parent / Guardian</h2>
+                </div>
+                <button type="button" class="form-page-close-btn" id="parentModalCloseBtn">
+                    <i class="bi bi-x-lg"></i>
+                    <span>Close</span>
+                </button>
+            </div>
+
+            <div class="form-page-body">
+                <p class="form-page-intro">
+                    You are about to add a new parent or guardian record. Please complete all required fields
+                    and link them to a student.
+                </p>
+
+                <form class="form-page-form" id="addParentForm">
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <i class="bi bi-person-vcard"></i>
+                            <span>Parent / Guardian Info</span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="parentTitle">Select Title: *</label>
+                            <select id="parentTitle" required>
+                                <option value="" selected disabled>Select here</option>
+                                <option>Mr</option>
+                                <option>Mrs</option>
+                                <option>Miss</option>
+                                <option>Dr</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="parentFirstName">First Name: *</label>
+                            <input type="text" id="parentFirstName" required />
+                        </div>
+
+                        <div class="form-field">
+                            <label for="parentLastName">Last Name: *</label>
+                            <input type="text" id="parentLastName" required />
+                        </div>
+
+                        <div class="form-field">
+                            <label for="parentRelationship">Relationship: *</label>
+                            <select id="parentRelationship" required>
+                                <option value="" selected disabled>Select here</option>
+                                <option value="Father">Father</option>
+                                <option value="Mother">Mother</option>
+                                <option value="Guardian">Guardian</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="parentPhone">Phone Number: *</label>
+                            <input type="tel" id="parentPhone" required />
+                        </div>
+
+                        <div class="form-field">
+                            <label for="parentEmail">Email Address: *</label>
+                            <input type="email" id="parentEmail" required />
+                        </div>
+
+                        <div class="form-field">
+                            <label for="parentAddress">Home Address:</label>
+                            <input type="text" id="parentAddress" />
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <i class="bi bi-people-fill"></i>
+                            <span>Linked Student</span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="parentLinkedStudent">Select Student: *</label>
+                            <select id="parentLinkedStudent" required>
+                                <option value="" selected disabled>Select here</option>
+                                <option value="Arlene McCoy — AD33578">Arlene McCoy — AD33578</option>
+                                <option value="Wade Warren — AD45231">Wade Warren — AD45231</option>
+                                <option value="Brooklyn Simmons — AD67452">Brooklyn Simmons — AD67452</option>
+                                <option value="Theresa Webb — AD76133">Theresa Webb — AD76133</option>
+                                <option value="Darlene Robertson — AD98214">Darlene Robertson — AD98214</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="form-page-submit-btn">
+                        <i class="bi bi-check-lg"></i>
+                        <span>Submit</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Parent / Guardian Profile View Modal -->
+    <div class="inpage-modal-overlay" id="parentProfileModalOverlay">
+        <div class="inpage-modal profile-modal">
+            <div class="inpage-modal-header">
+                <div class="inpage-modal-header-title">
+                    <div class="inpage-modal-header-icon"><i class="bi bi-house-heart-fill"></i></div>
+                    <h2>Parent / Guardian Profile</h2>
+                </div>
+                <button type="button" class="inpage-modal-close-btn" id="parentProfileCloseBtn">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="inpage-modal-body" style="padding: 0; gap: 0;">
+                <div class="profile-modal-banner">
+                    <div class="profile-modal-avatar">
+                        <img id="parentProfileAvatar" src="" alt="">
+                    </div>
+                </div>
+
+                <div class="profile-modal-identity">
+                    <h2 id="parentProfileName">—</h2>
+                    <p class="profile-modal-subline">
+                        Relationship: <b id="parentProfileRelation">—</b>
+                    </p>
+                </div>
+
+                <div style="padding: 20px 24px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+                    <div>
+                        <p class="profile-modal-section-title">Contact Information</p>
+                        <div class="profile-field-grid">
+                            <div class="profile-field profile-field-full">
+                                <label>Full Name</label>
+                                <div class="profile-field-value" id="parentProfileFullName">—</div>
+                            </div>
+                            <div class="profile-field profile-field-full">
+                                <label>Email Address</label>
+                                <div class="profile-field-value" id="parentProfileEmail">—</div>
+                            </div>
+                            <div class="profile-field">
+                                <label>Phone Number</label>
+                                <div class="profile-field-value" id="parentProfilePhone">—</div>
+                            </div>
+                            <div class="profile-field">
+                                <label>Relationship</label>
+                                <div class="profile-field-value" id="parentProfileRelationField">—</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="profile-modal-section-title">Linked Student</p>
+                        <div class="profile-students-brought" id="parentProfileLinkedStudent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="JS/parents.js"></script>
+</body>
+
+</html>

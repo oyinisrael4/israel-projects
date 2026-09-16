@@ -48,6 +48,13 @@
                     </li>
 
                     <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="counselor.html">
+                            <i class="bi bi-chat-heart-fill"></i>
+                            <span>Counselor</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-item">
                         <a class="sidebar-nav-link" href="instructor.html">
                             <i class="bi bi-easel2-fill"></i>
                             <span>Instructor</span>
@@ -61,6 +68,13 @@
                         </a>
                     </li>
 
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="parents.html">
+                            <i class="bi bi-house-heart-fill"></i>
+                            <span>Parents</span>
+                        </a>
+                    </li>
+
                     <li class="sidebar-nav-item sidebar-nav-item-active">
                         <a class="sidebar-nav-link" href="programme.html">
                             <i class="bi bi-list-ul"></i>
@@ -69,7 +83,7 @@
                     </li>
 
                     <li class="sidebar-nav-item">
-                        <a class="sidebar-nav-link" href="#">
+                        <a class="sidebar-nav-link" href="examinations.html">
                             <i class="bi bi-pencil-square"></i>
                             <span>Examinations</span>
                         </a>
@@ -83,7 +97,7 @@
                     </li>
 
                     <li class="sidebar-nav-item">
-                        <a class="sidebar-nav-link" href="#">
+                        <a class="sidebar-nav-link" href="report.html">
                             <i class="bi bi-bar-chart-line-fill"></i>
                             <span>Report</span>
                         </a>
@@ -133,21 +147,9 @@
                             <div class="programme-panel-header">
                                 <div class="programme-panel-heading">
                                     <h3>All Programmes</h3>
-                                    <p class="programme-count-text" id="programmeCount">6 programmes available</p>
+                                    <p class="programme-count-text" id="programmeCount">18 programmes available</p>
                                 </div>
                                 <div class="programme-panel-actions">
-                                    <div class="programme-filter-wrapper">
-                                        <i class="bi bi-funnel"></i>
-                                        <select class="programme-filter-select" id="programmeCategoryFilter">
-                                            <option value="all">All Categories</option>
-                                            <option value="Software Development">Software Development</option>
-                                            <option value="Cybersecurity">Cybersecurity</option>
-                                            <option value="Data & AI">Data & AI</option>
-                                            <option value="Networking">Networking</option>
-                                            <option value="Design">UI/UX Design</option>
-                                        </select>
-                                        <i class="bi bi-chevron-down programme-filter-chevron"></i>
-                                    </div>
                                     <button type="button" id="addProgrammeBtn" class="panel-add-btn">
                                         <i class="bi bi-plus-lg"></i>
                                         <span>Add Programme</span>
@@ -175,7 +177,7 @@
 
     <!-- ─── Programme Details Modal ────────────────────────────────────── -->
     <div class="inpage-modal-overlay" id="programmeDetailModal">
-        <div class="inpage-modal" style="max-width: 620px;">
+        <div class="inpage-modal" style="max-width: 800px; width: 92vw;">
             <div class="inpage-modal-header">
                 <div class="inpage-modal-header-title">
                     <div class="inpage-modal-header-icon">
@@ -193,8 +195,8 @@
                     <img id="detailCoverImage" src="all-images/body-images/software-eng.jpg" alt="Cover">
                     <div class="programme-detail-header-content">
                         <div>
-                            <h3 id="detailTitle">Software Engineering & Full Stack</h3>
-                            <p id="detailSubtitle">PRG-SE101 • Software Development</p>
+                            <h3 id="detailTitle">Hardware & Networking</h3>
+                            <p id="detailSubtitle">PRG-HN101</p>
                         </div>
                         <div class="programme-detail-header-price" id="detailPrice">
                             ₦250,000
@@ -249,11 +251,13 @@
             </div>
 
             <div class="inpage-modal-footer">
-                <button type="button" class="programme-delete-btn" onclick="confirmDeleteProgramme()" title="Delete this programme">
+                <button type="button" class="programme-delete-btn" onclick="confirmDeleteProgramme()"
+                    title="Delete this programme">
                     <i class="bi bi-trash3-fill"></i>
                     <span>Delete</span>
                 </button>
-                <button type="button" class="inpage-cancel-btn" onclick="document.getElementById('detailModalCloseBtn').click()">Close</button>
+                <button type="button" class="inpage-cancel-btn"
+                    onclick="document.getElementById('detailModalCloseBtn').click()">Close</button>
                 <button type="button" class="inpage-submit-btn" onclick="openEditProgrammeModal()">
                     <i class="bi bi-pencil-square"></i>
                     <span>Edit Fee & Info</span>
@@ -279,7 +283,8 @@
 
             <div class="inpage-modal-body">
                 <p class="inpage-modal-intro">
-                    Update the programme details and tuition fee below. Changes will be updated immediately across the catalogue.
+                    Update the programme details and tuition fee below. Changes will be updated immediately across the
+                    catalogue.
                 </p>
 
                 <form id="editProgrammeForm">
@@ -294,17 +299,6 @@
                         <div class="inpage-form-field">
                             <label for="editProgCode">Programme Code: <span>*</span></label>
                             <input type="text" id="editProgCode" required />
-                        </div>
-
-                        <div class="inpage-form-field">
-                            <label for="editProgCategory">Category: <span>*</span></label>
-                            <select id="editProgCategory" required>
-                                <option value="Software Development">Software Development</option>
-                                <option value="Cybersecurity">Cybersecurity</option>
-                                <option value="Data & AI">Data & AI</option>
-                                <option value="Networking">Networking</option>
-                                <option value="Design">UI/UX Design</option>
-                            </select>
                         </div>
 
                         <div class="inpage-form-field">
@@ -344,7 +338,8 @@
                     </div>
 
                     <div class="inpage-modal-footer" style="margin-top: 18px;">
-                        <button type="button" class="programme-delete-btn" id="editModalDeleteBtn" title="Delete this programme">
+                        <button type="button" class="programme-delete-btn" id="editModalDeleteBtn"
+                            title="Delete this programme">
                             <i class="bi bi-trash3-fill"></i>
                             <span>Delete Programme</span>
                         </button>
@@ -376,30 +371,21 @@
 
             <div class="inpage-modal-body">
                 <p class="inpage-modal-intro">
-                    Enter the details of the new academic programme below to add it into the EduManage curriculum catalog.
+                    Enter the details of the new academic programme below to add it into the EduManage curriculum
+                    catalog.
                 </p>
 
                 <form id="addProgrammeForm">
                     <div class="inpage-form-grid">
                         <div class="inpage-form-field form-field-full">
                             <label for="addProgTitle">Programme Title: <span>*</span></label>
-                            <input type="text" id="addProgTitle" placeholder="e.g. Cloud Architecture & Kubernetes" required />
+                            <input type="text" id="addProgTitle" placeholder="e.g. Cloud Architecture & Kubernetes"
+                                required />
                         </div>
 
                         <div class="inpage-form-field">
                             <label for="addProgCode">Programme Code: <span>*</span></label>
                             <input type="text" id="addProgCode" placeholder="e.g. PRG-CA501" required />
-                        </div>
-
-                        <div class="inpage-form-field">
-                            <label for="addProgCategory">Category: <span>*</span></label>
-                            <select id="addProgCategory" required>
-                                <option value="Software Development">Software Development</option>
-                                <option value="Cybersecurity">Cybersecurity</option>
-                                <option value="Data & AI">Data & AI</option>
-                                <option value="Networking">Networking</option>
-                                <option value="Design">UI/UX Design</option>
-                            </select>
                         </div>
 
                         <div class="inpage-form-field">
@@ -428,7 +414,8 @@
 
                         <div class="inpage-form-field">
                             <label for="addProgCapacity">Max Capacity: <span>*</span></label>
-                            <input type="number" id="addProgCapacity" placeholder="e.g. 40" min="1" value="40" required />
+                            <input type="number" id="addProgCapacity" placeholder="e.g. 40" min="1" value="40"
+                                required />
                         </div>
 
                         <div class="inpage-form-field">
@@ -438,12 +425,14 @@
 
                         <div class="inpage-form-field form-field-full">
                             <label for="addProgSchedule">Schedule:</label>
-                            <input type="text" id="addProgSchedule" placeholder="e.g. Mon, Wed, Fri • 10:00 AM - 1:00 PM" />
+                            <input type="text" id="addProgSchedule"
+                                placeholder="e.g. Mon, Wed, Fri • 10:00 AM - 1:00 PM" />
                         </div>
 
                         <div class="inpage-form-field form-field-full">
                             <label for="addProgDescription">Programme Description: <span>*</span></label>
-                            <input type="text" id="addProgDescription" placeholder="Brief 1-2 sentence overview of the course" required />
+                            <input type="text" id="addProgDescription"
+                                placeholder="Brief 1-2 sentence overview of the course" required />
                         </div>
                     </div>
 
