@@ -60,7 +60,6 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    display: none;
 }
 
 .alert-overlay .alert-container {
@@ -91,6 +90,7 @@ a {
 
 .alert-overlay .alert-container h4 {
     font-size: 15px;
+    color:#000;
     font-family: sub-title-font;
 
 }

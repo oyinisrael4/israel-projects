@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import niitLogo from "../assets/niit-logo.png";
+import InputField from "../components/InputFieldComponent";
+import ButtonComponent from "../components/ButtonComponent";
+import AlertModal from "../components/AlertModal";
 
 export default function ResetPassword() {
   return (
@@ -27,31 +30,38 @@ export default function ResetPassword() {
                   </div>
 
                   <div className="alert-success">
-                    dY`&lt; <span className="alert-highlight">Israel</span>, an OTP has been sent to your{" "}
+                    <span className="alert-highlight">Israel</span>, an OTP has been sent to your{" "}
                     <span className="alert-highlight">email address</span> to reset your password.
                   </div>
 
                   <div className="input-container">
-                    <div className="input-wrapper">
-                      <label>OTP: <span>*</span></label>
-                      <input type="number" className="text-field" id="otp" placeholder="Enter OTP" />
-                    </div>
+                    <InputField
+                      title="OTP"
+                      inputType="number"
+                      placeHolder="Enter OTP"
+                    />
 
-                    <div className="input-wrapper">
-                      <label>NEW PASSWORD: <span>*</span></label>
-                      <input type="password" className="text-field" id="newPassword" placeholder="Enter new password" />
-                    </div>
+                    <InputField
+                      title="New Password"
+                      inputType="password"
+                      placeHolder="Enter new password"
+                    />
 
                     <div className="alert-warning">
                       <i>At least 8 characters required including upper &amp; lower cases and special characters and numbers.</i>
                     </div>
 
-                    <div className="input-wrapper">
-                      <label>CONFIRMED PASSWORD: <span>*</span></label>
-                      <input type="password" className="text-field" id="confirmedPassword" placeholder="Enter Confirmed password" />
-                    </div>
+                    <InputField
+                      title="Confirmed Password"
+                      inputType="password"
+                      placeHolder="Enter Confirmed password"
+                    />
 
-                    <button className="btn" type="button" title="Submit" id="submitBtnId">Submit</button>
+                    <ButtonComponent
+                      buttonType="button"
+                      buttonText="Submit"
+                      buttonTitle="Submit"
+                    />
                   </div>
                 </div>
               </div>

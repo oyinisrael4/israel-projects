@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import niitLogo from "../assets/niit-logo.png";
+import InputField from "../components/InputFieldComponent";
+import ButtonComponent from "../components/ButtonComponent";
 
 export default function ForgotPassword() {
   return (
@@ -27,15 +29,18 @@ export default function ForgotPassword() {
                   </div>
 
                   <div className="input-container">
-                    <div className="input-wrapper">
-                      <label>Email Address: <span>*</span></label>
-                      <input type="text" className="text-field" id="emailAddress" placeholder="Enter your email Address" />
-                    </div>
 
+                    <InputField
+                      title="Email Address"
+                      inputType="email"
+                      placeHolder="Enter your email Address"
+                    />
                     <Link to="/reset-password">
-                      <button className="btn" type="button" id="submitBtnId" title="Proceed to Reset Password">
-                        Proceed to Reset Password
-                      </button>
+                      <ButtonComponent
+                        buttonType="button"
+                        buttonText="Proceed to Reset Password"
+                        buttonTitle="Proceed to Reset Password"
+                      />
                     </Link>
                   </div>
                 </div>

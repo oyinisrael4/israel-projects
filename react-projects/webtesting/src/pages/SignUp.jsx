@@ -1,10 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import niitLogo from "../assets/niit-logo.png";
+import InputField from "../components/InputFieldComponent";
+import ButtonComponent from "../components/ButtonComponent";
+import AlertModal from "../components/AlertModal";
 
 export default function SignUp() {
+  const navigate = useNavigate();
+  const [modal, setModal] = useState(false);
+
   return (
     <>
-      <section className="auth-section">
+      <section className="auth-section"> 
         <div className="auth-background">
           <div className="overlay-bg">
             <div className="form-container">
@@ -27,27 +34,36 @@ export default function SignUp() {
                   </div>
 
                   <div className="input-container">
-                    <div className="input-wrapper">
-                      <label>Fullname: <span>*</span></label>
-                      <input type="text" className="text-field" id="fullName" placeholder="Enter your fullname" />
-                    </div>
+                    <InputField
+                      title="Fullname"
+                      inputType="text"
+                      placeHolder="Enter your fullname"
+                    />
 
-                    <div className="input-wrapper">
-                      <label>Email Address: <span>*</span></label>
-                      <input type="text" className="text-field" id="emailAddress" placeholder="Enter your email Address" />
-                    </div>
+                    <InputField
+                      title="Email Address"
+                      inputType="email"
+                      placeHolder="Enter your email Address"
+                    />
 
-                    <div className="input-wrapper">
-                      <label>Phone Number: <span>*</span></label>
-                      <input type="text" className="text-field" id="phoneNumber" placeholder="Enter your phone number" />
-                    </div>
+                    <InputField
+                      title="Phone Number"
+                      inputType="text"
+                      placeHolder="Enter your phone number"
+                    />
 
-                    <div className="input-wrapper">
-                      <label>Password: <span>*</span></label>
-                      <input type="password" className="text-field" id="password" placeholder="Enter your password" />
-                    </div>
+                    <InputField
+                      title="Password"
+                      inputType="password"
+                      placeHolder="Enter your password"
+                    />
 
-                    <button className="btn" type="button" id="submitBtnId" title="Sign Up">Sign Up</button>
+                    <ButtonComponent
+                      buttonType="button"
+                      buttonText="Sign Up"
+                      buttonTitle="Sign Up"
+                      action={(e) => setModal(true)}
+                    />
                   </div>
 
                   <p className="signin-footer">
@@ -75,6 +91,11 @@ export default function SignUp() {
           </div>
         </div>
       </section>
+
+      {modal && <AlertModal redirectLink="/sign-in" message="Account Created Successfully" />}
+
+
+
     </>
   );
 }
