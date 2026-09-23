@@ -1,4 +1,10 @@
+import { useState } from "react";
 import Sidebar from "./Sidebar";
+import TopBar from "../components/TopBar";
+import PageHeading from "../components/PageHeading";
+import StatCard from "../components/StatCard";
+import PageFooter from "../components/PageFooter";
+import StatusBadge from "../components/StatusBadge";
 import teacherAvatar from "../assets/icon-images/teacher-avatar.png";
 import profile1 from "../assets/icon-images/profile-1.png";
 import profile2 from "../assets/icon-images/profile-2.png";
@@ -10,46 +16,69 @@ import student3 from "../assets/icon-images/student-3.png";
 import student4 from "../assets/icon-images/student-4.png";
 import student5 from "../assets/icon-images/student-5.png";
 
+const STATS = [
+    { icon: "bi-person-fill", label: "Total Students", value: "3,500", variant: "primary" },
+    { icon: "bi-journal-check", label: "Total Staffs", value: "3,500", variant: "secondary" },
+    { icon: "bi-mortarboard-fill", label: "Total Programmes", value: "3,500", variant: "black" },
+    { icon: "bi-wallet2", label: "Total Revenue", value: "3,500", variant: "footer" },
+];
+
+const NOTICES = [
+    { img: profile1, name: "Admin", text: "Lorem Ipsum is simply dummy text of the printing and typesetti" },
+    { img: profile2, name: "Kathryn Murphy", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry." },
+    { img: profile3, name: "Admin", text: "Lorem Ipsum is simply dummy text of the printing and typesetti" },
+    { img: profile4, name: "John Doe", text: "Lorem Ipsum dolor sit amet consectetur adipisicing elit." },
+];
+
+const EVENTS = [
+    { time: "09:00 - 09:45", ampm: "AM", title: "Marketing Strategy Kickoff", lead: "Robert Fox", cls: "events-panel-item-primary" },
+    { time: "11:15 - 12:00", ampm: "AM", title: "Product Design Brainstorm", lead: "Leslie Alexander", cls: "events-panel-item-secondary" },
+    { time: "02:00 - 03:00", ampm: "PM", title: "Client Feedback Review", lead: "Courtney Henry", cls: "events-panel-item-black" },
+    { time: "04:15 - 05:00", ampm: "PM", title: "Sprint Planning & Task Allocation", lead: "Eleanor Pena", cls: "events-panel-item-primary" },
+    { time: "01:15 - 02:00", ampm: "PM", title: "Client Feedback Review", lead: "John", cls: "events-panel-item-secondary" },
+];
+
+const STUDENTS = [
+    { no: 1, img: student1, name: "Arlene McCoy", id: "AD33578", prog: "Web Development", phone: "0800 234 5678", status: "Active" },
+    { no: 2, img: student2, name: "Wade Warren", id: "AD45231", prog: "Data Science", phone: "0802 345 6789", status: "Active" },
+    { no: 3, img: student3, name: "Brooklyn Simmons", id: "AD67452", prog: "Cybersecurity", phone: "0810 345 6789", status: "Active" },
+    { no: 4, img: student4, name: "Theresa Webb", id: "AD76133", prog: "Software Engineering", phone: "0813 456 7890", status: "Inactive" },
+    { no: 5, img: student5, name: "Darlene Robertson", id: "AD98214", prog: "Networking", phone: "0816 567 8901", status: "Inactive" },
+];
+
+const LEAVES = [
+    { title: "Emergency Leave", status: "Pending" },
+    { title: "Medical Leave", status: "Accepted" },
+    { title: "Now Well", status: "Pending" },
+    { title: "Medical Leave", status: "Accepted" },
+    { title: "Emergency Leave", status: "Accepted" },
+    { title: "Now Well", status: "Pending" },
+    { title: "Medical Leave", status: "Accepted" },
+];
 
 export default function Dashboard() {
+    const [searchValue, setSearchValue] = useState("");
+
     return (
         <div className="app-layout-container">
             <Sidebar activePage="dashboard" />
 
             <main className="main-content-wrapper">
-
-                <header className="topbar-wrapper">
-                    <div className="topbar-search-box">
-                        <i className="bi bi-search"></i>
-                        <input type="text" placeholder="Search" />
-                    </div>
-                    <div className="topbar-actions-wrapper">
-                        <button className="topbar-icon-btn" title="Theme">
-                            <i className="bi bi-sun-fill"></i>
-                        </button>
-                        <button className="topbar-icon-btn" title="Language">
-                            <i className="bi bi-globe2"></i>
-                        </button>
-                        <button className="topbar-icon-btn topbar-notification-btn" title="Notifications">
-                            <i className="bi bi-bell-fill"></i>
-                            <span className="topbar-notification-dot"></span>
-                        </button>
-                    </div>
-                </header>
+                <TopBar
+                    searchPlaceholder="Search"
+                    searchValue={searchValue}
+                    onSearchChange={(e) => setSearchValue(e.target.value)}
+                />
 
                 <div className="dashboard-content-container">
                     <div className="dashboard-content-wrapper">
 
-                        <div className="page-heading-wrapper">
-                            <div className="page-heading-tag">
-                                <i className="bi bi-grid-1x2-fill"></i>
-                                <span>Dashboard</span>
-                            </div>
-                            <h1 className="page-heading-title">Admin Dashboard</h1>
-                            <p className="page-heading-description">
-                                Admin <i className="bi bi-arrow-right"></i> Manage staffs, students, programmes, and everything else happening across the institute from one place.
-                            </p>
-                        </div>
+                        <PageHeading
+                            icon="bi-grid-1x2-fill"
+                            tag="Dashboard"
+                            title="Admin Dashboard"
+                            description="Manage staffs, students, programmes, and everything else happening across the institute from one place."
+                        />
 
                         <div className="stats-row-container">
                             <div className="teacher-profile-card">
@@ -65,26 +94,9 @@ export default function Dashboard() {
                             </div>
 
                             <div className="stat-card-grid">
-                                <div className="stat-card stat-card-primary">
-                                    <div className="stat-card-icon"><i className="bi bi-person-fill"></i></div>
-                                    <p className="stat-card-label">Total Students</p>
-                                    <h3 className="stat-card-value">3,500</h3>
-                                </div>
-                                <div className="stat-card stat-card-secondary">
-                                    <div className="stat-card-icon"><i className="bi bi-journal-check"></i></div>
-                                    <p className="stat-card-label">Total Staffs</p>
-                                    <h3 className="stat-card-value">3,500</h3>
-                                </div>
-                                <div className="stat-card stat-card-black">
-                                    <div className="stat-card-icon"><i className="bi bi-mortarboard-fill"></i></div>
-                                    <p className="stat-card-label">Total Programmes</p>
-                                    <h3 className="stat-card-value">3,500</h3>
-                                </div>
-                                <div className="stat-card stat-card-footer">
-                                    <div className="stat-card-icon"><i className="bi bi-wallet2"></i></div>
-                                    <p className="stat-card-label">Total Students</p>
-                                    <h3 className="stat-card-value">3,500</h3>
-                                </div>
+                                {STATS.map((s) => (
+                                    <StatCard key={s.label} icon={s.icon} label={s.label} value={s.value} variant={s.variant} />
+                                ))}
                             </div>
 
                             <div className="attendance-card">
@@ -98,27 +110,19 @@ export default function Dashboard() {
                                 </div>
                                 <div className="attendance-card-body">
                                     <div className="attendance-legend-list">
-                                        <div className="attendance-legend-item">
-                                            <i className="bi bi-circle-fill attendance-legend-icon attendance-legend-icon-present"></i>
-                                            <div className="attendance-legend-text">
-                                                <h4>200</h4>
-                                                <p>Present</p>
+                                        {[
+                                            { cls: "attendance-legend-icon-present", count: 200, label: "Present" },
+                                            { cls: "attendance-legend-icon-half", count: 300, label: "Half Day" },
+                                            { cls: "attendance-legend-icon-absent", count: 100, label: "Absent" },
+                                        ].map((item) => (
+                                            <div className="attendance-legend-item" key={item.label}>
+                                                <i className={`bi bi-circle-fill attendance-legend-icon ${item.cls}`}></i>
+                                                <div className="attendance-legend-text">
+                                                    <h4>{item.count}</h4>
+                                                    <p>{item.label}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="attendance-legend-item">
-                                            <i className="bi bi-circle-fill attendance-legend-icon attendance-legend-icon-half"></i>
-                                            <div className="attendance-legend-text">
-                                                <h4>300</h4>
-                                                <p>Half Day</p>
-                                            </div>
-                                        </div>
-                                        <div className="attendance-legend-item">
-                                            <i className="bi bi-circle-fill attendance-legend-icon attendance-legend-icon-absent"></i>
-                                            <div className="attendance-legend-text">
-                                                <h4>100</h4>
-                                                <p>Absent</p>
-                                            </div>
-                                        </div>
+                                        ))}
                                     </div>
                                     <div className="attendance-donut-chart"></div>
                                 </div>
@@ -132,12 +136,7 @@ export default function Dashboard() {
                                     <i className="bi bi-three-dots-vertical panel-card-menu-icon"></i>
                                 </div>
                                 <div className="notice-panel-list">
-                                    {[
-                                        { img: profile1, name: "Admin", text: "Lorem Ipsum is simply dummy text of the printing and typesetti" },
-                                        { img: profile2, name: "Kathryn Murphy", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry." },
-                                        { img: profile3, name: "Admin", text: "Lorem Ipsum is simply dummy text of the printing and typesetti" },
-                                        { img: profile4, name: "John Doe", text: "Lorem Ipsum dolor sit amet consectetur adipisicing elit." },
-                                    ].map((item, i) => (
+                                    {NOTICES.map((item, i) => (
                                         <div className="notice-panel-item" key={i}>
                                             <div className="notice-panel-item-avatar">
                                                 <img src={item.img} alt={item.name} />
@@ -157,13 +156,7 @@ export default function Dashboard() {
                                     <h3 className="panel-card-title">Upcoming Events</h3>
                                 </div>
                                 <div className="events-panel-list">
-                                    {[
-                                        { time: "09:00 - 09:45", ampm: "AM", title: "Marketing Strategy Kickoff", lead: "Robert Fox", cls: "events-panel-item-primary" },
-                                        { time: "11:15 - 12:00", ampm: "AM", title: "Product Design Brainstorm", lead: "Leslie Alexander", cls: "events-panel-item-secondary" },
-                                        { time: "02:00 - 03:00", ampm: "PM", title: "Client Feedback Review", lead: "Courtney Henry", cls: "events-panel-item-black" },
-                                        { time: "04:15 - 05:00", ampm: "PM", title: "Sprint Planning & Task Allocation", lead: "Eleanor Pena", cls: "events-panel-item-primary" },
-                                        { time: "01:15 - 02:00", ampm: "PM", title: "Client Feedback Review", lead: "John", cls: "events-panel-item-secondary" },
-                                    ].map((ev, i) => (
+                                    {EVENTS.map((ev, i) => (
                                         <div className={`events-panel-item ${ev.cls}`} key={i}>
                                             <div className="events-panel-item-text">
                                                 <h4>{ev.time} <small>{ev.ampm}</small></h4>
@@ -197,13 +190,7 @@ export default function Dashboard() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {[
-                                                { no: 1, img: student1, name: "Arlene McCoy", id: "AD33578", prog: "Web Development", phone: "0800 234 5678", status: "Active" },
-                                                { no: 2, img: student2, name: "Wade Warren", id: "AD45231", prog: "Data Science", phone: "0802 345 6789", status: "Active" },
-                                                { no: 3, img: student3, name: "Brooklyn Simmons", id: "AD67452", prog: "Cybersecurity", phone: "0810 345 6789", status: "Active" },
-                                                { no: 4, img: student4, name: "Theresa Webb", id: "AD76133", prog: "Software Engineering", phone: "0813 456 7890", status: "Inactive" },
-                                                { no: 5, img: student5, name: "Darlene Robertson", id: "AD98214", prog: "Networking", phone: "0816 567 8901", status: "Inactive" },
-                                            ].map((s) => (
+                                            {STUDENTS.map((s) => (
                                                 <tr key={s.no}>
                                                     <td className="marks-table-admission-no">{s.no}</td>
                                                     <td>
@@ -217,7 +204,7 @@ export default function Dashboard() {
                                                     </td>
                                                     <td>{s.prog}</td>
                                                     <td>{s.phone}</td>
-                                                    <td><span className={`status-badge ${s.status === "Active" ? "status-badge-active" : "status-badge-inactive"}`}>{s.status}</span></td>
+                                                    <td><StatusBadge status={s.status} /></td>
                                                 </tr>
                                             ))}
                                         </tbody>
@@ -244,34 +231,22 @@ export default function Dashboard() {
                                     </select>
                                 </div>
                                 <div className="leave-panel-list">
-                                    {[
-                                        { title: "Emergency Leave", status: "Pending" },
-                                        { title: "Medical Leave", status: "Accepted" },
-                                        { title: "Now Well", status: "Pending" },
-                                        { title: "Medical Leave", status: "Accepted" },
-                                        { title: "Emergency Leave", status: "Accepted" },
-                                        { title: "Now Well", status: "Pending" },
-                                        { title: "Medical Leave", status: "Accepted" },
-                                    ].map((leave, i) => (
+                                    {LEAVES.map((leave, i) => (
                                         <div className="leave-panel-item" key={i}>
                                             <div className="leave-panel-item-text">
                                                 <h4>{leave.title}</h4>
                                                 <p>Date: 10/10/24</p>
                                             </div>
-                                            <span className={`status-badge ${leave.status === "Pending" ? "status-badge-pending" : "status-badge-accepted"}`}>{leave.status}</span>
+                                            <StatusBadge status={leave.status} />
                                         </div>
                                     ))}
                                 </div>
                             </div>
                         </div>
 
-                        <footer className="dashboard-footer-wrapper">
-                            <p>Ac 2026 Made With <i className="bi bi-heart-fill"></i> by NIIT.</p>
-                        </footer>
-
+                        <PageFooter />
                     </div>
                 </div>
-
             </main>
         </div>
     );

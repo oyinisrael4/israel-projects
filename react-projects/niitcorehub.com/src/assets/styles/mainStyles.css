@@ -3150,8 +3150,9 @@ body {
 
 /* â”€â”€â”€ Banner strip behind the header (photo-style gradient stand-in) â”€â”€â”€ */
 .profile-modal .profile-modal-banner {
-    height: 130px;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 130%);
+    height: 140px;
+    background: linear-gradient(180deg, rgba(0, 30, 80, 0.35) 0%, rgba(5, 15, 35, 0.65) 100%),
+                url("/all-images/body-images/profile-banner.jpg") center 35% / cover no-repeat;
     position: relative;
     flex-shrink: 0;
 }
@@ -3177,8 +3178,71 @@ body {
 }
 
 /* â”€â”€â”€ Name + status/last-login line, sits below the overlapping avatar â”€ */
+.profile-modal .profile-modal-identity-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 46px 24px 16px 24px;
+    border-bottom: 1px solid var(--border);
+    gap: 16px;
+}
+
 .profile-modal .profile-modal-identity {
     padding: 48px 24px 4px 24px;
+}
+
+.profile-modal .profile-modal-identity-bar .profile-modal-identity {
+    padding: 0;
+    flex: 1;
+}
+
+.profile-modal .profile-modal-edit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 38px;
+    padding: 0 18px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #00256e 100%);
+    border: none;
+    border-radius: 25px;
+    color: var(--white-color);
+    font-family: sub-title-font;
+    font-size: 13px;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0, 52, 149, 0.22);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.profile-modal .profile-modal-edit-btn:hover {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, #e55c00 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 102, 0, 0.32);
+    color: var(--white-color);
+}
+
+.profile-modal .profile-modal-edit-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 52, 149, 0.2);
+}
+
+.profile-modal .profile-modal-edit-btn i {
+    font-size: 14px;
+    transition: transform 0.2s ease;
+}
+
+.profile-modal .profile-modal-edit-btn:hover i {
+    transform: rotate(-10deg) scale(1.15);
+}
+
+@media (max-width: 540px) {
+    .profile-modal .profile-modal-identity-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
 }
 
 .profile-modal .profile-modal-identity h2 {

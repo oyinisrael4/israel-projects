@@ -5,18 +5,19 @@ import ResetPassword from "./pages/ResetPassword";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
 import Students from "./pages/Students";
-import Instructor from "./pages/Instructor";
+import Staff from "./pages/Staff";
 import Counselor from "./pages/Counselor";
 import Parents from "./pages/Parents";
 import Payments from "./pages/Payments";
 import PaymentLink from "./pages/PaymentLink";
 import Programme from "./pages/Programme";
+import Referrals from "./pages/Referrals";
 
 import './index.css';
 import './assets/styles/mainStyles.css';
 // Bootstrap Icons CSS is loaded via <link> in index.html to avoid Vite scanning its docs/ folder
 
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
 export const router = createBrowserRouter([
   {
@@ -52,8 +53,12 @@ export const router = createBrowserRouter([
     element: <Students />
   },
   {
+    path: "/staff",
+    element: <Staff />
+  },
+  {
     path: "/instructor",
-    element: <Instructor />
+    element: <Navigate to="/staff" replace />
   },
   {
     path: "/counselor",
@@ -74,5 +79,9 @@ export const router = createBrowserRouter([
   {
     path: "/programme",
     element: <Programme />
+  },
+  {
+    path: "/referrals",
+    element: <Referrals />
   },
 ]);

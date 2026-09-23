@@ -1,229 +1,269 @@
-import { useEffect } from "react";
+import { useState, useMemo } from "react";
 import Sidebar from "./Sidebar";
-import { init } from "../JS/counselor";
+import TopBar from "../components/TopBar";
+import PageHeading from "../components/PageHeading";
+import PageFooter from "../components/PageFooter";
+import PersonCard from "../components/PersonCard";
+import SlideDrawer from "../components/SlideDrawer";
+import ProfileModal from "../components/ProfileModal";
+import RosterFilter from "../components/RosterFilter";
+import FormField from "../components/FormField";
 import admin4 from "../assets/icon-images/admin-4.png";
 import admin5 from "../assets/icon-images/admin-5.png";
-import student1 from "../assets/icon-images/student-1.png";
-import student2 from "../assets/icon-images/student-2.png";
-import student3 from "../assets/icon-images/student-3.png";
+import adminAvatar from "../assets/icon-images/admin-avatar.png";
 
-const COUNSELORS = [
-    { id: "counselor-1", status: "Active", search: "adebiyi abasi counselor", img: admin4, name: "Adebiyi Abasi", phone: "080 6046 8880", bar: "var(--primary-color)" },
-    { id: "counselor-2", status: "Inactive", search: "grace okafor counselor", img: admin5, name: "Grace Okafor", phone: "080 3709 5149", bar: "var(--secondary-color)" },
+const INITIAL_COUNSELORS = [
+    { id: "counselor-1", status: "Active", search: "adebiyi abasi counselor", img: admin4, name: "Adebiyi Abasi", phone: "080 6046 8880", bar: "var(--primary-color)", email: "adebiyiabasi@niit.edu", lastLogin: "2026-09-02 09:15 AM" },
+    { id: "counselor-2", status: "Inactive", search: "grace okafor counselor", img: admin5, name: "Grace Okafor", phone: "080 3709 5149", bar: "var(--secondary-color)", email: "graceokafor@niit.edu", lastLogin: "2026-08-18 04:20 PM" },
 ];
 
 export default function Counselor() {
-    useEffect(() => {
-        init();
-    }, []);
+    const [counselors, setCounselors] = useState(INITIAL_COUNSELORS);
+    const [searchValue, setSearchValue] = useState("");
+    const [statusFilter, setStatusFilter] = useState("all");
+
+    // Drawer states
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
+
+    // Profile modal state
+    const [profileData, setProfileData] = useState(null);
+    const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+    // Form state
+    const [form, setForm] = useState({ firstName: "", lastName: "", email: "", phone: "", status: "Active" });
+    const [editForm, setEditForm] = useState({});
+
+    // Filtered list
+    const filteredCounselors = useMemo(() => {
+        return counselors.filter((c) => {
+            const matchesStatus = statusFilter === "all" || c.status === statusFilter;
+            const query = searchValue.trim().toLowerCase();
+            const matchesSearch = !query || c.search.includes(query);
+            return matchesStatus && matchesSearch;
+        });
+    }, [counselors, statusFilter, searchValue]);
+
+    function openProfile(counselor) {
+        setProfileData(counselor);
+        setIsProfileOpen(true);
+    }
+
+    function handleAdd(e) {
+        e.preventDefault();
+        const { firstName, lastName, email, phone, status } = form;
+        if (!firstName || !lastName || !email || !phone) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+        const fullName = `${firstName} ${lastName}`;
+        const newCounselor = {
+            id: "counselor-new-" + Date.now(),
+            status,
+            search: `${fullName} counselor`.toLowerCase(),
+            img: adminAvatar,
+            name: fullName,
+            phone, email,
+            bar: "var(--primary-color)",
+            lastLogin: "—",
+        };
+        setCounselors((prev) => [...prev, newCounselor]);
+        setForm({ firstName: "", lastName: "", email: "", phone: "", status: "Active" });
+        setIsDrawerOpen(false);
+    }
+
+    function openEditDrawer() {
+        if (!profileData) return;
+        setEditForm({
+            name: profileData.name,
+            email: profileData.email,
+            phone: profileData.phone,
+            status: profileData.status,
+        });
+        setIsProfileOpen(false);
+        setIsEditDrawerOpen(true);
+    }
+
+    function handleEdit(e) {
+        e.preventDefault();
+        setCounselors((prev) =>
+            prev.map((c) =>
+                c.id === profileData.id
+                    ? {
+                        ...c,
+                        name: editForm.name,
+                        email: editForm.email,
+                        phone: editForm.phone,
+                        status: editForm.status,
+                        search: `${editForm.name} counselor`.toLowerCase(),
+                    }
+                    : c
+            )
+        );
+        setProfileData((prev) => ({ ...prev, name: editForm.name, email: editForm.email, phone: editForm.phone, status: editForm.status }));
+        setIsEditDrawerOpen(false);
+    }
+
+    const countText = `${filteredCounselors.length} counselor${filteredCounselors.length !== 1 ? "s" : ""}`;
 
     return (
         <div className="app-layout-container">
             <Sidebar activePage="counselor" />
 
             <main className="main-content-wrapper">
-                <header className="topbar-wrapper">
-                    <div className="topbar-search-box">
-                        <i className="bi bi-search"></i>
-                        <input type="text" placeholder="Search Counselor Here..." />
-                    </div>
-                    <div className="topbar-actions-wrapper">
-                        <button className="topbar-icon-btn" title="Theme"><i className="bi bi-sun-fill"></i></button>
-                        <button className="topbar-icon-btn" title="Language"><i className="bi bi-globe2"></i></button>
-                        <button className="topbar-icon-btn topbar-notification-btn" title="Notifications">
-                            <i className="bi bi-bell-fill"></i>
-                            <span className="topbar-notification-dot"></span>
-                        </button>
-                    </div>
-                </header>
+                <TopBar
+                    searchPlaceholder="Search Counselor Here..."
+                    searchValue={searchValue}
+                    onSearchChange={(e) => setSearchValue(e.target.value)}
+                />
 
                 <div className="dashboard-content-container">
                     <div className="dashboard-content-wrapper">
 
-                        <div className="page-heading-wrapper">
-                            <div className="page-heading-tag">
-                                <i className="bi bi-chat-heart-fill"></i>
-                                <span>Counselor</span>
-                            </div>
-                            <p className="page-heading-description">
-                                Admin <i className="bi bi-arrow-right"></i> Manage student counselors and track admissions brought through each counselor.
-                            </p>
-                        </div>
+                        <PageHeading
+                            icon="bi-chat-heart-fill"
+                            tag="Counselor"
+                            description="Manage student counselors and track admissions brought through each counselor."
+                        />
 
                         <div className="page-section-wrapper">
                             <div className="roster-panel-card">
-                                <div className="roster-panel-header">
-                                    <div className="roster-panel-heading">
-                                        <h3>All Counselors</h3>
-                                        <p className="roster-count-text" id="counselorCount">2 counselors</p>
-                                    </div>
-                                    <div className="roster-panel-actions panel-card-header-actions">
-                                        <div className="roster-filter-wrapper">
-                                            <i className="bi bi-toggle2-on"></i>
-                                            <select className="roster-filter-select" id="statusFilter">
-                                                <option value="all">All Status</option>
-                                                <option value="Active">Active</option>
-                                                <option value="Inactive">Inactive</option>
-                                            </select>
-                                            <i className="bi bi-chevron-down roster-filter-chevron"></i>
-                                        </div>
-                                        <button type="button" id="addCounselorBtn" className="panel-add-btn">
-                                            <i className="bi bi-plus-lg"></i>
-                                            <span>Create New Counselor</span>
-                                        </button>
-                                    </div>
-                                </div>
+                                <RosterFilter
+                                    heading="All Counselors"
+                                    countText={countText}
+                                    filters={[
+                                        {
+                                            icon: "bi-toggle2-on",
+                                            value: statusFilter,
+                                            onChange: (e) => setStatusFilter(e.target.value),
+                                            options: [
+                                                { value: "all", label: "All Status" },
+                                                { value: "Active", label: "Active" },
+                                                { value: "Inactive", label: "Inactive" },
+                                            ],
+                                        },
+                                    ]}
+                                    addLabel="Create New Counselor"
+                                    onAdd={() => setIsDrawerOpen(true)}
+                                />
 
-                                <div className="people-card-grid" id="counselorGrid">
-                                    {COUNSELORS.map((c) => (
-                                        <div className="person-card" key={c.id} data-id={c.id} data-status={c.status} data-search={c.search}>
-                                            <div>
-                                                <div className="person-card-avatar">
-                                                    <img src={c.img} alt={c.name} />
-                                                </div>
-                                                <div className="person-card-avatar-bar" style={{ background: c.bar }}></div>
-                                            </div>
-                                            <div className="person-card-body">
-                                                <h4>{c.name}</h4>
-                                                <p className="person-card-role">Student Counselor</p>
-                                                <p className="person-card-contact">{c.phone}</p>
-                                                <div className="person-card-meta-row">
-                                                    <span className="person-card-role-tag">COUNSELOR</span>
-                                                    <span className={`status-badge ${c.status === "Active" ? "status-badge-active" : "status-badge-inactive"}`}>{c.status}</span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div className="people-card-grid">
+                                    {filteredCounselors.map((c) => (
+                                        <PersonCard
+                                            key={c.id}
+                                            img={c.img}
+                                            name={c.name}
+                                            roleLabel="Student Counselor"
+                                            phone={c.phone}
+                                            tag="COUNSELOR"
+                                            status={c.status}
+                                            bar={c.bar}
+                                            onClick={() => openProfile(c)}
+                                        />
                                     ))}
                                 </div>
                             </div>
                         </div>
 
-                        <footer className="dashboard-footer-wrapper">
-                            <p>© 2026 Made With <i className="bi bi-heart-fill"></i> by NIIT.</p>
-                        </footer>
+                        <PageFooter />
                     </div>
                 </div>
             </main>
 
             {/* Create New Counselor — Slide-Over Drawer */}
-            <div className="side-drawer-overlay" id="counselorModalOverlay">
-                <div className="form-page-left">
-                    <div className="form-page-header">
-                        <div className="form-page-header-title">
-                            <div className="form-page-header-icon"><i className="bi bi-person-plus-fill"></i></div>
-                            <h2>Create New Counselor</h2>
+            <SlideDrawer
+                isOpen={isDrawerOpen}
+                onClose={() => { setIsDrawerOpen(false); setForm({ firstName: "", lastName: "", email: "", phone: "", status: "Active" }); }}
+                title="Create New Counselor"
+                icon="bi-person-plus-fill"
+                intro="Complete the form below to add a new counselor."
+            >
+                <form className="form-page-form" onSubmit={handleAdd}>
+                    <div className="form-section">
+                        <div className="form-section-title">
+                            <i className="bi bi-person-vcard"></i>
+                            <span>Counselor Basic Info</span>
                         </div>
-                        <button type="button" className="form-page-close-btn" id="counselorModalCloseBtn">
-                            <i className="bi bi-x-lg"></i>
-                            <span>Close</span>
-                        </button>
+                        <FormField label="First Name" htmlFor="counselorFirstName" required>
+                            <input type="text" id="counselorFirstName" required value={form.firstName} onChange={(e) => setForm({ ...form, firstName: e.target.value })} />
+                        </FormField>
+                        <FormField label="Last Name" htmlFor="counselorLastName" required>
+                            <input type="text" id="counselorLastName" required value={form.lastName} onChange={(e) => setForm({ ...form, lastName: e.target.value })} />
+                        </FormField>
+                        <FormField label="Email Address" htmlFor="counselorEmail" required>
+                            <input type="email" id="counselorEmail" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+                        </FormField>
+                        <FormField label="Phone Number" htmlFor="counselorPhone" required>
+                            <input type="tel" id="counselorPhone" required value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+                        </FormField>
+                        <FormField label="Status" htmlFor="counselorStatus" required>
+                            <select id="counselorStatus" required value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })}>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </FormField>
                     </div>
-                    <div className="form-page-body">
-                        <p className="form-page-intro">Complete the form below to add a new counselor.</p>
-                        <form className="form-page-form" id="addCounselorForm">
-                            <div className="form-section">
-                                <div className="form-section-title">
-                                    <i className="bi bi-person-vcard"></i>
-                                    <span>Counselor Basic Info</span>
-                                </div>
-                                <div className="form-field"><label htmlFor="counselorFirstName">First Name: *</label><input type="text" id="counselorFirstName" required /></div>
-                                <div className="form-field"><label htmlFor="counselorLastName">Last Name: *</label><input type="text" id="counselorLastName" required /></div>
-                                <div className="form-field"><label htmlFor="counselorEmail">Email Address: *</label><input type="email" id="counselorEmail" required /></div>
-                                <div className="form-field"><label htmlFor="counselorPhone">Phone Number: *</label><input type="tel" id="counselorPhone" required /></div>
-                                <div className="form-field">
-                                    <label htmlFor="counselorStatus">Status: *</label>
-                                    <select id="counselorStatus" required defaultValue="Active">
-                                        <option value="Active">Active</option><option value="Inactive">Inactive</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="form-section" id="counselorStudentsBroughtSection">
-                                <div className="form-section-title">
-                                    <i className="bi bi-people-fill"></i>
-                                    <span>Students Brought</span>
-                                </div>
-                                <p className="form-page-intro" style={{ margin: "-8px 0 4px 0" }}>Tick the students this counselor has brought.</p>
-                                <div className="students-brought-list" id="counselorStudentsList">
-                                    {[
-                                        { img: student1, name: "Arlene McCoy", id: "AD33578" },
-                                        { img: student2, name: "Wade Warren", id: "AD45231" },
-                                        { img: student3, name: "Brooklyn Simmons", id: "AD67452" },
-                                    ].map((s) => (
-                                        <label className="students-brought-option" key={s.id}>
-                                            <input type="checkbox" value={s.name} data-id={s.id} />
-                                            <img src={s.img} alt={s.name} />
-                                            <span>{s.name} — {s.id}</span>
-                                        </label>
-                                    ))}
-                                </div>
-                            </div>
-                            <button type="submit" className="form-page-submit-btn">
-                                <i className="bi bi-check-lg"></i>
-                                <span>Submit</span>
-                            </button>
-                        </form>
+                    <button type="submit" className="form-page-submit-btn">
+                        <i className="bi bi-check-lg"></i>
+                        <span>Submit</span>
+                    </button>
+                </form>
+            </SlideDrawer>
+
+            {/* Edit Counselor Info — Slide-Over Drawer */}
+            <SlideDrawer
+                isOpen={isEditDrawerOpen}
+                onClose={() => setIsEditDrawerOpen(false)}
+                title="Edit Counselor Info"
+                icon="bi-pencil-square"
+                intro="Update the counselor's information below."
+            >
+                <form className="form-page-form" onSubmit={handleEdit}>
+                    <div className="form-section">
+                        <div className="form-section-title">
+                            <i className="bi bi-person-vcard"></i>
+                            <span>Counselor Basic Info</span>
+                        </div>
+                        <FormField label="Full Name" htmlFor="editCounselorName" required>
+                            <input type="text" id="editCounselorName" required value={editForm.name || ""} onChange={(e) => setEditForm({ ...editForm, name: e.target.value })} />
+                        </FormField>
+                        <FormField label="Email Address" htmlFor="editCounselorEmail" required>
+                            <input type="email" id="editCounselorEmail" required value={editForm.email || ""} onChange={(e) => setEditForm({ ...editForm, email: e.target.value })} />
+                        </FormField>
+                        <FormField label="Phone Number" htmlFor="editCounselorPhone" required>
+                            <input type="tel" id="editCounselorPhone" required value={editForm.phone || ""} onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })} />
+                        </FormField>
+                        <FormField label="Status" htmlFor="editCounselorStatus" required>
+                            <select id="editCounselorStatus" required value={editForm.status || "Active"} onChange={(e) => setEditForm({ ...editForm, status: e.target.value })}>
+                                <option>Active</option><option>Inactive</option>
+                            </select>
+                        </FormField>
                     </div>
-                </div>
-            </div>
+                    <button type="submit" className="form-page-submit-btn">
+                        <i className="bi bi-check-lg"></i>
+                        <span>Save Changes</span>
+                    </button>
+                </form>
+            </SlideDrawer>
 
             {/* Counselor Profile — View Modal */}
-            <div className="inpage-modal-overlay" id="profileModalOverlay">
-                <div className="inpage-modal profile-modal">
-                    <div className="inpage-modal-header">
-                        <div className="inpage-modal-header-title">
-                            <div className="inpage-modal-header-icon"><i className="bi bi-chat-heart-fill"></i></div>
-                            <h2>Counselor Profile</h2>
-                        </div>
-                        <button type="button" className="inpage-modal-close-btn" id="profileModalCloseBtn">
-                            <i className="bi bi-x-lg"></i>
-                        </button>
-                    </div>
-
-                    <div className="inpage-modal-body" style={{ padding: 0, gap: 0 }}>
-                        <div className="profile-modal-banner">
-                            <div className="profile-modal-avatar">
-                                <img id="profileAvatar" src="" alt="" />
-                            </div>
-                        </div>
-
-                        <div className="profile-modal-identity">
-                            <h2 id="profileName">—</h2>
-                            <p className="profile-modal-subline">
-                                Status: <b id="profileStatus">—</b> &nbsp;|&nbsp; Last Login: <b id="profileLastLogin">—</b>
-                            </p>
-                        </div>
-
-                        <div style={{ padding: "20px 24px 24px 24px", display: "flex", flexDirection: "column", gap: "20px" }}>
-                            <div>
-                                <p className="profile-modal-section-title">Basic Information</p>
-                                <div className="profile-field-grid">
-                                    <div className="profile-field profile-field-full">
-                                        <label>Full Name</label>
-                                        <div className="profile-field-value" id="profileFullName">—</div>
-                                    </div>
-                                    <div className="profile-field profile-field-full">
-                                        <label>Email Address</label>
-                                        <div className="profile-field-value" id="profileEmail">—</div>
-                                    </div>
-                                    <div className="profile-field">
-                                        <label>Position</label>
-                                        <div className="profile-field-value" id="profilePosition">—</div>
-                                    </div>
-                                    <div className="profile-field">
-                                        <label>Phone Number</label>
-                                        <div className="profile-field-value" id="profilePhone">—</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="profileStudentsBroughtWrapper">
-                                <p className="profile-modal-section-title">Students Brought</p>
-                                <div className="profile-students-brought" id="profileStudentsBrought"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <ProfileModal
+                isOpen={isProfileOpen}
+                onClose={() => setIsProfileOpen(false)}
+                title="Counselor Profile"
+                icon="bi-chat-heart-fill"
+                maxWidth="760px"
+                data={profileData ? {
+                    avatar: profileData.img,
+                    fullName: profileData.name,
+                    email: profileData.email,
+                    position: "Student Counselor",
+                    phone: profileData.phone,
+                    status: profileData.status,
+                    lastLogin: profileData.lastLogin || "—",
+                } : null}
+                onEdit={openEditDrawer}
+            />
         </div>
     );
 }

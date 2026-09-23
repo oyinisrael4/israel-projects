@@ -1,5 +1,8 @@
 import { useEffect } from "react";
 import Sidebar from "./Sidebar";
+import TopBar from "../components/TopBar";
+import PageHeading from "../components/PageHeading";
+import PageFooter from "../components/PageFooter";
 import { init } from "../JS/programme";
 
 export default function Programme() {
@@ -12,33 +15,16 @@ export default function Programme() {
             <Sidebar activePage="programme" />
 
             <main className="main-content-wrapper">
-                <header className="topbar-wrapper">
-                    <div className="topbar-search-box">
-                        <i className="bi bi-search"></i>
-                        <input type="text" placeholder="Search Programmes Here..." />
-                    </div>
-                    <div className="topbar-actions-wrapper">
-                        <button className="topbar-icon-btn" title="Theme"><i className="bi bi-sun-fill"></i></button>
-                        <button className="topbar-icon-btn" title="Language"><i className="bi bi-globe2"></i></button>
-                        <button className="topbar-icon-btn topbar-notification-btn" title="Notifications">
-                            <i className="bi bi-bell-fill"></i>
-                            <span className="topbar-notification-dot"></span>
-                        </button>
-                    </div>
-                </header>
+                <TopBar searchPlaceholder="Search Programmes Here..." />
 
                 <div className="dashboard-content-container">
                     <div className="dashboard-content-wrapper">
 
-                        <div className="page-heading-wrapper">
-                            <div className="page-heading-tag">
-                                <i className="bi bi-list-ul"></i>
-                                <span>Programmes</span>
-                            </div>
-                            <p className="page-heading-description">
-                                Admin <i className="bi bi-arrow-right"></i> Manage course curriculum, pricing, duration, and student enrollments.
-                            </p>
-                        </div>
+                        <PageHeading
+                            icon="bi-list-ul"
+                            tag="Programmes"
+                            description="Manage course curriculum, pricing, duration, and student enrollments."
+                        />
 
                         <div className="page-section-wrapper">
                             <div className="programme-panel-card">
@@ -62,9 +48,7 @@ export default function Programme() {
                             </div>
                         </div>
 
-                        <footer className="dashboard-footer-wrapper">
-                            <p>© 2026 Made With <i className="bi bi-heart-fill"></i> by NIIT.</p>
-                        </footer>
+                        <PageFooter />
 
                     </div>
                 </div>
