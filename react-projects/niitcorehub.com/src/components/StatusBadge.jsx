@@ -1,7 +1,5 @@
 /**
- * StatusBadge — Colored pill badge for entity statuses.
- * Props:
- *   status  {string}  "Active" | "Inactive" | "Pending" | "Accepted"
+  StatusBadge — Colored pill badge for entity statuses.
  */
 export default function StatusBadge({ status }) {
     const variantMap = {

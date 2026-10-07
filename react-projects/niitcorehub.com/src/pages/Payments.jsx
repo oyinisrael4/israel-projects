@@ -5,12 +5,27 @@ import TopBar from "../components/TopBar";
 import PageHeading from "../components/PageHeading";
 import PageFooter from "../components/PageFooter";
 import StatusBadge from "../components/StatusBadge";
+import RosterFilter from "../components/RosterFilter";
 import student1 from "../assets/icon-images/student-1.png";
 import student2 from "../assets/icon-images/student-2.png";
 import student3 from "../assets/icon-images/student-3.png";
 import student4 from "../assets/icon-images/student-4.png";
 import student5 from "../assets/icon-images/student-5.png";
 import niitLogo from "../assets/icon-images/niit-logo.png";
+import adminAvatar from "../assets/icon-images/admin-avatar.png";
+
+const ADMIN_NAV = [
+    { id: "dashboard", to: "/dashboard", icon: "bi-grid-1x2-fill", label: "Dashboard" },
+    { id: "admin", to: "/admin", icon: "bi-person-badge-fill", label: "Admin" },
+    { id: "counselor", to: "/counselor", icon: "bi-chat-heart-fill", label: "Counselor" },
+    { id: "staff", to: "/staff", icon: "bi-easel2-fill", label: "Staff" },
+    { id: "students", to: "/students", icon: "bi-people-fill", label: "Students" },
+    { id: "parents", to: "/parents", icon: "bi-house-heart-fill", label: "Parents" },
+    { id: "programme", to: "/programme", icon: "bi-list-ul", label: "Programme" },
+    { id: "referrals", to: "/referrals", icon: "bi-arrow-repeat", label: "Referrals" },
+    { id: "payments", to: "/payments", icon: "bi-cash-coin", label: "Payments" },
+    { id: "logout", to: "/login", icon: "bi-power", label: "Log-Out" },
+];
 
 const STUDENT_DATABASE = {
     AD33578: { name: "Arlene McCoy", programme: "Web Development", avatar: student1, email: "arlene.mccoy@example.com" },
@@ -130,6 +145,11 @@ export default function Payments() {
                     searchPlaceholder="Search Payments Here..."
                     searchValue={searchValue}
                     onSearchChange={(e) => setSearchValue(e.target.value)}
+                    profileAvatar={adminAvatar}
+                    profileName="Jone Copper"
+                    profileRole="Administrator"
+                    navItems={ADMIN_NAV}
+                    activePage="payments"
                 />
 
                 <div className="dashboard-content-container">
@@ -143,43 +163,30 @@ export default function Payments() {
 
                         <div className="page-section-wrapper">
                             <div className="roster-panel-card">
-                                <div className="roster-panel-header">
-                                    <div className="roster-panel-heading">
-                                        <h3>All Payments</h3>
-                                        <p className="roster-count-text">
-                                            {filteredPayments.length} payment{filteredPayments.length !== 1 ? "s" : ""}
-                                        </p>
-                                    </div>
-                                    <div className="roster-panel-actions panel-card-header-actions">
-                                        <div className="roster-filter-wrapper">
-                                            <i className="bi bi-toggle2-on"></i>
-                                            <select
-                                                className="roster-filter-select"
-                                                value={statusFilter}
-                                                onChange={(e) => setStatusFilter(e.target.value)}
-                                            >
-                                                <option value="all">All Status</option>
-                                                <option value="Paid">Paid</option>
-                                                <option value="Pending">Pending</option>
-                                                <option value="Overdue">Overdue</option>
-                                            </select>
-                                            <i className="bi bi-chevron-down roster-filter-chevron"></i>
-                                        </div>
-                                        <button
-                                            type="button"
-                                            className="panel-add-btn"
-                                            onClick={() => {
-                                                setStudentIdInput("");
-                                                setFetchedStudent(null);
-                                                setFetchError("");
-                                                setIsAddModalOpen(true);
-                                            }}
-                                        >
-                                            <i className="bi bi-plus-lg"></i>
-                                            <span>Add Payment</span>
-                                        </button>
-                                    </div>
-                                </div>
+                                <RosterFilter
+                                    heading="All Payments"
+                                    countText={`${filteredPayments.length} payment${filteredPayments.length !== 1 ? "s" : ""}`}
+                                    filters={[
+                                        {
+                                            icon: "bi-toggle2-on",
+                                            value: statusFilter,
+                                            onChange: (e) => setStatusFilter(e.target.value),
+                                            options: [
+                                                { value: "all", label: "All Status" },
+                                                { value: "Paid", label: "Paid" },
+                                                { value: "Pending", label: "Pending" },
+                                                { value: "Overdue", label: "Overdue" },
+                                            ],
+                                        },
+                                    ]}
+                                    addLabel="Add Payment"
+                                    onAdd={() => {
+                                        setStudentIdInput("");
+                                        setFetchedStudent(null);
+                                        setFetchError("");
+                                        setIsAddModalOpen(true);
+                                    }}
+                                />
 
                                 <div className="roster-table-wrapper">
                                     <table className="marks-table" id="paymentTable">
@@ -208,7 +215,7 @@ export default function Payments() {
                                                     </td>
                                                     <td>{p.programme}</td>
                                                     <td>
-                                                        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                                                        <div className="table-payment-link-group">
                                                             <Link
                                                                 to={`/payment-link?id=${p.sid}`}
                                                                 className="payment-link-cell"
@@ -220,17 +227,9 @@ export default function Payments() {
                                                                 type="button"
                                                                 onClick={(e) => handleCopyLink(e, p.sid)}
                                                                 title="Copy link"
-                                                                style={{
-                                                                    background: "none",
-                                                                    border: "none",
-                                                                    cursor: "pointer",
-                                                                    color: "var(--primary-color, #1a73e8)",
-                                                                    padding: "2px",
-                                                                    display: "inline-flex",
-                                                                    alignItems: "center"
-                                                                }}
+                                                                className="table-copy-link-btn"
                                                             >
-                                                                <i className="bi bi-link-45deg" style={{ fontSize: "1.1rem" }}></i>
+                                                                <i className="bi bi-link-45deg table-copy-link-icon"></i>
                                                             </button>
                                                         </div>
                                                     </td>
@@ -248,7 +247,7 @@ export default function Payments() {
                                             ))}
                                             {filteredPayments.length === 0 && (
                                                 <tr>
-                                                    <td colSpan={6} style={{ textAlign: "center", padding: "24px", color: "var(--text-muted, #888)" }}>
+                                                    <td colSpan={6} className="table-empty-cell">
                                                         No payments found.
                                                     </td>
                                                 </tr>
@@ -321,7 +320,7 @@ export default function Payments() {
 
                             {/* Student preview card */}
                             {fetchedStudent && (
-                                <div className="payment-modal-preview" style={{ display: "flex" }}>
+                                <div className="payment-modal-preview payment-modal-preview-active">
                                     <div className="payment-modal-preview-row">
                                         <span className="payment-modal-preview-label">Name:</span>
                                         <span className="payment-modal-preview-value">{fetchedStudent.name}</span>
@@ -341,7 +340,7 @@ export default function Payments() {
 
                             {/* Error message */}
                             {fetchError && (
-                                <div className="payment-modal-error" style={{ display: "flex" }}>
+                                <div className="payment-modal-error payment-modal-error-active">
                                     <i className="bi bi-exclamation-triangle-fill"></i>
                                     <span>{fetchError}</span>
                                 </div>

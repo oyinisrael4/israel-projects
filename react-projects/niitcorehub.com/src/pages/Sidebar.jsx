@@ -19,6 +19,7 @@ export default function Sidebar({ activePage = "" }) {
         { id: "examinations", to: "#", icon: "bi-pencil-square", label: "Examinations" },
         { id: "payments", to: "/payments", icon: "bi-cash-coin", label: "Payments" },
         { id: "report", to: "#", icon: "bi-bar-chart-line-fill", label: "Report" },
+        { id: "logout", to: "/login", icon: "bi-power", label: "Log-Out" },
     ];
 
     return (

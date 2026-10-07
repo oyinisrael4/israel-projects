@@ -6,6 +6,7 @@ import StatCard from "../components/StatCard";
 import PageFooter from "../components/PageFooter";
 import StatusBadge from "../components/StatusBadge";
 import teacherAvatar from "../assets/icon-images/teacher-avatar.png";
+import adminAvatar from "../assets/icon-images/admin-avatar.png";
 import profile1 from "../assets/icon-images/profile-1.png";
 import profile2 from "../assets/icon-images/profile-2.png";
 import profile3 from "../assets/icon-images/profile-3.png";
@@ -15,6 +16,19 @@ import student2 from "../assets/icon-images/student-2.png";
 import student3 from "../assets/icon-images/student-3.png";
 import student4 from "../assets/icon-images/student-4.png";
 import student5 from "../assets/icon-images/student-5.png";
+
+const ADMIN_NAV = [
+    { id: "dashboard", to: "/dashboard", icon: "bi-grid-1x2-fill", label: "Dashboard" },
+    { id: "admin", to: "/admin", icon: "bi-person-badge-fill", label: "Admin" },
+    { id: "counselor", to: "/counselor", icon: "bi-chat-heart-fill", label: "Counselor" },
+    { id: "staff", to: "/staff", icon: "bi-easel2-fill", label: "Staff" },
+    { id: "students", to: "/students", icon: "bi-people-fill", label: "Students" },
+    { id: "parents", to: "/parents", icon: "bi-house-heart-fill", label: "Parents" },
+    { id: "programme", to: "/programme", icon: "bi-list-ul", label: "Programme" },
+    { id: "referrals", to: "/referrals", icon: "bi-arrow-repeat", label: "Referrals" },
+    { id: "payments", to: "/payments", icon: "bi-cash-coin", label: "Payments" },
+    { id: "logout", to: "/login", icon: "bi-power", label: "Log-Out" },
+];
 
 const STATS = [
     { icon: "bi-person-fill", label: "Total Students", value: "3,500", variant: "primary" },
@@ -68,6 +82,11 @@ export default function Dashboard() {
                     searchPlaceholder="Search"
                     searchValue={searchValue}
                     onSearchChange={(e) => setSearchValue(e.target.value)}
+                    profileAvatar={adminAvatar}
+                    profileName="Jone Copper"
+                    profileRole="Administrator"
+                    navItems={ADMIN_NAV}
+                    activePage="dashboard"
                 />
 
                 <div className="dashboard-content-container">

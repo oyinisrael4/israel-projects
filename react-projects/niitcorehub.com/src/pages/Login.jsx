@@ -68,6 +68,16 @@ export default function Login() {
                                 </div>
                             </div>
 
+                            <div className="login-parent-portal-link-wrap">
+                                <Link
+                                    to="/parent-portal/dashboard"
+                                    className="login-parent-portal-link"
+                                >
+                                    <i className="bi bi-house-heart-fill"></i>
+                                    <span>Parent / Guardian Portal &rarr;</span>
+                                </Link>
+                            </div>
+
                         </div>
                     </div>
 

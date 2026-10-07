@@ -13,19 +13,26 @@ import StatusBadge from "./StatusBadge";
  *   onClick   {function}  Click handler (opens profile modal)
  *   dataAttrs {object}    Extra data-* attributes for filtering
  */
+function getBarClass(bar) {
+    if (typeof bar === "string") {
+        if (bar.includes("secondary")) return "person-card-avatar-bar-secondary";
+        if (bar.includes("footer")) return "person-card-avatar-bar-footer";
+    }
+    return "person-card-avatar-bar-primary";
+}
+
 export default function PersonCard({ img, name, roleLabel, phone, tag, status, bar, onClick, dataAttrs = {} }) {
     return (
         <div
-            className="person-card"
+            className="person-card cursor-pointer"
             onClick={onClick}
-            style={{ cursor: "pointer" }}
             {...dataAttrs}
         >
             <div>
                 <div className="person-card-avatar">
                     <img src={img} alt={name} />
                 </div>
-                <div className="person-card-avatar-bar" style={{ background: bar }}></div>
+                <div className={`person-card-avatar-bar ${getBarClass(bar)}`}></div>
             </div>
             <div className="person-card-body">
                 <h4>{name}</h4>
@@ -39,3 +46,4 @@ export default function PersonCard({ img, name, roleLabel, phone, tag, status, b
         </div>
     );
 }
+

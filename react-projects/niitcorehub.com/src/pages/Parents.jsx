@@ -6,7 +6,8 @@ import PageFooter from "../components/PageFooter";
 import SlideDrawer from "../components/SlideDrawer";
 import ProfileModal from "../components/ProfileModal";
 import RosterFilter from "../components/RosterFilter";
-import FormField from "../components/FormField";
+import { FormInput, FormSelect } from "../components/FormField";
+import adminAvatar from "../assets/icon-images/admin-avatar.png";
 import admin3 from "../assets/icon-images/admin-3.png";
 import admin4 from "../assets/icon-images/admin-4.png";
 import admin5 from "../assets/icon-images/admin-5.png";
@@ -17,6 +18,19 @@ import student3 from "../assets/icon-images/student-3.png";
 import student4 from "../assets/icon-images/student-4.png";
 import student5 from "../assets/icon-images/student-5.png";
 
+const ADMIN_NAV = [
+    { id: "dashboard", to: "/dashboard", icon: "bi-grid-1x2-fill", label: "Dashboard" },
+    { id: "admin", to: "/admin", icon: "bi-person-badge-fill", label: "Admin" },
+    { id: "counselor", to: "/counselor", icon: "bi-chat-heart-fill", label: "Counselor" },
+    { id: "staff", to: "/staff", icon: "bi-easel2-fill", label: "Staff" },
+    { id: "students", to: "/students", icon: "bi-people-fill", label: "Students" },
+    { id: "parents", to: "/parents", icon: "bi-house-heart-fill", label: "Parents" },
+    { id: "programme", to: "/programme", icon: "bi-list-ul", label: "Programme" },
+    { id: "referrals", to: "/referrals", icon: "bi-arrow-repeat", label: "Referrals" },
+    { id: "payments", to: "/payments", icon: "bi-cash-coin", label: "Payments" },
+    { id: "logout", to: "/login", icon: "bi-power", label: "Log-Out" },
+];
+
 const INITIAL_PARENTS = [
     { id: "parent-1", sn: 1, img: admin3, name: "Mr James McCoy", relation: "Father", studentName: "Arlene McCoy", sid: "AD33578", sImg: student1, phone: "0812 345 6789", email: "james.mccoy@gmail.com", search: "james mccoy arlene ad33578 father", lastLogin: "—" },
     { id: "parent-2", sn: 2, img: profile2, name: "Mrs Patricia Warren", relation: "Mother", studentName: "Wade Warren", sid: "AD45231", sImg: student2, phone: "0803 456 7890", email: "pwarren@yahoo.com", search: "patricia warren wade ad45231 mother", lastLogin: "—" },
@@ -26,11 +40,18 @@ const INITIAL_PARENTS = [
 ];
 
 const STUDENT_OPTIONS = [
-    { label: "Arlene McCoy — AD33578", img: student1 },
-    { label: "Wade Warren — AD45231", img: student2 },
-    { label: "Brooklyn Simmons — AD67452", img: student3 },
-    { label: "Theresa Webb — AD76133", img: student4 },
-    { label: "Darlene Robertson — AD98214", img: student5 },
+    { label: "Arlene McCoy — AD33578", value: "Arlene McCoy — AD33578" },
+    { label: "Wade Warren — AD45231", value: "Wade Warren — AD45231" },
+    { label: "Brooklyn Simmons — AD67452", value: "Brooklyn Simmons — AD67452" },
+    { label: "Theresa Webb — AD76133", value: "Theresa Webb — AD76133" },
+    { label: "Darlene Robertson — AD98214", value: "Darlene Robertson — AD98214" },
+];
+
+const PARENT_EDIT_FIELDS = [
+    { key: "name", label: "Full Name", type: "text" },
+    { key: "relation", label: "Relationship", type: "select", options: ["Father", "Mother", "Guardian"] },
+    { key: "email", label: "Email Address", type: "email" },
+    { key: "phone", label: "Phone Number", type: "tel" },
 ];
 
 export default function Parents() {
@@ -41,6 +62,7 @@ export default function Parents() {
     const [profileData, setProfileData] = useState(null);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
     const [form, setForm] = useState({ title: "", firstName: "", lastName: "", relation: "", phone: "", email: "", address: "", linkedStudent: "" });
+    const [editForm, setEditForm] = useState({});
 
     const filtered = useMemo(() => {
         return parents.filter((p) => {
@@ -53,7 +75,37 @@ export default function Parents() {
 
     function openProfile(parent) {
         setProfileData(parent);
+        setEditForm({
+            name: parent.name,
+            relation: parent.relation,
+            email: parent.email,
+            phone: parent.phone,
+        });
         setIsProfileOpen(true);
+    }
+
+    function handleSaveEdit(updatedForm) {
+        setParents((prev) =>
+            prev.map((p) =>
+                p.id === profileData.id
+                    ? {
+                        ...p,
+                        name: updatedForm.name,
+                        relation: updatedForm.relation,
+                        email: updatedForm.email,
+                        phone: updatedForm.phone,
+                        search: `${updatedForm.name} ${p.studentName} ${p.sid} ${updatedForm.relation}`.toLowerCase(),
+                    }
+                    : p
+            )
+        );
+        setProfileData((prev) => ({
+            ...prev,
+            name: updatedForm.name,
+            relation: updatedForm.relation,
+            email: updatedForm.email,
+            phone: updatedForm.phone,
+        }));
     }
 
     function handleAdd(e) {
@@ -94,6 +146,11 @@ export default function Parents() {
                     searchPlaceholder="Search Parents Here..."
                     searchValue={searchValue}
                     onSearchChange={(e) => setSearchValue(e.target.value)}
+                    profileAvatar={adminAvatar}
+                    profileName="Jone Copper"
+                    profileRole="Administrator"
+                    navItems={ADMIN_NAV}
+                    activePage="parents"
                 />
 
                 <div className="dashboard-content-container">
@@ -181,13 +238,13 @@ export default function Parents() {
                 </div>
             </main>
 
-            {/* Add Parent / Guardian — Slide-Over Drawer */}
+            {/* Create New Parent — Slide-Over Drawer */}
             <SlideDrawer
                 isOpen={isDrawerOpen}
                 onClose={() => { setIsDrawerOpen(false); setForm({ title: "", firstName: "", lastName: "", relation: "", phone: "", email: "", address: "", linkedStudent: "" }); }}
-                title="Add Parent / Guardian"
+                title="Create New Parent"
                 icon="bi-person-plus-fill"
-                intro="Complete the form below to add a new parent or guardian record."
+                intro="Fill in the parent or guardian details to register and link them to an active student."
             >
                 <form className="form-page-form" onSubmit={handleAdd}>
                     <div className="form-section">
@@ -195,49 +252,75 @@ export default function Parents() {
                             <i className="bi bi-person-vcard"></i>
                             <span>Parent / Guardian Info</span>
                         </div>
-                        <FormField label="Select Title" htmlFor="parentTitle" required>
-                            <select id="parentTitle" required value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })}>
-                                <option value="" disabled>Select here</option>
-                                <option>Mr</option><option>Mrs</option><option>Miss</option><option>Dr</option>
-                            </select>
-                        </FormField>
-                        <FormField label="First Name" htmlFor="parentFirstName" required>
-                            <input type="text" id="parentFirstName" required value={form.firstName} onChange={(e) => setForm({ ...form, firstName: e.target.value })} />
-                        </FormField>
-                        <FormField label="Last Name" htmlFor="parentLastName" required>
-                            <input type="text" id="parentLastName" required value={form.lastName} onChange={(e) => setForm({ ...form, lastName: e.target.value })} />
-                        </FormField>
-                        <FormField label="Relationship" htmlFor="parentRelationship" required>
-                            <select id="parentRelationship" required value={form.relation} onChange={(e) => setForm({ ...form, relation: e.target.value })}>
-                                <option value="" disabled>Select here</option>
-                                <option value="Father">Father</option>
-                                <option value="Mother">Mother</option>
-                                <option value="Guardian">Guardian</option>
-                            </select>
-                        </FormField>
-                        <FormField label="Phone Number" htmlFor="parentPhone" required>
-                            <input type="tel" id="parentPhone" required value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
-                        </FormField>
-                        <FormField label="Email Address" htmlFor="parentEmail" required>
-                            <input type="email" id="parentEmail" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-                        </FormField>
-                        <FormField label="Home Address" htmlFor="parentAddress">
-                            <input type="text" id="parentAddress" value={form.address} onChange={(e) => setForm({ ...form, address: e.target.value })} />
-                        </FormField>
+                        <FormSelect
+                            label="Select Title"
+                            id="parentTitle"
+                            required
+                            value={form.title}
+                            onChange={(e) => setForm({ ...form, title: e.target.value })}
+                            placeholder="Select here"
+                            options={["Mr", "Mrs", "Miss", "Dr"]}
+                        />
+                        <FormInput
+                            label="First Name"
+                            id="parentFirstName"
+                            required
+                            value={form.firstName}
+                            onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+                        />
+                        <FormInput
+                            label="Last Name"
+                            id="parentLastName"
+                            required
+                            value={form.lastName}
+                            onChange={(e) => setForm({ ...form, lastName: e.target.value })}
+                        />
+                        <FormSelect
+                            label="Relationship"
+                            id="parentRelationship"
+                            required
+                            value={form.relation}
+                            onChange={(e) => setForm({ ...form, relation: e.target.value })}
+                            placeholder="Select here"
+                            options={["Father", "Mother", "Guardian"]}
+                        />
+                        <FormInput
+                            label="Phone Number"
+                            id="parentPhone"
+                            type="tel"
+                            required
+                            value={form.phone}
+                            onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        />
+                        <FormInput
+                            label="Email Address"
+                            id="parentEmail"
+                            type="email"
+                            required
+                            value={form.email}
+                            onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        />
+                        <FormInput
+                            label="Home Address"
+                            id="parentAddress"
+                            value={form.address}
+                            onChange={(e) => setForm({ ...form, address: e.target.value })}
+                        />
                     </div>
                     <div className="form-section">
                         <div className="form-section-title">
                             <i className="bi bi-people-fill"></i>
                             <span>Linked Student</span>
                         </div>
-                        <FormField label="Select Student" htmlFor="parentLinkedStudent" required>
-                            <select id="parentLinkedStudent" required value={form.linkedStudent} onChange={(e) => setForm({ ...form, linkedStudent: e.target.value })}>
-                                <option value="" disabled>Select here</option>
-                                {STUDENT_OPTIONS.map((s) => (
-                                    <option key={s.label} value={s.label}>{s.label}</option>
-                                ))}
-                            </select>
-                        </FormField>
+                        <FormSelect
+                            label="Select Student"
+                            id="parentLinkedStudent"
+                            required
+                            value={form.linkedStudent}
+                            onChange={(e) => setForm({ ...form, linkedStudent: e.target.value })}
+                            placeholder="Select here"
+                            options={STUDENT_OPTIONS}
+                        />
                     </div>
                     <button type="submit" className="form-page-submit-btn">
                         <i className="bi bi-check-lg"></i>
@@ -246,7 +329,7 @@ export default function Parents() {
                 </form>
             </SlideDrawer>
 
-            {/* Parent / Guardian Profile View Modal */}
+            {/* Parent / Guardian Profile View / Inline Edit Modal */}
             <ProfileModal
                 isOpen={isProfileOpen}
                 onClose={() => setIsProfileOpen(false)}
@@ -262,6 +345,11 @@ export default function Parents() {
                     status: "Active",
                     lastLogin: profileData.lastLogin || "—",
                 } : null}
+                onEdit={() => {}}
+                editForm={editForm}
+                setEditForm={setEditForm}
+                onSaveEdit={handleSaveEdit}
+                editFields={PARENT_EDIT_FIELDS}
                 extraSection={profileData && (
                     <div>
                         <p className="profile-modal-section-title">Linked Student</p>

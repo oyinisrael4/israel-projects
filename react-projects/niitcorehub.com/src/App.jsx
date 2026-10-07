@@ -12,9 +12,14 @@ import Payments from "./pages/Payments";
 import PaymentLink from "./pages/PaymentLink";
 import Programme from "./pages/Programme";
 import Referrals from "./pages/Referrals";
+import ParentDashboard from "./pages/parent-portal/ParentDashboard";
+import ParentStudent from "./pages/parent-portal/ParentStudent";
+import ParentPayment from "./pages/parent-portal/ParentPayment";
 
 import './index.css';
 import './assets/styles/mainStyles.css';
+import './assets/styles/paymentLink.css';
+import './assets/styles/parentPortal.css';
 // Bootstrap Icons CSS is loaded via <link> in index.html to avoid Vite scanning its docs/ folder
 
 import { createBrowserRouter, Navigate } from "react-router-dom";
@@ -83,5 +88,21 @@ export const router = createBrowserRouter([
   {
     path: "/referrals",
     element: <Referrals />
+  },
+  {
+    path: "/parent-portal",
+    element: <Navigate to="/parent-portal/dashboard" replace />
+  },
+  {
+    path: "/parent-portal/dashboard",
+    element: <ParentDashboard />
+  },
+  {
+    path: "/parent-portal/student",
+    element: <ParentStudent />
+  },
+  {
+    path: "/parent-portal/payment",
+    element: <ParentPayment />
   },
 ]);

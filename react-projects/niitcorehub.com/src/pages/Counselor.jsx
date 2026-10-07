@@ -7,10 +7,23 @@ import PersonCard from "../components/PersonCard";
 import SlideDrawer from "../components/SlideDrawer";
 import ProfileModal from "../components/ProfileModal";
 import RosterFilter from "../components/RosterFilter";
-import FormField from "../components/FormField";
+import { FormInput, FormSelect } from "../components/FormField";
 import admin4 from "../assets/icon-images/admin-4.png";
 import admin5 from "../assets/icon-images/admin-5.png";
 import adminAvatar from "../assets/icon-images/admin-avatar.png";
+
+const ADMIN_NAV = [
+    { id: "dashboard", to: "/dashboard", icon: "bi-grid-1x2-fill", label: "Dashboard" },
+    { id: "admin", to: "/admin", icon: "bi-person-badge-fill", label: "Admin" },
+    { id: "counselor", to: "/counselor", icon: "bi-chat-heart-fill", label: "Counselor" },
+    { id: "staff", to: "/staff", icon: "bi-easel2-fill", label: "Staff" },
+    { id: "students", to: "/students", icon: "bi-people-fill", label: "Students" },
+    { id: "parents", to: "/parents", icon: "bi-house-heart-fill", label: "Parents" },
+    { id: "programme", to: "/programme", icon: "bi-list-ul", label: "Programme" },
+    { id: "referrals", to: "/referrals", icon: "bi-arrow-repeat", label: "Referrals" },
+    { id: "payments", to: "/payments", icon: "bi-cash-coin", label: "Payments" },
+    { id: "logout", to: "/login", icon: "bi-power", label: "Log-Out" },
+];
 
 const INITIAL_COUNSELORS = [
     { id: "counselor-1", status: "Active", search: "adebiyi abasi counselor", img: admin4, name: "Adebiyi Abasi", phone: "080 6046 8880", bar: "var(--primary-color)", email: "adebiyiabasi@niit.edu", lastLogin: "2026-09-02 09:15 AM" },
@@ -24,7 +37,13 @@ export default function Counselor() {
 
     // Drawer states
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-    const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
+
+    const COUNSELOR_EDIT_FIELDS = [
+        { key: "name", label: "Full Name", type: "text" },
+        { key: "email", label: "Email Address", type: "email" },
+        { key: "phone", label: "Phone Number", type: "tel" },
+        { key: "status", label: "Status", type: "select", options: ["Active", "Inactive"] },
+    ];
 
     // Profile modal state
     const [profileData, setProfileData] = useState(null);
@@ -46,6 +65,12 @@ export default function Counselor() {
 
     function openProfile(counselor) {
         setProfileData(counselor);
+        setEditForm({
+            name: counselor.name,
+            email: counselor.email,
+            phone: counselor.phone,
+            status: counselor.status,
+        });
         setIsProfileOpen(true);
     }
 
@@ -72,36 +97,22 @@ export default function Counselor() {
         setIsDrawerOpen(false);
     }
 
-    function openEditDrawer() {
-        if (!profileData) return;
-        setEditForm({
-            name: profileData.name,
-            email: profileData.email,
-            phone: profileData.phone,
-            status: profileData.status,
-        });
-        setIsProfileOpen(false);
-        setIsEditDrawerOpen(true);
-    }
-
-    function handleEdit(e) {
-        e.preventDefault();
+    function handleSaveEdit(updatedForm) {
         setCounselors((prev) =>
             prev.map((c) =>
                 c.id === profileData.id
                     ? {
                         ...c,
-                        name: editForm.name,
-                        email: editForm.email,
-                        phone: editForm.phone,
-                        status: editForm.status,
-                        search: `${editForm.name} counselor`.toLowerCase(),
+                        name: updatedForm.name,
+                        email: updatedForm.email,
+                        phone: updatedForm.phone,
+                        status: updatedForm.status,
+                        search: `${updatedForm.name} counselor`.toLowerCase(),
                     }
                     : c
             )
         );
-        setProfileData((prev) => ({ ...prev, name: editForm.name, email: editForm.email, phone: editForm.phone, status: editForm.status }));
-        setIsEditDrawerOpen(false);
+        setProfileData((prev) => ({ ...prev, name: updatedForm.name, email: updatedForm.email, phone: updatedForm.phone, status: updatedForm.status }));
     }
 
     const countText = `${filteredCounselors.length} counselor${filteredCounselors.length !== 1 ? "s" : ""}`;
@@ -115,6 +126,11 @@ export default function Counselor() {
                     searchPlaceholder="Search Counselor Here..."
                     searchValue={searchValue}
                     onSearchChange={(e) => setSearchValue(e.target.value)}
+                    profileAvatar={adminAvatar}
+                    profileName="Jone Copper"
+                    profileRole="Administrator"
+                    navItems={ADMIN_NAV}
+                    activePage="counselor"
                 />
 
                 <div className="dashboard-content-container">
@@ -184,24 +200,44 @@ export default function Counselor() {
                             <i className="bi bi-person-vcard"></i>
                             <span>Counselor Basic Info</span>
                         </div>
-                        <FormField label="First Name" htmlFor="counselorFirstName" required>
-                            <input type="text" id="counselorFirstName" required value={form.firstName} onChange={(e) => setForm({ ...form, firstName: e.target.value })} />
-                        </FormField>
-                        <FormField label="Last Name" htmlFor="counselorLastName" required>
-                            <input type="text" id="counselorLastName" required value={form.lastName} onChange={(e) => setForm({ ...form, lastName: e.target.value })} />
-                        </FormField>
-                        <FormField label="Email Address" htmlFor="counselorEmail" required>
-                            <input type="email" id="counselorEmail" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-                        </FormField>
-                        <FormField label="Phone Number" htmlFor="counselorPhone" required>
-                            <input type="tel" id="counselorPhone" required value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
-                        </FormField>
-                        <FormField label="Status" htmlFor="counselorStatus" required>
-                            <select id="counselorStatus" required value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })}>
-                                <option value="Active">Active</option>
-                                <option value="Inactive">Inactive</option>
-                            </select>
-                        </FormField>
+                        <FormInput
+                            label="First Name"
+                            id="counselorFirstName"
+                            required
+                            value={form.firstName}
+                            onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+                        />
+                        <FormInput
+                            label="Last Name"
+                            id="counselorLastName"
+                            required
+                            value={form.lastName}
+                            onChange={(e) => setForm({ ...form, lastName: e.target.value })}
+                        />
+                        <FormInput
+                            label="Email Address"
+                            id="counselorEmail"
+                            type="email"
+                            required
+                            value={form.email}
+                            onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        />
+                        <FormInput
+                            label="Phone Number"
+                            id="counselorPhone"
+                            type="tel"
+                            required
+                            value={form.phone}
+                            onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        />
+                        <FormSelect
+                            label="Status"
+                            id="counselorStatus"
+                            required
+                            value={form.status}
+                            onChange={(e) => setForm({ ...form, status: e.target.value })}
+                            options={["Active", "Inactive"]}
+                        />
                     </div>
                     <button type="submit" className="form-page-submit-btn">
                         <i className="bi bi-check-lg"></i>
@@ -210,43 +246,7 @@ export default function Counselor() {
                 </form>
             </SlideDrawer>
 
-            {/* Edit Counselor Info — Slide-Over Drawer */}
-            <SlideDrawer
-                isOpen={isEditDrawerOpen}
-                onClose={() => setIsEditDrawerOpen(false)}
-                title="Edit Counselor Info"
-                icon="bi-pencil-square"
-                intro="Update the counselor's information below."
-            >
-                <form className="form-page-form" onSubmit={handleEdit}>
-                    <div className="form-section">
-                        <div className="form-section-title">
-                            <i className="bi bi-person-vcard"></i>
-                            <span>Counselor Basic Info</span>
-                        </div>
-                        <FormField label="Full Name" htmlFor="editCounselorName" required>
-                            <input type="text" id="editCounselorName" required value={editForm.name || ""} onChange={(e) => setEditForm({ ...editForm, name: e.target.value })} />
-                        </FormField>
-                        <FormField label="Email Address" htmlFor="editCounselorEmail" required>
-                            <input type="email" id="editCounselorEmail" required value={editForm.email || ""} onChange={(e) => setEditForm({ ...editForm, email: e.target.value })} />
-                        </FormField>
-                        <FormField label="Phone Number" htmlFor="editCounselorPhone" required>
-                            <input type="tel" id="editCounselorPhone" required value={editForm.phone || ""} onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })} />
-                        </FormField>
-                        <FormField label="Status" htmlFor="editCounselorStatus" required>
-                            <select id="editCounselorStatus" required value={editForm.status || "Active"} onChange={(e) => setEditForm({ ...editForm, status: e.target.value })}>
-                                <option>Active</option><option>Inactive</option>
-                            </select>
-                        </FormField>
-                    </div>
-                    <button type="submit" className="form-page-submit-btn">
-                        <i className="bi bi-check-lg"></i>
-                        <span>Save Changes</span>
-                    </button>
-                </form>
-            </SlideDrawer>
-
-            {/* Counselor Profile — View Modal */}
+            {/* Counselor Profile — View/Edit Modal */}
             <ProfileModal
                 isOpen={isProfileOpen}
                 onClose={() => setIsProfileOpen(false)}
@@ -262,7 +262,11 @@ export default function Counselor() {
                     status: profileData.status,
                     lastLogin: profileData.lastLogin || "—",
                 } : null}
-                onEdit={openEditDrawer}
+                onEdit={() => {}}
+                editForm={editForm}
+                setEditForm={setEditForm}
+                onSaveEdit={handleSaveEdit}
+                editFields={COUNSELOR_EDIT_FIELDS}
             />
         </div>
     );

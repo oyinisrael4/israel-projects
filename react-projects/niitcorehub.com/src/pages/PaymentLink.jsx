@@ -114,14 +114,14 @@ export default function PaymentLink() {
                             </span>
                         </div>
 
-                        <p style={{ fontFamily: "body-font", fontSize: "12px", color: "#777", margin: 0 }}>
+                        <p className="pay-info-subtext">
                             <i className="bi bi-info-circle"></i> Once completed, a verified digital receipt will be generated instantly and updated in your student record.
                         </p>
                     </div>
 
                     {/* Right: Payment Method & Paystack CTA */}
                     <div className="pay-card">
-                        <h2 className="pay-card-title" style={{ fontSize: "16px" }}>Payment Method</h2>
+                        <h2 className="pay-card-title pay-method-title">Payment Method</h2>
                         <p className="pay-card-subtitle">Fast, secure payment processed by Paystack.</p>
 
                         <div className="pay-provider-box">
@@ -134,7 +134,7 @@ export default function PaymentLink() {
                                     <p>Cards, Bank Transfer &amp; USSD</p>
                                 </div>
                             </div>
-                            <i className="bi bi-check-circle-fill" style={{ color: "var(--primary-color)", fontSize: "20px" }}></i>
+                            <i className="bi bi-check-circle-fill pay-method-check-icon"></i>
                         </div>
 
                         <button
@@ -152,8 +152,8 @@ export default function PaymentLink() {
                             <span>256-bit SSL Bank Grade Encryption</span>
                         </div>
 
-                        <div style={{ textAlign: "center", marginTop: "24px" }}>
-                            <Link to="/payments" style={{ fontFamily: "sub-title-font", fontSize: "13px", color: "var(--primary-color)", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "6px" }}>
+                        <div className="pay-return-wrap">
+                            <Link to="/payments" className="pay-return-link">
                                 <i className="bi bi-arrow-left"></i> Return to Payments Dashboard
                             </Link>
                         </div>
@@ -231,20 +231,20 @@ export default function PaymentLink() {
                             )}
 
                             {activeTab === "transfer" && (
-                                <div style={{ background: "#f8fafc", padding: "16px", borderRadius: "8px", border: "1px solid #e2e8f0", marginBottom: "14px" }}>
-                                    <p style={{ fontSize: "11px", color: "#666", textTransform: "uppercase", marginBottom: "4px" }}>Bank Name</p>
-                                    <h4 style={{ margin: "0 0 10px 0", fontSize: "14px", color: "#1a1a1a" }}>Wema Bank / Paystack-Titan</h4>
-                                    <p style={{ fontSize: "11px", color: "#666", textTransform: "uppercase", marginBottom: "4px" }}>Account Number</p>
-                                    <h3 style={{ margin: "0 0 4px 0", fontSize: "18px", color: "var(--primary-color)", letterSpacing: "1px" }}>9920194821</h3>
-                                    <span style={{ fontSize: "11px", color: "#888" }}>Expires in 30 minutes</span>
+                                <div className="pay-transfer-box">
+                                    <p className="pay-transfer-label">Bank Name</p>
+                                    <h4 className="pay-transfer-bank">Wema Bank / Paystack-Titan</h4>
+                                    <p className="pay-transfer-label">Account Number</p>
+                                    <h3 className="pay-transfer-acc">9920194821</h3>
+                                    <span className="pay-transfer-expire">Expires in 30 minutes</span>
                                 </div>
                             )}
 
                             {activeTab === "ussd" && (
-                                <div style={{ background: "#f8fafc", padding: "16px", borderRadius: "8px", border: "1px solid #e2e8f0", marginBottom: "14px", textAlign: "center" }}>
-                                    <p style={{ fontSize: "12px", color: "#666", marginBottom: "8px" }}>Dial this USSD code on your registered phone:</p>
-                                    <h3 style={{ fontSize: "18px", color: "var(--primary-color)", letterSpacing: "1px", margin: "0 0 6px 0" }}>*737*50*150000*114#</h3>
-                                    <span style={{ fontSize: "11px", color: "#888" }}>GTBank Instant USSD</span>
+                                <div className="pay-ussd-box">
+                                    <p className="pay-ussd-label">Dial this USSD code on your registered phone:</p>
+                                    <h3 className="pay-ussd-code">*737*50*150000*114#</h3>
+                                    <span className="pay-ussd-type">GTBank Instant USSD</span>
                                 </div>
                             )}
 
@@ -264,7 +264,7 @@ export default function PaymentLink() {
                                     `Pay ${student.amount}`
                                 )}
                             </button>
-                            <p style={{ textAlign: "center", fontFamily: "body-font", fontSize: "11px", color: "#888", marginTop: "10px", margin: 0 }}>
+                            <p className="pay-secured-text">
                                 <i className="bi bi-shield-check"></i> Secured by Paystack
                             </p>
                         </div>
@@ -274,25 +274,23 @@ export default function PaymentLink() {
                             <div className="pay-success-icon">
                                 <i className="bi bi-check-lg"></i>
                             </div>
-                            <h3 style={{ fontFamily: "title-font", fontSize: "18px", color: "var(--black-color)", marginBottom: "6px" }}>
+                            <h3 className="pay-success-title">
                                 Payment Successful!
                             </h3>
-                            <p style={{ fontFamily: "body-font", fontSize: "13px", color: "#555", marginBottom: "16px" }}>
+                            <p className="pay-success-desc">
                                 Your payment of <strong>{student.amount}</strong> has been confirmed. Ref: <span id="txnRef">{txnRef}</span>
                             </p>
-                            <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
+                            <div className="pay-success-btn-row">
                                 <button
-                                    className="btn"
+                                    className="btn pay-success-print-btn"
                                     type="button"
                                     onClick={() => window.print()}
-                                    style={{ background: "var(--primary-color)", color: "#fff", borderRadius: "8px", padding: "10px 18px", fontSize: "13px", border: "none", cursor: "pointer", display: "inline-flex", alignItems: "center", gap: "6px" }}
                                 >
                                     <i className="bi bi-printer"></i> Print Receipt
                                 </button>
                                 <Link
                                     to="/payments"
-                                    className="btn"
-                                    style={{ background: "#2e7d32", color: "#fff", borderRadius: "8px", padding: "10px 18px", fontSize: "13px", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "6px" }}
+                                    className="btn pay-success-portal-btn"
                                 >
                                     Back to Portal
                                 </Link>

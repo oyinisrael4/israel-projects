@@ -4,12 +4,28 @@ import TopBar from "../components/TopBar";
 import PageHeading from "../components/PageHeading";
 import PageFooter from "../components/PageFooter";
 import StatusBadge from "../components/StatusBadge";
+import RosterFilter from "../components/RosterFilter";
+import ReferralModal from "../components/ReferralModal";
 import admin4 from "../assets/icon-images/admin-4.png";
 import admin5 from "../assets/icon-images/admin-5.png";
+import adminAvatar from "../assets/icon-images/admin-avatar.png";
 import student1 from "../assets/icon-images/student-1.png";
 import student2 from "../assets/icon-images/student-2.png";
 import student3 from "../assets/icon-images/student-3.png";
 import student4 from "../assets/icon-images/student-4.png";
+
+const ADMIN_NAV = [
+    { id: "dashboard", to: "/dashboard", icon: "bi-grid-1x2-fill", label: "Dashboard" },
+    { id: "admin", to: "/admin", icon: "bi-person-badge-fill", label: "Admin" },
+    { id: "counselor", to: "/counselor", icon: "bi-chat-heart-fill", label: "Counselor" },
+    { id: "staff", to: "/staff", icon: "bi-easel2-fill", label: "Staff" },
+    { id: "students", to: "/students", icon: "bi-people-fill", label: "Students" },
+    { id: "parents", to: "/parents", icon: "bi-house-heart-fill", label: "Parents" },
+    { id: "programme", to: "/programme", icon: "bi-list-ul", label: "Programme" },
+    { id: "referrals", to: "/referrals", icon: "bi-arrow-repeat", label: "Referrals" },
+    { id: "payments", to: "/payments", icon: "bi-cash-coin", label: "Payments" },
+    { id: "logout", to: "/login", icon: "bi-power", label: "Log-Out" },
+];
 
 const REFERRALS = [
     {
@@ -61,6 +77,13 @@ const REFERRALS = [
 export default function Referrals() {
     const [searchValue, setSearchValue] = useState("");
     const [statusFilter, setStatusFilter] = useState("all");
+    const [selectedReferral, setSelectedReferral] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    function openReferral(r) {
+        setSelectedReferral(r);
+        setIsModalOpen(true);
+    }
 
     const filtered = useMemo(() => {
         return REFERRALS.filter((r) => {
@@ -85,6 +108,11 @@ export default function Referrals() {
                     searchPlaceholder="Search Referrals Here..."
                     searchValue={searchValue}
                     onSearchChange={(e) => setSearchValue(e.target.value)}
+                    profileAvatar={adminAvatar}
+                    profileName="Jone Copper"
+                    profileRole="Administrator"
+                    navItems={ADMIN_NAV}
+                    activePage="referrals"
                 />
 
                 <div className="dashboard-content-container">
@@ -98,28 +126,23 @@ export default function Referrals() {
 
                         <div className="page-section-wrapper">
                             <div className="roster-panel-card">
-                                <div className="roster-panel-header">
-                                    <div className="roster-panel-heading">
-                                        <h3>All Referrals</h3>
-                                        <p className="roster-count-text">{filtered.length} record{filtered.length !== 1 ? "s" : ""}</p>
-                                    </div>
-                                    <div className="roster-panel-actions panel-card-header-actions">
-                                        <div className="roster-filter-wrapper">
-                                            <i className="bi bi-toggle2-on"></i>
-                                            <select
-                                                className="roster-filter-select"
-                                                value={statusFilter}
-                                                onChange={(e) => setStatusFilter(e.target.value)}
-                                            >
-                                                <option value="all">All Status</option>
-                                                <option value="Active">Active</option>
-                                                <option value="Inactive">Inactive</option>
-                                                <option value="Pending">Pending</option>
-                                            </select>
-                                            <i className="bi bi-chevron-down roster-filter-chevron"></i>
-                                        </div>
-                                    </div>
-                                </div>
+                                <RosterFilter
+                                    heading="All Referrals"
+                                    countText={`${filtered.length} record${filtered.length !== 1 ? "s" : ""}`}
+                                    filters={[
+                                        {
+                                            icon: "bi-toggle2-on",
+                                            value: statusFilter,
+                                            onChange: (e) => setStatusFilter(e.target.value),
+                                            options: [
+                                                { value: "all", label: "All Status" },
+                                                { value: "Active", label: "Active" },
+                                                { value: "Inactive", label: "Inactive" },
+                                                { value: "Pending", label: "Pending" },
+                                            ],
+                                        },
+                                    ]}
+                                />
 
                                 <div className="roster-table-wrapper">
                                     <table className="marks-table" id="referralsTable">
@@ -158,13 +181,19 @@ export default function Referrals() {
                                                     <td>{r.dateRegistered}</td>
                                                     <td><StatusBadge status={r.status} /></td>
                                                     <td>
-                                                        <button className="table-view-btn" type="button">View</button>
+                                                        <button
+                                                            className="table-view-btn"
+                                                            type="button"
+                                                            onClick={() => openReferral(r)}
+                                                        >
+                                                            View
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             ))}
                                             {filtered.length === 0 && (
                                                 <tr>
-                                                    <td colSpan={6} style={{ textAlign: "center", padding: "24px", color: "var(--text-muted, #888)" }}>
+                                                    <td colSpan={6} className="table-empty-message">
                                                         No referrals found.
                                                     </td>
                                                 </tr>
@@ -179,6 +208,13 @@ export default function Referrals() {
                     </div>
                 </div>
             </main>
+
+            {/* Referral Detail Modal */}
+            <ReferralModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                referral={selectedReferral}
+            />
         </div>
     );
 }

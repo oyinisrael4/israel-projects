@@ -6,8 +6,9 @@ import PageFooter from "../components/PageFooter";
 import PersonCard from "../components/PersonCard";
 import SlideDrawer from "../components/SlideDrawer";
 import ProfileModal from "../components/ProfileModal";
+
 import RosterFilter from "../components/RosterFilter";
-import FormField from "../components/FormField";
+import { FormInput, FormSelect } from "../components/FormField";
 import adminAvatar from "../assets/icon-images/admin-avatar.png";
 import admin3 from "../assets/icon-images/admin-3.png";
 import admin4 from "../assets/icon-images/admin-4.png";
@@ -25,6 +26,19 @@ const INITIAL_ADMINS = [
 
 const BAR_COLORS = ["var(--primary-color)", "var(--secondary-color)", "var(--footer-color)"];
 
+const ADMIN_NAV = [
+    { id: "dashboard", to: "/dashboard", icon: "bi-grid-1x2-fill", label: "Dashboard" },
+    { id: "admin", to: "/admin", icon: "bi-person-badge-fill", label: "Admin" },
+    { id: "counselor", to: "/counselor", icon: "bi-chat-heart-fill", label: "Counselor" },
+    { id: "staff", to: "/staff", icon: "bi-easel2-fill", label: "Staff" },
+    { id: "students", to: "/students", icon: "bi-people-fill", label: "Students" },
+    { id: "parents", to: "/parents", icon: "bi-house-heart-fill", label: "Parents" },
+    { id: "programme", to: "/programme", icon: "bi-list-ul", label: "Programme" },
+    { id: "referrals", to: "/referrals", icon: "bi-arrow-repeat", label: "Referrals" },
+    { id: "payments", to: "/payments", icon: "bi-cash-coin", label: "Payments" },
+    { id: "logout", to: "/login", icon: "bi-power", label: "Log-Out" },
+];
+
 export default function Admin() {
     const [admins, setAdmins] = useState(INITIAL_ADMINS);
     const [searchValue, setSearchValue] = useState("");
@@ -33,7 +47,6 @@ export default function Admin() {
 
     // Drawer states
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-    const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
 
     // Profile modal state
     const [profileData, setProfileData] = useState(null);
@@ -42,6 +55,14 @@ export default function Admin() {
     // Form state
     const [form, setForm] = useState({ title: "", firstName: "", lastName: "", email: "", phone: "", address: "", role: "", status: "Active" });
     const [editForm, setEditForm] = useState({});
+
+    const ADMIN_EDIT_FIELDS = [
+        { key: "name", label: "Full Name", type: "text" },
+        { key: "email", label: "Email Address", type: "email" },
+        { key: "phone", label: "Phone Number", type: "tel" },
+        { key: "role", label: "Select Role", type: "select", options: ["Super Admin", "President", "Registrar", "Technologist"] },
+        { key: "status", label: "Select Status", type: "select", options: ["Active", "Inactive"] },
+    ];
 
     // Derive unique roles for filter
     const allRoles = useMemo(() => {
@@ -62,6 +83,13 @@ export default function Admin() {
 
     function openProfile(admin) {
         setProfileData(admin);
+        setEditForm({
+            name: admin.name,
+            email: admin.email,
+            phone: admin.phone,
+            role: admin.role,
+            status: admin.status,
+        });
         setIsProfileOpen(true);
     }
 
@@ -89,39 +117,24 @@ export default function Admin() {
         setIsDrawerOpen(false);
     }
 
-    function openEditDrawer() {
-        if (!profileData) return;
-        setEditForm({
-            name: profileData.name,
-            email: profileData.email,
-            phone: profileData.phone,
-            role: profileData.role,
-            status: profileData.status,
-        });
-        setIsProfileOpen(false);
-        setIsEditDrawerOpen(true);
-    }
-
-    function handleEdit(e) {
-        e.preventDefault();
+    function handleSaveEdit(updatedForm) {
         setAdmins((prev) =>
             prev.map((a) =>
                 a.id === profileData.id
                     ? {
                         ...a,
-                        name: editForm.name,
-                        email: editForm.email,
-                        phone: editForm.phone,
-                        role: editForm.role,
-                        status: editForm.status,
-                        tag: editForm.role.toUpperCase(),
-                        search: `${editForm.name} ${editForm.role}`.toLowerCase(),
+                        name: updatedForm.name,
+                        email: updatedForm.email,
+                        phone: updatedForm.phone,
+                        role: updatedForm.role,
+                        status: updatedForm.status,
+                        tag: updatedForm.role.toUpperCase(),
+                        search: `${updatedForm.name} ${updatedForm.role}`.toLowerCase(),
                     }
                     : a
             )
         );
-        setProfileData((prev) => ({ ...prev, name: editForm.name, email: editForm.email, phone: editForm.phone, role: editForm.role, status: editForm.status }));
-        setIsEditDrawerOpen(false);
+        setProfileData((prev) => ({ ...prev, name: updatedForm.name, email: updatedForm.email, phone: updatedForm.phone, role: updatedForm.role, status: updatedForm.status }));
     }
 
     const countText = `${filteredAdmins.length} administrator${filteredAdmins.length !== 1 ? "s" : ""}`;
@@ -135,6 +148,11 @@ export default function Admin() {
                     searchPlaceholder="Search Admin Here..."
                     searchValue={searchValue}
                     onSearchChange={(e) => setSearchValue(e.target.value)}
+                    profileAvatar={adminAvatar}
+                    profileName="Jone Copper"
+                    profileRole="Administrator"
+                    navItems={ADMIN_NAV}
+                    activePage="admin"
                 />
 
                 <div className="dashboard-content-container">
@@ -210,44 +228,74 @@ export default function Admin() {
                             <i className="bi bi-person-vcard"></i>
                             <span>Admin Basic Info</span>
                         </div>
-                        <FormField label="Title" htmlFor="adminTitle">
-                            <select id="adminTitle" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })}>
-                                <option value="">Select here</option>
-                                <option>Mr</option><option>Mrs</option><option>Miss</option><option>Dr</option><option>Prof</option>
-                            </select>
-                        </FormField>
-                        <FormField label="First Name" htmlFor="adminFirstName" required>
-                            <input type="text" id="adminFirstName" required value={form.firstName} onChange={(e) => setForm({ ...form, firstName: e.target.value })} />
-                        </FormField>
-                        <FormField label="Last Name" htmlFor="adminLastName" required>
-                            <input type="text" id="adminLastName" required value={form.lastName} onChange={(e) => setForm({ ...form, lastName: e.target.value })} />
-                        </FormField>
-                        <FormField label="Email Address" htmlFor="adminEmail" required>
-                            <input type="email" id="adminEmail" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-                        </FormField>
-                        <FormField label="Phone Number" htmlFor="adminPhone" required>
-                            <input type="tel" id="adminPhone" required value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
-                        </FormField>
-                        <FormField label="Home Address" htmlFor="adminAddress" required>
-                            <input type="text" id="adminAddress" required value={form.address} onChange={(e) => setForm({ ...form, address: e.target.value })} />
-                        </FormField>
+                        <FormSelect
+                            label="Title"
+                            id="adminTitle"
+                            value={form.title}
+                            onChange={(e) => setForm({ ...form, title: e.target.value })}
+                            placeholder="Select here"
+                            options={["Mr", "Mrs", "Miss", "Dr", "Prof"]}
+                        />
+                        <FormInput
+                            label="First Name"
+                            id="adminFirstName"
+                            required
+                            value={form.firstName}
+                            onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+                        />
+                        <FormInput
+                            label="Last Name"
+                            id="adminLastName"
+                            required
+                            value={form.lastName}
+                            onChange={(e) => setForm({ ...form, lastName: e.target.value })}
+                        />
+                        <FormInput
+                            label="Email Address"
+                            id="adminEmail"
+                            type="email"
+                            required
+                            value={form.email}
+                            onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        />
+                        <FormInput
+                            label="Phone Number"
+                            id="adminPhone"
+                            type="tel"
+                            required
+                            value={form.phone}
+                            onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        />
+                        <FormInput
+                            label="Home Address"
+                            id="adminAddress"
+                            required
+                            value={form.address}
+                            onChange={(e) => setForm({ ...form, address: e.target.value })}
+                        />
                     </div>
                     <div className="form-section">
                         <div className="form-section-title">
                             <i className="bi bi-shield-lock-fill"></i>
                             <span>Administrative Info</span>
                         </div>
-                        <FormField label="Select Role" htmlFor="adminRole" required>
-                            <select id="adminRole" required value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })}>
-                                <option value="" disabled>Select here</option>
-                                <option>Super Admin</option><option>President</option><option>Registrar</option><option>Technologist</option>
-                            </select>
-                        </FormField>
-                        <FormField label="Select Status" htmlFor="adminStatus" required>
-                            <select id="adminStatus" required value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })}>
-                                <option>Active</option><option>Inactive</option>
-                            </select>
-                        </FormField>
+                        <FormSelect
+                            label="Select Role"
+                            id="adminRole"
+                            required
+                            value={form.role}
+                            onChange={(e) => setForm({ ...form, role: e.target.value })}
+                            placeholder="Select here"
+                            options={["Super Admin", "President", "Registrar", "Technologist"]}
+                        />
+                        <FormSelect
+                            label="Select Status"
+                            id="adminStatus"
+                            required
+                            value={form.status}
+                            onChange={(e) => setForm({ ...form, status: e.target.value })}
+                            options={["Active", "Inactive"]}
+                        />
                     </div>
                     <button type="submit" className="form-page-submit-btn">
                         <i className="bi bi-check-lg"></i>
@@ -256,55 +304,7 @@ export default function Admin() {
                 </form>
             </SlideDrawer>
 
-            {/* Edit Admin Info — Slide-Over Drawer */}
-            <SlideDrawer
-                isOpen={isEditDrawerOpen}
-                onClose={() => setIsEditDrawerOpen(false)}
-                title="Edit Admin Info"
-                icon="bi-pencil-square"
-                intro="Update the administrator's information below."
-            >
-                <form className="form-page-form" onSubmit={handleEdit}>
-                    <div className="form-section">
-                        <div className="form-section-title">
-                            <i className="bi bi-person-vcard"></i>
-                            <span>Admin Basic Info</span>
-                        </div>
-                        <FormField label="Full Name" htmlFor="editAdminName" required>
-                            <input type="text" id="editAdminName" required value={editForm.name || ""} onChange={(e) => setEditForm({ ...editForm, name: e.target.value })} />
-                        </FormField>
-                        <FormField label="Email Address" htmlFor="editAdminEmail" required>
-                            <input type="email" id="editAdminEmail" required value={editForm.email || ""} onChange={(e) => setEditForm({ ...editForm, email: e.target.value })} />
-                        </FormField>
-                        <FormField label="Phone Number" htmlFor="editAdminPhone" required>
-                            <input type="tel" id="editAdminPhone" required value={editForm.phone || ""} onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })} />
-                        </FormField>
-                    </div>
-                    <div className="form-section">
-                        <div className="form-section-title">
-                            <i className="bi bi-shield-lock-fill"></i>
-                            <span>Administrative Info</span>
-                        </div>
-                        <FormField label="Select Role" htmlFor="editAdminRole" required>
-                            <select id="editAdminRole" required value={editForm.role || ""} onChange={(e) => setEditForm({ ...editForm, role: e.target.value })}>
-                                <option value="" disabled>Select here</option>
-                                <option>Super Admin</option><option>President</option><option>Registrar</option><option>Technologist</option>
-                            </select>
-                        </FormField>
-                        <FormField label="Select Status" htmlFor="editAdminStatus" required>
-                            <select id="editAdminStatus" required value={editForm.status || "Active"} onChange={(e) => setEditForm({ ...editForm, status: e.target.value })}>
-                                <option>Active</option><option>Inactive</option>
-                            </select>
-                        </FormField>
-                    </div>
-                    <button type="submit" className="form-page-submit-btn">
-                        <i className="bi bi-check-lg"></i>
-                        <span>Save Changes</span>
-                    </button>
-                </form>
-            </SlideDrawer>
-
-            {/* Administrative Profile — View Modal */}
+            {/* Administrative Profile — View/Edit Modal */}
             <ProfileModal
                 isOpen={isProfileOpen}
                 onClose={() => setIsProfileOpen(false)}
@@ -320,7 +320,11 @@ export default function Admin() {
                     status: profileData.status,
                     lastLogin: profileData.lastLogin || "—",
                 } : null}
-                onEdit={openEditDrawer}
+                onEdit={() => {}}
+                editForm={editForm}
+                setEditForm={setEditForm}
+                onSaveEdit={handleSaveEdit}
+                editFields={ADMIN_EDIT_FIELDS}
             />
         </div>
     );

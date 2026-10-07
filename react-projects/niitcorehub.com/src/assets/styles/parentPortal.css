@@ -1,0 +1,927 @@
+/* =========================================================
+   PARENT / GUARDIAN PORTAL STYLES
+   ========================================================= */
+
+/* Top Portal Navigation Bar (Matches Reference Image) */
+.parent-portal-top-bar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.parent-portal-brand-tag {
+    font-family: title-font, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--black-color, #1a1a1a);
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.parent-portal-tabs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #eef2f6;
+    padding: 5px;
+    border-radius: 30px;
+}
+
+.parent-portal-tab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 25px;
+    border: none;
+    background: transparent;
+    font-family: sub-title-font, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.parent-portal-tab-btn:hover {
+    color: var(--primary-color, #003495);
+}
+
+.parent-portal-tab-btn.active {
+    background: #ffffff;
+    color: var(--primary-color, #003495);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.parent-portal-tab-btn i {
+    font-size: 14px;
+}
+
+/* Breadcrumb Subline */
+.parent-sub-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: sub-title-font, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--black-color, #1a1a1a);
+    margin-bottom: 18px;
+}
+
+.parent-sub-heading i {
+    color: var(--primary-color, #003495);
+    font-size: 16px;
+}
+
+/* Parent Top Profile Card (Summary Bar from Reference Image) */
+.parent-summary-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 20px 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    border: 1px solid #eef2f8;
+    margin-bottom: 24px;
+}
+
+.parent-summary-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.parent-summary-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.parent-avatar-circle {
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #f1f5f9;
+    border: 3px solid rgba(0, 52, 149, 0.15);
+}
+
+.parent-avatar-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.parent-summary-meta h3 {
+    font-family: title-font, sans-serif;
+    font-size: 17px;
+    color: var(--black-color, #1a1a1a);
+    margin: 0 0 4px 0;
+}
+
+.parent-summary-meta p {
+    font-family: body-font, sans-serif;
+    font-size: 13px;
+    color: #64748b;
+    margin: 0 0 3px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.parent-summary-meta p i {
+    color: var(--primary-color, #003495);
+    font-size: 13px;
+}
+
+.parent-summary-meta .login-date {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 2px;
+}
+
+/* My Profile Full Screen (Matches 4th Reference Image) */
+.parent-profile-panel {
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    border: 1px solid #eef2f8;
+    padding: 30px;
+}
+
+.parent-profile-panel-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: title-font, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--primary-color, #003495);
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #edf2f7;
+}
+
+.parent-profile-grid {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+@media (max-width: 860px) {
+    .parent-profile-grid {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+}
+
+.parent-profile-avatar-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.parent-profile-large-avatar {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    overflow: hidden;
+    border: 5px solid #e2e8f0;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.parent-profile-large-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.parent-profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.parent-profile-form .form-field label {
+    font-family: sub-title-font, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #475569;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.parent-profile-form .form-field input,
+.parent-profile-form .form-field select {
+    width: 100%;
+    height: 46px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 0 16px;
+    font-family: body-font, sans-serif;
+    font-size: 14px;
+    background: #ffffff;
+    color: #1e293b;
+    outline: none;
+    transition: all 0.2s;
+    box-sizing: border-box;
+}
+
+.parent-profile-form .form-field input:focus,
+.parent-profile-form .form-field select:focus {
+    border-color: var(--primary-color, #003495);
+    box-shadow: 0 0 0 3px rgba(0, 52, 149, 0.1);
+}
+
+.parent-profile-submit-btn {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #6a1b9a;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: sub-title-font, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(106, 27, 154, 0.3);
+    transition: all 0.2s ease;
+    margin-top: 6px;
+}
+
+.parent-profile-submit-btn:hover {
+    background: #4a148c;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(106, 27, 154, 0.4);
+}
+
+/* Make Payment Action Button */
+.make-pay-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: linear-gradient(90deg, #09a5db 0%, #00c3f7 100%);
+    color: #ffffff !important;
+    border: none;
+    border-radius: 6px;
+    font-family: sub-title-font, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 195, 247, 0.28);
+    transition: all 0.2s ease;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.make-pay-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0, 195, 247, 0.42);
+    color: #ffffff !important;
+}
+
+.make-pay-btn i {
+    font-size: 13px;
+}
+
+/* =========================================================
+   POPUP PAYMENT MODAL (Exact PaymentLink 2-Column Structure)
+   ========================================================= */
+
+.pay-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(6px);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.pay-modal-overlay.active {
+    display: flex;
+}
+
+.pay-modal-dialog {
+    width: 100%;
+    max-width: 960px;
+    background: #f4f6fa;
+    border-radius: 18px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    position: relative;
+    animation: payModalFadeIn 0.28s ease-out;
+    margin: auto;
+}
+
+@keyframes payModalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.pay-modal-header {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e9f2;
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pay-modal-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pay-modal-header-left img {
+    height: 32px;
+    object-fit: contain;
+}
+
+.pay-modal-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-family: sub-title-font, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.pay-modal-close-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.pay-modal-close-btn:hover {
+    background: #fee2e2;
+    color: #ef4444;
+    border-color: #fca5a5;
+}
+
+.pay-modal-body {
+    padding: 28px;
+}
+
+/* Fee Selection Item in Modal Breakdown */
+.pay-fee-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.pay-fee-item:hover {
+    border-color: var(--primary-color, #003495);
+    background: #f8faff;
+}
+
+.pay-fee-item.selected {
+    border-color: var(--primary-color, #003495);
+    background: rgba(0, 52, 149, 0.04);
+}
+
+.pay-fee-item-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: body-font, sans-serif;
+    font-size: 13px;
+    color: #334155;
+}
+
+.pay-fee-item-left input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    accent-color: var(--primary-color, #003495);
+    cursor: pointer;
+}
+
+.pay-fee-item-amount {
+    font-family: sub-title-font, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.pay-fee-item.selected .pay-fee-item-amount {
+    color: var(--primary-color, #003495);
+}
+
+/* Receipt & Modal Utilities without Inline CSS */
+.pay-return-btn {
+    font-family: sub-title-font, sans-serif;
+    font-size: 13px;
+    color: var(--primary-color, #003495);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 auto;
+}
+
+.pay-return-btn:hover {
+    text-decoration: underline;
+}
+
+.pay-print-btn {
+    background: var(--primary-color, #003495);
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 13px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: sub-title-font, sans-serif;
+    transition: background 0.2s;
+}
+
+.pay-print-btn:hover {
+    background: #002266;
+}
+
+.pay-done-btn {
+    background: #2e7d32;
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 13px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: sub-title-font, sans-serif;
+    transition: background 0.2s;
+}
+
+.pay-done-btn:hover {
+    background: #1b5e20;
+}
+
+.pay-modal-btn-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.pay-modal-return-wrap {
+    text-align: center;
+    margin-top: 24px;
+}
+
+.parent-summary-phone-wrap {
+    text-align: right;
+}
+
+.parent-summary-phone-label {
+    font-family: body-font, sans-serif;
+    font-size: 12px;
+    color: #64748b;
+    margin: 0 0 4px 0;
+}
+
+.parent-summary-phone-value {
+    font-family: title-font, sans-serif;
+    font-size: 15px;
+    color: #1e293b;
+    margin: 0;
+}
+
+.table-empty-row td {
+    text-align: center;
+    padding: 24px;
+    color: #888888;
+    font-family: body-font, sans-serif;
+}
+
+/* =========================================================
+   HAMBURGER BUTTON (shown only on mobile)
+   ========================================================= */
+
+.parent-hamburger-btn {
+    display: none; /* hidden on desktop */
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    background: var(--primary-color, #003495);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 22px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    z-index: 20;
+}
+
+.parent-hamburger-btn:hover {
+    background: #002266;
+}
+
+/* Mobile topbar row — wraps hamburger + TopBar */
+.mobile-topbar-row {
+    display: contents; /* transparent on desktop – TopBar renders normally */
+}
+
+/* =========================================================
+   MOBILE SIDEBAR DRAWER + BACKDROP
+   ========================================================= */
+
+/* Dark backdrop that appears behind the open drawer */
+.parent-sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(2px);
+    z-index: 200;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.parent-sidebar-backdrop.parent-sidebar-backdrop-visible {
+    display: block;
+    opacity: 1;
+}
+
+/* Close button inside drawer & backdrop — hidden on desktop */
+.parent-sidebar-close-btn {
+    display: none;
+}
+
+.parent-sidebar-backdrop {
+    display: none;
+}
+
+.parent-sidebar-header-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+/* =========================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    /* ---- Mobile Backdrop Overlay ---- */
+    .parent-sidebar-backdrop {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.45);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        z-index: 998;
+        animation: parentBackdropFadeIn 0.22s ease-out;
+    }
+
+    @keyframes parentBackdropFadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* ---- Mobile Off-Canvas Drawer ---- */
+    .app-layout-container .sidebar-wrapper.parent-sidebar-wrapper {
+        display: flex !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 280px;
+        max-width: 82vw;
+        height: 100vh;
+        z-index: 999;
+        background: #ffffff;
+        box-shadow: 12px 0 40px rgba(0, 0, 0, 0.18);
+        transform: translateX(-105%);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        overflow-y: auto;
+        flex-direction: column;
+        padding: 20px 0;
+    }
+
+    .app-layout-container .sidebar-wrapper.parent-sidebar-wrapper.parent-sidebar-open {
+        transform: translateX(0);
+    }
+
+    .parent-sidebar-header-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px 12px;
+        border-bottom: 1px solid #f1f5f9;
+        margin-bottom: 12px;
+    }
+
+    .parent-sidebar-header-row .sidebar-logo-wrapper {
+        padding: 0;
+        margin: 0;
+        border: none;
+    }
+
+    .parent-sidebar-close-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid #e2e8f0;
+        background: #f8fafc;
+        color: #64748b;
+        font-size: 15px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+    }
+
+    .parent-sidebar-close-btn:hover,
+    .parent-sidebar-close-btn:active {
+        background: #fee2e2;
+        color: #ef4444;
+        border-color: #fca5a5;
+        transform: scale(1.05);
+    }
+
+    /* ---- Layout ---- */
+    .app-layout-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+    }
+
+    /* ---- Main content: full width ---- */
+    .app-layout-container .main-content-wrapper {
+        width: 100%;
+        height: auto;
+        overflow-y: visible;
+    }
+
+    /* ---- Content container padding ---- */
+    .app-layout-container .main-content-wrapper .dashboard-content-container {
+        padding: 16px;
+    }
+
+    /* ---- Parent portal top bar: stack brand + tabs ---- */
+    .parent-portal-top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    .parent-portal-brand-tag {
+        font-size: 15px;
+    }
+
+    .parent-portal-tabs {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .parent-portal-tab-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    /* ---- Summary card: stack avatar + phone ---- */
+    .parent-summary-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .parent-summary-phone-wrap {
+        text-align: left;
+    }
+
+    .parent-summary-card {
+        padding: 16px;
+    }
+
+    .parent-avatar-circle {
+        width: 52px;
+        height: 52px;
+    }
+
+    /* ---- Profile grid: single column ---- */
+    .parent-profile-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .parent-profile-large-avatar {
+        width: 120px;
+        height: 120px;
+    }
+
+    .parent-profile-panel {
+        padding: 20px 16px;
+    }
+
+    /* ---- Tables: hide, show mobile cards instead ---- */
+    .roster-table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Horizontally scroll tables on mobile (fallback) */
+    .marks-table {
+        min-width: 560px;
+    }
+
+    /* ---- Payment table special: hide heavy columns ---- */
+    #parentPaymentTable th:nth-child(3),
+    #parentPaymentTable td:nth-child(3),
+    #parentPaymentTable th:nth-child(5),
+    #parentPaymentTable td:nth-child(5) {
+        display: none;
+    }
+
+    /* ---- Student tables: hide SN + Programme on very small ---- */
+    #parentStudentTable th:nth-child(1),
+    #parentStudentTable td:nth-child(1),
+    #parentStudentListTable th:nth-child(1),
+    #parentStudentListTable td:nth-child(1) {
+        display: none;
+    }
+
+    /* ---- Make payment button: icon only on smallest ---- */
+    .make-pay-btn span {
+        display: none;
+    }
+
+    .make-pay-btn {
+        padding: 8px 10px;
+        border-radius: 8px;
+    }
+
+    /* ---- Payment modal: single column, full height ---- */
+    .pay-modal-overlay {
+        padding: 0;
+        align-items: flex-end;
+    }
+
+    .pay-modal-dialog {
+        border-radius: 20px 20px 0 0;
+        max-height: 92vh;
+        overflow-y: auto;
+    }
+
+    .pay-modal-body {
+        padding: 16px;
+    }
+
+    .pay-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .pay-card {
+        padding: 20px 16px;
+    }
+
+    /* ---- Receipt modal: full-screen on mobile ---- */
+    .inpage-modal {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 20px 20px 0 0;
+        margin: 0;
+    }
+
+    .inpage-modal-overlay {
+        align-items: flex-end;
+        padding: 0;
+    }
+
+    /* ---- Paystack modal: full width ---- */
+    .paystack-card {
+        max-width: 100%;
+        border-radius: 20px 20px 0 0;
+    }
+
+    .paystack-modal-overlay {
+        align-items: flex-end;
+        padding: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    /* ---- Extra small: further reduce paddings ---- */
+    .app-layout-container .main-content-wrapper .dashboard-content-container {
+        padding: 12px;
+    }
+
+    .parent-portal-tab-btn span {
+        font-size: 11px;
+    }
+
+    .parent-summary-meta h3 {
+        font-size: 14px;
+    }
+
+    .pay-total-card h2 {
+        font-size: 20px;
+    }
+
+    .parent-portal-brand-tag {
+        font-size: 13px;
+    }
+
+    /* Stack receipt actions vertically */
+    .receipt-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .receipt-print-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Make payment button: keep icon only */
+    .make-pay-btn span {
+        display: none;
+    }
+
+    /* Hide student SN + programme columns */
+    #parentStudentTable th:nth-child(3),
+    #parentStudentTable td:nth-child(3),
+    #parentStudentListTable th:nth-child(3),
+    #parentStudentListTable td:nth-child(3) {
+        display: none;
+    }
+
+    /* Pay modal header compact */
+    .pay-modal-header {
+        padding: 12px 16px;
+    }
+
+    .pay-modal-header-left img {
+        height: 26px;
+    }
+
+    .pay-modal-badge span {
+        display: none;
+    }
+}

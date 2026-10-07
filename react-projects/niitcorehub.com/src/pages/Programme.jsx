@@ -4,6 +4,20 @@ import TopBar from "../components/TopBar";
 import PageHeading from "../components/PageHeading";
 import PageFooter from "../components/PageFooter";
 import { init } from "../JS/programme";
+import adminAvatar from "../assets/icon-images/admin-avatar.png";
+
+const ADMIN_NAV = [
+    { id: "dashboard", to: "/dashboard", icon: "bi-grid-1x2-fill", label: "Dashboard" },
+    { id: "admin", to: "/admin", icon: "bi-person-badge-fill", label: "Admin" },
+    { id: "counselor", to: "/counselor", icon: "bi-chat-heart-fill", label: "Counselor" },
+    { id: "staff", to: "/staff", icon: "bi-easel2-fill", label: "Staff" },
+    { id: "students", to: "/students", icon: "bi-people-fill", label: "Students" },
+    { id: "parents", to: "/parents", icon: "bi-house-heart-fill", label: "Parents" },
+    { id: "programme", to: "/programme", icon: "bi-list-ul", label: "Programme" },
+    { id: "referrals", to: "/referrals", icon: "bi-arrow-repeat", label: "Referrals" },
+    { id: "payments", to: "/payments", icon: "bi-cash-coin", label: "Payments" },
+    { id: "logout", to: "/login", icon: "bi-power", label: "Log-Out" },
+];
 
 export default function Programme() {
     useEffect(() => {
@@ -15,7 +29,14 @@ export default function Programme() {
             <Sidebar activePage="programme" />
 
             <main className="main-content-wrapper">
-                <TopBar searchPlaceholder="Search Programmes Here..." />
+                <TopBar
+                    searchPlaceholder="Search Programmes Here..."
+                    profileAvatar={adminAvatar}
+                    profileName="Jone Copper"
+                    profileRole="Administrator"
+                    navItems={ADMIN_NAV}
+                    activePage="programme"
+                />
 
                 <div className="dashboard-content-container">
                     <div className="dashboard-content-wrapper">
@@ -56,7 +77,7 @@ export default function Programme() {
 
             {/* Programme Details Modal */}
             <div className="inpage-modal-overlay" id="programmeDetailModal">
-                <div className="inpage-modal" style={{ maxWidth: "800px", width: "92vw" }}>
+                <div className="inpage-modal programme-modal-dialog">
                     <div className="inpage-modal-header">
                         <div className="inpage-modal-header-title">
                             <div className="inpage-modal-header-icon">
@@ -70,7 +91,7 @@ export default function Programme() {
                     </div>
 
                     <div className="inpage-modal-body">
-                        <div className="programme-detail-header-card" style={{ flexShrink: 0, minHeight: "140px", height: "140px" }}>
+                        <div className="programme-detail-header-card programme-modal-header-card">
                             <img id="detailCoverImage" src="/all-images/body-images/hardware-networking-course.jpg" alt="Cover" />
                             <div className="programme-detail-header-content">
                                 <div>
@@ -112,15 +133,15 @@ export default function Programme() {
 
                         <div>
                             <h4 className="programme-curriculum-title">
-                                <i className="bi bi-info-circle-fill" style={{ color: "var(--primary-color)" }}></i>
+                                <i className="bi bi-info-circle-fill programme-modal-info-icon"></i>
                                 &nbsp;About Programme
                             </h4>
-                            <p className="inpage-modal-intro" id="detailDescription" style={{ marginTop: "6px" }}></p>
+                            <p className="inpage-modal-intro programme-modal-desc" id="detailDescription"></p>
                         </div>
 
                         <div className="programme-enrolled-section">
                             <h4 className="programme-section-title">
-                                <i className="bi bi-people-fill" style={{ color: "var(--primary-color)" }}></i>
+                                <i className="bi bi-people-fill programme-modal-people-icon"></i>
                                 &nbsp;Enrolled Students (<span id="detailEnrolledCount">0</span>)
                             </h4>
                             <div className="programme-students-list" id="detailEnrolledStudentsList">
@@ -217,7 +238,7 @@ export default function Programme() {
                                 </div>
                             </div>
 
-                            <div className="inpage-modal-footer" style={{ marginTop: "18px" }}>
+                            <div className="inpage-modal-footer programme-modal-footer-gap">
                                 <button type="button" className="programme-delete-btn" id="editModalDeleteBtn" title="Delete this programme">
                                     <i className="bi bi-trash3-fill"></i>
                                     <span>Delete Programme</span>
@@ -311,7 +332,7 @@ export default function Programme() {
                                 </div>
                             </div>
 
-                            <div className="inpage-modal-footer" style={{ marginTop: "18px" }}>
+                            <div className="inpage-modal-footer programme-modal-footer-gap">
                                 <button type="button" className="inpage-cancel-btn" id="addModalCancelBtn">Cancel</button>
                                 <button type="submit" className="inpage-submit-btn">
                                     <i className="bi bi-check-lg"></i>
