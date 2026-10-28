@@ -1,31 +1,44 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 /**
  * TopBar — Shared top navigation bar used on every dashboard page.
- *
- * Props:
- *   searchPlaceholder  {string}     Placeholder text for search
- *   searchValue        {string}     Controlled search value
- *   onSearchChange     {function}   onChange handler
- *   profileAvatar      {string}     Profile image src
- *   profileName        {string}     Logged-in user's name
- *   profileRole        {string}     Role label (e.g. "Parent / Guardian")
- *   navItems           {Array}      Sidebar nav items to show in the profile dropdown
- *                                   Each item: { id, to, icon, label }
- *   activePage         {string}     Currently active nav item id
  */
 export default function TopBar({
     searchPlaceholder = "Search",
     searchValue = "",
     onSearchChange,
     profileAvatar,
-    profileName = "Admin",
-    profileRole = "Administrator",
+    profileName = "Isreal Oyinlola",
+    profileRole = "Super Admin",
     navItems = [],
     activePage = "",
     onMenuClick,
 }) {
+    const { user, logout } = useAuth();
+    const isCounselor =
+        (user?.roleName || "").toLowerCase().includes("counselor") ||
+        (user?.role || "").toLowerCase().includes("counselor");
+
+    const formattedFirstName = user?.firstName
+        ? user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1).toLowerCase()
+        : "";
+    const formattedLastName = user?.lastName
+        ? user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1).toLowerCase()
+        : "";
+
+    const userFullName = formattedFirstName
+        ? `${formattedFirstName} ${formattedLastName}`.trim()
+        : null;
+
+    const displayName = userFullName || (profileName && profileName !== "Admin" && profileName !== "Jone Copper" ? profileName : "Isreal Oyinlola");
+    const displayRole = user?.roleName || (profileRole && profileRole !== "Administrator" ? profileRole : "Super Admin");
+
+    const filteredNavItems = isCounselor
+        ? navItems.filter((i) => !["admin", "staff", "payments", "report"].includes(i.id))
+        : navItems;
+
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
 
@@ -108,28 +121,33 @@ export default function TopBar({
                             <div className="topbar-dropdown-header">
                                 <div className="topbar-dropdown-avatar-wrap">
                                     {profileAvatar ? (
-                                        <img src={profileAvatar} alt={profileName} />
+                                        <img src={profileAvatar} alt={displayName} />
                                     ) : (
                                         <i className="bi bi-person-circle"></i>
                                     )}
                                 </div>
                                 <div className="topbar-dropdown-user-info">
-                                    <p className="topbar-dropdown-name">{profileName}</p>
-                                    <p className="topbar-dropdown-role">{profileRole}</p>
+                                    <p className="topbar-dropdown-name">{displayName}</p>
+                                    <p className="topbar-dropdown-role">{displayRole}</p>
                                 </div>
                             </div>
 
                             <div className="topbar-dropdown-divider" />
 
                             {/* Nav items */}
-                            {navItems.length > 0 && (
+                            {filteredNavItems.length > 0 && (
                                 <nav className="topbar-dropdown-nav">
-                                    {navItems.map((item) => (
+                                    {filteredNavItems.map((item) => (
                                         <Link
                                             key={item.id}
                                             to={item.to}
                                             className={`topbar-dropdown-nav-item${activePage === item.id ? " topbar-dropdown-nav-item-active" : ""}`}
-                                            onClick={() => setIsDropdownOpen(false)}
+                                            onClick={() => {
+                                                setIsDropdownOpen(false);
+                                                if (item.id === "logout") {
+                                                    logout();
+                                                }
+                                            }}
                                             role="menuitem"
                                         >
                                             <i className={`bi ${item.icon}`}></i>

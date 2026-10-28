@@ -83,8 +83,8 @@ export default function Dashboard() {
                     searchValue={searchValue}
                     onSearchChange={(e) => setSearchValue(e.target.value)}
                     profileAvatar={adminAvatar}
-                    profileName="Jone Copper"
-                    profileRole="Administrator"
+                    profileName="Isreal Oyinlola"
+                    profileRole="Super Admin"
                     navItems={ADMIN_NAV}
                     activePage="dashboard"
                 />

@@ -53,7 +53,15 @@ const STUDENT_EDIT_FIELDS = [
 ];
 
 export default function Students() {
-    const [students, setStudents] = useState(INITIAL_STUDENTS);
+    const [students, setStudents] = useState(() => {
+        try {
+            const saved = localStorage.getItem("niit_students_data");
+            if (saved) return JSON.parse(saved);
+        } catch {
+            // Ignore
+        }
+        return INITIAL_STUDENTS;
+    });
     const [searchValue, setSearchValue] = useState("");
     const [programmeFilter, setProgrammeFilter] = useState("all");
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -91,8 +99,8 @@ export default function Students() {
     }
 
     function handleSaveEdit(updatedForm) {
-        setStudents((prev) =>
-            prev.map((s) =>
+        setStudents((prev) => {
+            const updated = prev.map((s) =>
                 s.sid === profileData.sid
                     ? {
                         ...s,
@@ -104,8 +112,14 @@ export default function Students() {
                         search: `${updatedForm.name} ${s.sid} ${updatedForm.prog} ${s.broughtBy || ""}`.toLowerCase(),
                     }
                     : s
-            )
-        );
+            );
+            try {
+                localStorage.setItem("niit_students_data", JSON.stringify(updated));
+            } catch {
+                // Ignore
+            }
+            return updated;
+        });
         setProfileData((prev) => ({
             ...prev,
             name: updatedForm.name,
@@ -140,7 +154,15 @@ export default function Students() {
             search: `${fullName} ${newSid} ${programme} ${broughtBy}`.toLowerCase(),
             lastLogin: "—",
         };
-        setStudents((prev) => [...prev, newStudent]);
+        setStudents((prev) => {
+            const updated = [...prev, newStudent];
+            try {
+                localStorage.setItem("niit_students_data", JSON.stringify(updated));
+            } catch {
+                // Ignore
+            }
+            return updated;
+        });
         setForm({ firstName: "", lastName: "", email: "", phone: "", address: "", programme: "", status: "Active", broughtBy: "" });
         setIsDrawerOpen(false);
     }
@@ -157,8 +179,8 @@ export default function Students() {
                     searchValue={searchValue}
                     onSearchChange={(e) => setSearchValue(e.target.value)}
                     profileAvatar={adminAvatar}
-                    profileName="Jone Copper"
-                    profileRole="Administrator"
+                    profileName="Isreal Oyinlola"
+                    profileRole="Super Admin"
                     navItems={ADMIN_NAV}
                     activePage="students"
                 />

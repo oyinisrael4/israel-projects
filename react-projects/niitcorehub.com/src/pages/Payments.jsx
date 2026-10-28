@@ -13,6 +13,7 @@ import student4 from "../assets/icon-images/student-4.png";
 import student5 from "../assets/icon-images/student-5.png";
 import niitLogo from "../assets/icon-images/niit-logo.png";
 import adminAvatar from "../assets/icon-images/admin-avatar.png";
+import { useAuth } from "../context/AuthContext";
 
 const ADMIN_NAV = [
     { id: "dashboard", to: "/dashboard", icon: "bi-grid-1x2-fill", label: "Dashboard" },
@@ -44,7 +45,20 @@ const INITIAL_PAYMENTS = [
 ];
 
 export default function Payments() {
-    const [payments, setPayments] = useState(INITIAL_PAYMENTS);
+    const { user } = useAuth();
+    const isCounselor =
+        (user?.roleName || "").toLowerCase().includes("counselor") ||
+        (user?.role || "").toLowerCase().includes("counselor");
+
+    const [payments, setPayments] = useState(() => {
+        try {
+            const saved = localStorage.getItem("niit_payments_data");
+            if (saved) return JSON.parse(saved);
+        } catch {
+            // Ignore
+        }
+        return INITIAL_PAYMENTS;
+    });
     const [searchValue, setSearchValue] = useState("");
     const [statusFilter, setStatusFilter] = useState("all");
 
@@ -108,7 +122,15 @@ export default function Payments() {
             search: `${fetchedStudent.name} ${fetchedStudent.id} ${fetchedStudent.programme} pending`.toLowerCase(),
         };
 
-        setPayments((prev) => [...prev, newPayment]);
+        setPayments((prev) => {
+            const updated = [...prev, newPayment];
+            try {
+                localStorage.setItem("niit_payments_data", JSON.stringify(updated));
+            } catch {
+                // Ignore
+            }
+            return updated;
+        });
         setIsAddModalOpen(false);
         setStudentIdInput("");
         setFetchedStudent(null);
@@ -146,8 +168,8 @@ export default function Payments() {
                     searchValue={searchValue}
                     onSearchChange={(e) => setSearchValue(e.target.value)}
                     profileAvatar={adminAvatar}
-                    profileName="Jone Copper"
-                    profileRole="Administrator"
+                    profileName="Isreal Oyinlola"
+                    profileRole="Super Admin"
                     navItems={ADMIN_NAV}
                     activePage="payments"
                 />

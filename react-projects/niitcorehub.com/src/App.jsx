@@ -12,6 +12,9 @@ import Payments from "./pages/Payments";
 import PaymentLink from "./pages/PaymentLink";
 import Programme from "./pages/Programme";
 import Referrals from "./pages/Referrals";
+import ParentLogin from "./pages/parent-portal/ParentLogin";
+import ParentForgotPassword from "./pages/parent-portal/ParentForgotPassword";
+import ParentResetPassword from "./pages/parent-portal/ParentResetPassword";
 import ParentDashboard from "./pages/parent-portal/ParentDashboard";
 import ParentStudent from "./pages/parent-portal/ParentStudent";
 import ParentPayment from "./pages/parent-portal/ParentPayment";
@@ -25,84 +28,102 @@ import './assets/styles/parentPortal.css';
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
 export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Login />
-  },
-  {
-    path: "/login",
-    element: <Login />
-  },
-  {
-    path: "/dashboard",
-    element: <Dashboard />
-  },
-  {
-    path: "/sign-up",
-    element: <SignUp />
-  },
-  {
-    path: "/forgot-password",
-    element: <ForgotPassword />
-  },
-  {
-    path: "/reset-password",
-    element: <ResetPassword />
-  },
-  {
-    path: "/admin",
-    element: <Admin />
-  },
-  {
-    path: "/students",
-    element: <Students />
-  },
-  {
-    path: "/staff",
-    element: <Staff />
-  },
-  {
-    path: "/instructor",
-    element: <Navigate to="/staff" replace />
-  },
-  {
-    path: "/counselor",
-    element: <Counselor />
-  },
-  {
-    path: "/parents",
-    element: <Parents />
-  },
-  {
-    path: "/payments",
-    element: <Payments />
-  },
-  {
-    path: "/payment-link",
-    element: <PaymentLink />
-  },
-  {
-    path: "/programme",
-    element: <Programme />
-  },
-  {
-    path: "/referrals",
-    element: <Referrals />
-  },
-  {
-    path: "/parent-portal",
-    element: <Navigate to="/parent-portal/dashboard" replace />
-  },
-  {
-    path: "/parent-portal/dashboard",
-    element: <ParentDashboard />
-  },
-  {
-    path: "/parent-portal/student",
-    element: <ParentStudent />
-  },
-  {
-    path: "/parent-portal/payment",
-    element: <ParentPayment />
-  },
+    {
+        path: "/",
+        element: <Login />
+    },
+    {
+        path: "/login",
+        element: <Login />
+    },
+    {
+        path: "/sign-in",
+        element: <Login />
+    },
+    {
+        path: "/dashboard",
+        element: <Dashboard />
+    },
+    {
+        path: "/sign-up",
+        element: <SignUp />
+    },
+    {
+        path: "/forgot-password",
+        element: <ForgotPassword />
+    },
+    {
+        path: "/reset-password",
+        element: <ResetPassword />
+    },
+    {
+        path: "/admin",
+        element: <Admin />
+    },
+    {
+        path: "/students",
+        element: <Students />
+    },
+    {
+        path: "/staff",
+        element: <Staff />
+    },
+    {
+        path: "/instructor",
+        element: <Navigate to="/staff" replace />
+    },
+    {
+        path: "/counselor",
+        element: <Counselor />
+    },
+    {
+        path: "/parents",
+        element: <Parents />
+    },
+    {
+        path: "/payments",
+        element: <Payments />
+    },
+    {
+        path: "/payment-link",
+        element: <PaymentLink />
+    },
+    {
+        path: "/programme",
+        element: <Programme />
+    },
+    {
+        path: "/referrals",
+        element: <Referrals />
+    },
+    // ── Parent Portal Auth ────────────────────────────────────────────────────
+    {
+        path: "/parent-portal",
+        element: <Navigate to="/parent-portal/login" replace />
+    },
+    {
+        path: "/parent-portal/login",
+        element: <ParentLogin />
+    },
+    {
+        path: "/parent-portal/forgot-password",
+        element: <ParentForgotPassword />
+    },
+    {
+        path: "/parent-portal/reset-password",
+        element: <ParentResetPassword />
+    },
+    // ── Parent Portal App ─────────────────────────────────────────────────────
+    {
+        path: "/parent-portal/dashboard",
+        element: <ParentDashboard />
+    },
+    {
+        path: "/parent-portal/student",
+        element: <ParentStudent />
+    },
+    {
+        path: "/parent-portal/payment",
+        element: <ParentPayment />
+    },
 ]);

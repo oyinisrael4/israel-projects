@@ -203,6 +203,18 @@
     margin-bottom: 20px;
 }
 
+.auth-background .overlay-bg .form-container .form-content .inner-form .input-container .input-wrapper .error {
+    font-size: 12px;
+    color: var(--error-color);
+}
+
+.auth-background .overlay-bg .form-container .form-content .inner-form .input-container > .error {
+    font-size: 13px;
+    color: var(--error-color);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
 .auth-background .overlay-bg .form-container .form-content .inner-form .input-container .input-wrapper label {
     font-size: 14px;
     color: var(--black-color);

@@ -12,7 +12,7 @@ export default function AlertModal({...props}) {
                     <h4>
                         {   props.message}
                     </h4>
-                    <Link to={props.redirectLink}>
+                    <Link to={props.redirectLink} state={props.state}>
                         <button className="btn" title="Okay, Thanks">Okay, Thanks</button>
                     </Link>
                 </div>

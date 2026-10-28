@@ -32,8 +32,8 @@ export default function Programme() {
                 <TopBar
                     searchPlaceholder="Search Programmes Here..."
                     profileAvatar={adminAvatar}
-                    profileName="Jone Copper"
-                    profileRole="Administrator"
+                    profileName="Isreal Oyinlola"
+                    profileRole="Super Admin"
                     navItems={ADMIN_NAV}
                     activePage="programme"
                 />

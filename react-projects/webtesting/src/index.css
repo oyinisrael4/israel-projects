@@ -12,6 +12,7 @@ body {
     --gray-color: #ccc;
     --input-bg-color: #F5F5F4;
     --black-color: #000;
+    --error-color: #f00;
 }
 
 @font-face {

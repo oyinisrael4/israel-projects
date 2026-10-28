@@ -20,7 +20,15 @@ export const router = createBrowserRouter([
     element: <SignIn />
   },
   {
+    path: "/sign_in",
+    element: <SignIn />
+  },
+  {
     path: "/sign-up",
+    element: <SignUp />
+  },
+  {
+    path: "/sign_up",
     element: <SignUp />
   },
   {
@@ -28,7 +36,15 @@ export const router = createBrowserRouter([
     element: <ForgotPassword />
   },
   {
+    path: "/forgot_password",
+    element: <ForgotPassword />
+  },
+  {
     path: "/reset-password",
+    element: <ResetPassword />
+  },
+  {
+    path: "/reset_password",
     element: <ResetPassword />
   },
   {

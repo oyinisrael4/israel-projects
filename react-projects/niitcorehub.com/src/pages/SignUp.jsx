@@ -1,24 +1,99 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 import niitLogo from "../assets/icon-images/niit-logo.png";
-import { signUpHandle } from "../JS/auth";
+import AlertModal from "../components/AlertModal";
+import InputField from "../components/InputFieldComponent";
+import ButtonComponent from "../components/ButtonComponent";
+import ErrorAlert from "../components/ErrorAlert";
 
 export default function SignUp() {
-    const navigate = useNavigate();
+    const [modal, setModal] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState("");
+    const [apiError, setApiError] = useState("");
 
-    useEffect(() => {
-        const signupForm = document.getElementById("signupForm");
-        if (signupForm) {
-            const handler = (e) => signUpHandle(e, navigate);
-            signupForm.addEventListener("submit", handler);
-            return () => signupForm.removeEventListener("submit", handler);
+    const [formData, setFormData] = useState({
+        fullName: "",
+        emailAddress: "",
+        phoneNumber: "",
+        password: "",
+    });
+
+    const [error, setError] = useState({
+        fullName: "",
+        emailAddress: "",
+        phoneNumber: "",
+        password: "",
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+        setError((prev) => ({
+            ...prev,
+            [name]: "",
+        }));
+        setApiError("");
+    };
+
+    const validateForm = () => {
+        const newErrors = {
+            fullName: "",
+            emailAddress: "",
+            phoneNumber: "",
+            password: "",
+        };
+
+        if (!formData.fullName.trim()) {
+            newErrors.fullName = "Full name is required.";
         }
-    }, [navigate]);
+
+        if (!formData.emailAddress.trim()) {
+            newErrors.emailAddress = "Email address is required.";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.emailAddress.trim())) {
+            newErrors.emailAddress = "Enter a valid email address.";
+        }
+
+        if (!formData.phoneNumber.trim()) {
+            newErrors.phoneNumber = "Phone number is required.";
+        }
+
+        if (!formData.password) {
+            newErrors.password = "Password is required.";
+        } else if (formData.password.length < 6) {
+            newErrors.password = "Password must be at least 6 characters.";
+        }
+
+        setError(newErrors);
+        return !Object.values(newErrors).some((msg) => msg !== "");
+    };
+
+    const handleSignUp = (e) => {
+        e.preventDefault();
+        if (loading) return;
+
+        setSuccess("");
+        setApiError("");
+
+        if (!validateForm()) {
+            return;
+        }
+
+        setLoading(true);
+        // Simulation since sign up API is excluded as per requirement
+        setTimeout(() => {
+            sessionStorage.setItem("userSignUpSession", JSON.stringify(formData));
+            setSuccess("Registration Successful! Welcome to NIIT.");
+            setModal(true);
+            setLoading(false);
+        }, 500);
+    };
 
     return (
         <>
-            <div className="alert-overlay" id="alert"></div>
-
             <div className="login-page-wrapper">
                 <div className="login-card">
 
@@ -34,28 +109,68 @@ export default function SignUp() {
                                 <p>Already have an account? <Link to="/login">Sign In</Link></p>
                             </div>
 
-                            <form className="login-form" id="signupForm">
-                                <div className="login-input-wrapper">
-                                    <label htmlFor="fullName">Fullname</label>
-                                    <input type="text" id="fullName" placeholder="Enter your fullname" />
-                                </div>
+                            <form className="login-form" onSubmit={handleSignUp}>
+                                <InputField
+                                    title="Full Name"
+                                    id="fullName"
+                                    name="fullName"
+                                    inputType="text"
+                                    placeHolder="Enter your full name"
+                                    handleChangeValue={handleChange}
+                                    inputValue={formData.fullName}
+                                    error={error.fullName}
+                                    autoComplete="name"
+                                />
 
-                                <div className="login-input-wrapper">
-                                    <label htmlFor="emailAddress">Email Address</label>
-                                    <input type="email" id="emailAddress" placeholder="Enter your email" />
-                                </div>
+                                <InputField
+                                    title="Email Address"
+                                    id="emailAddress"
+                                    name="emailAddress"
+                                    inputType="email"
+                                    placeHolder="Enter your email"
+                                    handleChangeValue={handleChange}
+                                    inputValue={formData.emailAddress}
+                                    error={error.emailAddress}
+                                    autoComplete="email"
+                                />
 
-                                <div className="login-input-wrapper">
-                                    <label htmlFor="phoneNumber">Phone Number</label>
-                                    <input type="tel" id="phoneNumber" placeholder="Enter your phone number" />
-                                </div>
+                                <InputField
+                                    title="Phone Number"
+                                    id="phoneNumber"
+                                    name="phoneNumber"
+                                    inputType="tel"
+                                    placeHolder="Enter your phone number"
+                                    handleChangeValue={handleChange}
+                                    inputValue={formData.phoneNumber}
+                                    error={error.phoneNumber}
+                                    autoComplete="tel"
+                                />
 
-                                <div className="login-input-wrapper">
-                                    <label htmlFor="password">Password</label>
-                                    <input type="password" id="password" placeholder="Enter your password" />
-                                </div>
+                                <InputField
+                                    title="Password"
+                                    id="password"
+                                    name="password"
+                                    inputType="password"
+                                    placeHolder="Enter your password"
+                                    handleChangeValue={handleChange}
+                                    inputValue={formData.password}
+                                    error={error.password}
+                                    autoComplete="new-password"
+                                />
 
-                                <button type="submit" id="submitBtnId" className="btn login-submit-btn">Sign Up</button>
+                                <ErrorAlert
+                                    message={apiError}
+                                    title="Registration Notice"
+                                    onClose={() => setApiError("")}
+                                />
+
+                                <ButtonComponent
+                                    buttonType="submit"
+                                    buttonText={loading ? "Creating Account..." : "Sign Up"}
+                                    buttonTitle="Sign Up"
+                                    btnAction={loading}
+                                    className="login-submit-btn"
+                                />
                             </form>
 
                             <div className="login-social-row">
@@ -83,6 +198,14 @@ export default function SignUp() {
 
                 </div>
             </div>
+
+            {/* Alert Modal */}
+            {modal && success && (
+                <AlertModal
+                    redirectLink="/login"
+                    message={success}
+                />
+            )}
         </>
     );
 }

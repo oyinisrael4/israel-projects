@@ -101,6 +101,96 @@
     border-color: var(--primary-color);
 }
 
+.login-page-wrapper .login-card .login-form-panel .login-form-inner .login-form .login-input-wrapper input.input-error {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+}
+
+.login-page-wrapper .login-card .login-form-panel .login-form-inner .login-form .login-input-wrapper input.input-error:focus {
+    border-color: #dc2626;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.login-input-error-msg {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #ef4444;
+    margin-top: 2px;
+    animation: fadeInError 0.2s ease-out;
+}
+
+.login-input-error-msg i {
+    font-size: 12px;
+}
+
+/* Premium Auth Error Alert Banner */
+.auth-error-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    border: 1px solid #fecaca;
+    border-left: 4px solid #ef4444;
+    border-radius: 8px;
+    margin: 4px 0 10px;
+    animation: slideDownFade 0.25s ease-out;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.08);
+}
+
+.auth-error-banner .auth-error-icon {
+    font-size: 17px;
+    color: #ef4444;
+    line-height: 1.1;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.auth-error-banner .auth-error-content {
+    flex: 1;
+}
+
+.auth-error-banner .auth-error-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #991b1b;
+    margin: 0 0 2px;
+    letter-spacing: 0.2px;
+}
+
+.auth-error-banner .auth-error-text {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: #b91c1c;
+    margin: 0;
+    line-height: 1.4;
+}
+
+@keyframes slideDownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInError {
+    from {
+        opacity: 0;
+        transform: translateY(-2px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .login-page-wrapper .login-card .login-form-panel .login-form-inner .login-form .login-form-options {
     display: flex;
     align-items: center;
@@ -3887,34 +3977,251 @@ body {
     font-family: body-font;
 }
 
-/* Login Page Link Wrap */
-.login-parent-portal-link-wrap {
+/* Upgraded Login Page: Parent Portal Access Gateway */
+.login-portal-switch-card {
     margin-top: 18px;
-    text-align: center;
-    border-top: 1px solid #edf2f7;
-    padding-top: 14px;
+    background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+    border: 1.5px solid #dbeafe;
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    transition: all 0.25s ease;
 }
 
-.login-parent-portal-link {
+.login-portal-switch-card:hover {
+    border-color: #93c5fd;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.12);
+    transform: translateY(-1px);
+}
+
+.login-portal-switch-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.login-portal-switch-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #ffffff;
+    color: var(--primary-color, #003495);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 2px 8px rgba(0, 52, 149, 0.1);
+    flex-shrink: 0;
+}
+
+.login-portal-switch-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #2563eb;
+    background: #dbeafe;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-bottom: 2px;
+}
+
+.login-portal-switch-left h4 {
+    font-family: title-font, sans-serif;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+}
+
+.login-portal-switch-left p {
+    font-size: 11.5px;
+    color: #64748b;
+    margin: 2px 0 0;
+}
+
+.login-portal-switch-btn {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    font-family: sub-title-font;
-    font-size: 13px;
-    color: var(--primary-color);
-    text-decoration: none;
+    gap: 4px;
+    padding: 8px 14px;
+    background: var(--primary-color, #003495);
+    color: #ffffff;
+    font-family: sub-title-font, sans-serif;
+    font-size: 12.5px;
     font-weight: 600;
-    padding: 6px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 52, 149, 0.2);
+}
+
+.login-portal-switch-btn:hover {
+    background: #1e40af;
+    color: #ffffff;
+    transform: translateX(2px);
+}
+
+/* Quick Demo Login Buttons for Testing */
+.login-demo-roles {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    font-size: 11.5px;
+    color: #64748b;
+    flex-wrap: wrap;
+}
+
+.login-demo-roles span {
+    font-weight: 600;
+    color: #475569;
+}
+
+.login-demo-role-btn {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    padding: 4px 8px;
     border-radius: 6px;
-    background: rgba(18, 119, 169, 0.08);
-    transition: background 0.2s;
+    font-size: 11px;
+    font-weight: 600;
+    color: #0f172a;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.login-parent-portal-link:hover {
-    background: rgba(18, 119, 169, 0.16);
+.login-demo-role-btn:hover {
+    background: var(--primary-color, #003495);
+    color: #ffffff;
+    border-color: var(--primary-color, #003495);
 }
 
-/* Utilities to replace inline styles */
+/* Sidebar Role Toggle Button & Notice */
+.sidebar-profile-card {
+    position: relative;
+    flex-wrap: wrap;
+}
+
+.sidebar-role-toggle-btn {
+    width: 100%;
+    margin-top: 8px;
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+    color: #ffffff;
+    font-family: sub-title-font, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.sidebar-role-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.28);
+}
+
+.sidebar-role-badge-notice {
+    background: #fef3c7;
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 11px;
+    color: #92400e;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1.3;
+}
+
+.sidebar-role-badge-notice i {
+    font-size: 13px;
+    color: #d97706;
+}
+
+/* Utilities replacing inline styles */
+.reset-otp-banner {
+    padding: 10px 14px;
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+    color: #166534;
+    font-size: 13px;
+    margin-bottom: 16px;
+    line-height: 1.4;
+}
+
+.auth-error-dismiss-btn {
+    background: none;
+    border: none;
+    color: #991b1b;
+    cursor: pointer;
+    padding: 0 4px;
+    font-size: 13px;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.auth-error-dismiss-btn:hover {
+    opacity: 1;
+}
+
+.admin-access-denied-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 20px;
+    background: #fffbeb;
+    border: 1.5px solid #fde68a;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    color: #92400e;
+}
+
+.admin-access-denied-banner i {
+    font-size: 24px;
+    color: #d97706;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.admin-access-denied-banner h4 {
+    font-family: title-font, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    color: #78350f;
+}
+
+.admin-access-denied-banner p {
+    font-size: 13.5px;
+    margin: 0;
+    line-height: 1.5;
+    color: #92400e;
+}
+
+.alert-submessage {
+    margin-top: -8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1e293b;
+    letter-spacing: 0.5px;
+}
+
 .cursor-pointer {
     cursor: pointer;
 }
@@ -5539,6 +5846,69 @@ select.student-modal-field-input {
     font-weight: bold;
     color: var(--primary-color, #0b296b);
 }
+
+/* Created Account Modal & Portal Link Styles (No inline styles) */
+.parent-modal-card {
+    max-width: 520px;
+}
+
+.parent-modal-success-icon {
+    color: #16a34a;
+}
+
+.parent-modal-hero {
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.parent-modal-badge {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #dcfce7;
+    color: #16a34a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin: 0 auto 12px;
+}
+
+.parent-modal-name {
+    margin: 0 0 6px;
+    color: #0f172a;
+}
+
+.parent-modal-email {
+    font-size: 13.5px;
+    color: #64748b;
+    margin: 0;
+}
+
+.parent-portal-link-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 16px 0 20px;
+}
+
+.parent-portal-link-code {
+    font-size: 12px;
+    color: #003495;
+    word-break: break-all;
+}
+
+.parent-portal-copy-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
 
 
 

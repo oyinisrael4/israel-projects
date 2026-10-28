@@ -6,13 +6,13 @@ import PageFooter from "../components/PageFooter";
 import PersonCard from "../components/PersonCard";
 import SlideDrawer from "../components/SlideDrawer";
 import ProfileModal from "../components/ProfileModal";
+import AlertModal from "../components/AlertModal";
 import RosterFilter from "../components/RosterFilter";
 import { FormInput, FormSelect } from "../components/FormField";
-import teacherAvatar from "../assets/icon-images/teacher-avatar.png";
 import adminAvatar from "../assets/icon-images/admin-avatar.png";
-import staff1 from "../assets/icon-images/staff-1.png";
-import staff2 from "../assets/icon-images/staff-2.png";
-import instructor4 from "../assets/icon-images/instructor-4.png";
+import teacherAvatar from "../assets/icon-images/teacher-avatar.png";
+import { useStaffData } from "../context/StaffDataContext";
+import { useAuth } from "../context/AuthContext";
 
 const ADMIN_NAV = [
     { id: "dashboard", to: "/dashboard", icon: "bi-grid-1x2-fill", label: "Dashboard" },
@@ -27,13 +27,6 @@ const ADMIN_NAV = [
     { id: "logout", to: "/login", icon: "bi-power", label: "Log-Out" },
 ];
 
-const INITIAL_STAFF = [
-    { id: "staff-1", role: "Tutor", status: "Active", search: "courtney henry tutor web development", img: teacherAvatar, name: "Courtney Henry", roleLabel: "Tutor — Diploma in Web Development", phone: "080 3123 4567", tag: "TUTOR", bar: "var(--primary-color)", email: "courtneyhenry@niit.edu", lastLogin: "2026-08-30 09:12 AM", position: "Tutor — Web Development" },
-    { id: "staff-2", role: "Tutor", status: "Inactive", search: "robert fox tutor cybersecurity", img: staff1, name: "Robert Fox", roleLabel: "Tutor — CyberOps & Certified Ethical Hacking", phone: "081 0345 6789", tag: "TUTOR", bar: "var(--footer-color)", email: "robertfox@niit.edu", lastLogin: "2026-08-20 08:03 AM", position: "Tutor — Cybersecurity" },
-    { id: "staff-3", role: "Senior Lecturer", status: "Active", search: "eleanor pena senior lecturer data analysis", img: staff2, name: "Eleanor Pena", roleLabel: "Senior Lecturer — Data Analysis", phone: "081 3456 7890", tag: "SENIOR LECTURER", bar: "var(--secondary-color)", email: "eleanorpena@niit.edu", lastLogin: "2026-08-31 11:20 AM", position: "Senior Lecturer — Data Analysis" },
-    { id: "staff-4", role: "Lecturer", status: "Active", search: "leslie alexander lecturer networking", img: instructor4, name: "Leslie Alexander", roleLabel: "Lecturer — CCNA / CCNP & IT Essentials", phone: "081 6567 8901", tag: "LECTURER", bar: "var(--primary-color)", email: "lesliealexander@niit.edu", lastLogin: "2026-09-01 01:40 PM", position: "Lecturer — Networking" },
-];
-
 const PROGRAMMES = [
     "Hardware & Networking", "Desktop Publishing (MS Office Suite)", "MasterMind Series (MIS)",
     "CCNA / CCNP", "IT Essentials", "Diploma in .NET Technologies", "Diploma in Web Development",
@@ -42,50 +35,80 @@ const PROGRAMMES = [
     "Game Development", "CyberOps", "Certified Ethical Hacking",
 ];
 
-const BAR_COLORS = ["var(--primary-color)", "var(--secondary-color)", "var(--footer-color)"];
+// All role options including Admin & Counselor
+const ALL_ROLES = [
+    "Tutor", "Lecturer", "Senior Lecturer", "Technologist",
+    "Admin", "Super Admin", "President", "Registrar",
+    "Counselor",
+];
+
+// Roles that require a programme (teaching staff only)
+const TEACHING_ROLES = ["Tutor", "Lecturer", "Senior Lecturer", "Technologist"];
+const ADMIN_ROLES = ["Admin", "Super Admin", "President", "Registrar", "Technologist"];
+const COUNSELOR_ROLES = ["Counselor"];
+
+function getCategoryFromRole(role) {
+    if (COUNSELOR_ROLES.includes(role)) return "counselor";
+    if (ADMIN_ROLES.includes(role)) return "admin";
+    return "staff";
+}
 
 export default function Staff() {
-    const [staff, setStaff] = useState(INITIAL_STAFF);
+    const { user } = useAuth();
+    const isCounselor =
+        (user?.roleName || "").toLowerCase().includes("counselor") ||
+        (user?.role || "").toLowerCase().includes("counselor");
+
+    const { allStaff, addStaffMember, updateStaffMember } = useStaffData();
     const [searchValue, setSearchValue] = useState("");
     const [roleFilter, setRoleFilter] = useState("all");
+    const [categoryFilter, setCategoryFilter] = useState("all");
     const [statusFilter, setStatusFilter] = useState("all");
 
     // Drawer states
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+    // Profile modal state
+    const [profileData, setProfileData] = useState(null);
+    const [isProfileOpen, setIsProfileOpen] = useState(false);
+    const [createdStaffModal, setCreatedStaffModal] = useState(null);
 
     const STAFF_EDIT_FIELDS = [
         { key: "name", label: "Full Name", type: "text" },
         { key: "email", label: "Email Address", type: "email" },
         { key: "phone", label: "Phone Number", type: "tel" },
         { key: "position", label: "Position", type: "text" },
-        { key: "role", label: "Select Role", type: "select", options: ["Tutor", "Lecturer", "Senior Lecturer", "Technologist"] },
+        { key: "role", label: "Select Role", type: "select", options: ALL_ROLES },
         { key: "status", label: "Select Status", type: "select", options: ["Active", "Inactive"] },
     ];
 
-    // Profile modal state
-    const [profileData, setProfileData] = useState(null);
-    const [isProfileOpen, setIsProfileOpen] = useState(false);
-
     // Form state
-    const [form, setForm] = useState({ title: "", firstName: "", lastName: "", email: "", phone: "", address: "", role: "", programme: "", status: "Active" });
+    const [form, setForm] = useState({
+        title: "", firstName: "", lastName: "", email: "", phone: "", address: "",
+        role: "", programme: "", status: "Active",
+    });
     const [editForm, setEditForm] = useState({});
 
-    // Derive unique roles for filter
-    const allRoles = useMemo(() => {
-        const roles = new Set(staff.map((s) => s.role));
-        return ["all", ...roles];
-    }, [staff]);
+    // Determine if the selected role needs a programme field
+    const roleNeedsProgramme = TEACHING_ROLES.includes(form.role);
 
-    // Filtered list
+    // Derive unique roles for filter from all staff
+    const allRoles = useMemo(() => {
+        const roles = new Set(allStaff.map((s) => s.role));
+        return ["all", ...roles];
+    }, [allStaff]);
+
+    // Filtered list — shows ALL staff/admin/counselor members
     const filteredStaff = useMemo(() => {
-        return staff.filter((s) => {
+        return allStaff.filter((s) => {
             const matchesRole = roleFilter === "all" || s.role === roleFilter;
+            const matchesCategory = categoryFilter === "all" || s.category === categoryFilter;
             const matchesStatus = statusFilter === "all" || s.status === statusFilter;
             const query = searchValue.trim().toLowerCase();
             const matchesSearch = !query || s.search.includes(query);
-            return matchesRole && matchesStatus && matchesSearch;
+            return matchesRole && matchesCategory && matchesStatus && matchesSearch;
         });
-    }, [staff, roleFilter, statusFilter, searchValue]);
+    }, [allStaff, roleFilter, categoryFilter, statusFilter, searchValue]);
 
     function openProfile(member) {
         setProfileData(member);
@@ -103,52 +126,87 @@ export default function Staff() {
     function handleAdd(e) {
         e.preventDefault();
         const { title, firstName, lastName, email, phone, role, programme, status } = form;
-        if (!firstName || !lastName || !email || !phone || !role || !programme) {
+        const needsProgramme = TEACHING_ROLES.includes(role);
+        if (!firstName || !lastName || !email || !phone || !role) {
             alert("Please fill in all required fields.");
             return;
         }
+        if (needsProgramme && !programme) {
+            alert("Please select a programme for this staff role.");
+            return;
+        }
         const fullName = `${title ? title + " " : ""}${firstName} ${lastName}`;
-        const position = `${role} — ${programme}`;
+        const category = getCategoryFromRole(role);
+        const position = needsProgramme ? `${role} — ${programme}` : role;
+        const cleanEmail = email.trim().toLowerCase();
         const newMember = {
-            id: "staff-new-" + Date.now(),
-            role, status,
-            search: `${fullName} ${role} ${programme}`.toLowerCase(),
-            img: teacherAvatar,
+            category,
+            role,
+            status,
+            search: `${fullName} ${role} ${programme || ""}`.toLowerCase(),
+            img: category === "counselor" ? adminAvatar : teacherAvatar,
             name: fullName,
-            roleLabel: position,
-            phone, email,
+            roleLabel: category === "counselor" ? "Student Counselor" : position,
+            phone,
+            email: cleanEmail,
             tag: role.toUpperCase(),
-            bar: BAR_COLORS[staff.length % BAR_COLORS.length],
             lastLogin: "—",
             position,
         };
-        setStaff((prev) => [...prev, newMember]);
+
+        const addedItem = addStaffMember(newMember);
+
+        // Provision their account with a temporary random password
+        try {
+            const tempPassword = Math.random().toString(36).slice(-8);
+            const staffAccount = {
+                id: addedItem?.id || "STF" + Date.now().toString().slice(-6),
+                name: fullName,
+                firstName,
+                lastName,
+                email: cleanEmail,
+                phone: phone.trim(),
+                role,
+                roleName: role,
+                category,
+                password: tempPassword,
+                temporaryPassword: tempPassword,
+                requiresReset: true,
+                createdAt: new Date().toISOString(),
+            };
+            const existing = JSON.parse(localStorage.getItem("niit_registered_staff") || "[]");
+            const filtered = existing.filter((acc) => acc.email !== cleanEmail);
+            filtered.push(staffAccount);
+            localStorage.setItem("niit_registered_staff", JSON.stringify(filtered));
+        } catch {
+            // Ignore
+        }
+
         setForm({ title: "", firstName: "", lastName: "", email: "", phone: "", address: "", role: "", programme: "", status: "Active" });
         setIsDrawerOpen(false);
+        setCreatedStaffModal({ fullName, role, email: cleanEmail });
     }
 
     function handleSaveEdit(updatedForm) {
-        setStaff((prev) =>
-            prev.map((s) =>
-                s.id === profileData.id
-                    ? {
-                        ...s,
-                        name: updatedForm.name,
-                        email: updatedForm.email,
-                        phone: updatedForm.phone,
-                        role: updatedForm.role,
-                        status: updatedForm.status,
-                        tag: updatedForm.role.toUpperCase(),
-                        position: updatedForm.position,
-                        search: `${updatedForm.name} ${updatedForm.role}`.toLowerCase(),
-                    }
-                    : s
-            )
-        );
-        setProfileData((prev) => ({ ...prev, name: updatedForm.name, email: updatedForm.email, phone: updatedForm.phone, role: updatedForm.role, status: updatedForm.status, position: updatedForm.position }));
+        if (!profileData) return;
+        const newCategory = getCategoryFromRole(updatedForm.role);
+        updateStaffMember(profileData.id, {
+            name: updatedForm.name,
+            email: updatedForm.email,
+            phone: updatedForm.phone,
+            role: updatedForm.role,
+            status: updatedForm.status,
+            tag: updatedForm.role.toUpperCase(),
+            position: updatedForm.position || updatedForm.role,
+            category: newCategory,
+        });
+        setProfileData((prev) => ({ ...prev, ...updatedForm, category: newCategory }));
     }
 
-    const countText = `${filteredStaff.length} staff member${filteredStaff.length !== 1 ? "s" : ""}`;
+    const countText = `${filteredStaff.length} member${filteredStaff.length !== 1 ? "s" : ""}`;
+
+    // Category badge helper
+    const categoryLabel = { staff: "Staff", admin: "Admin", counselor: "Counselor" };
 
     return (
         <div className="app-layout-container">
@@ -156,12 +214,12 @@ export default function Staff() {
 
             <main className="main-content-wrapper">
                 <TopBar
-                    searchPlaceholder="Search Staff Here..."
+                    searchPlaceholder="Search All Staff Here..."
                     searchValue={searchValue}
                     onSearchChange={(e) => setSearchValue(e.target.value)}
                     profileAvatar={adminAvatar}
-                    profileName="Jone Copper"
-                    profileRole="Administrator"
+                    profileName="Isreal Oyinlola"
+                    profileRole="Super Admin"
                     navItems={ADMIN_NAV}
                     activePage="staff"
                 />
@@ -172,15 +230,26 @@ export default function Staff() {
                         <PageHeading
                             icon="bi-easel2-fill"
                             tag="Staff"
-                            description="Manage tutors and lecturers, their programmes, and access across the institute."
+                            description="Manage all staff members including tutors, lecturers, administrators, and counselors."
                         />
 
                         <div className="page-section-wrapper">
                             <div className="roster-panel-card">
                                 <RosterFilter
-                                    heading="All Staff"
+                                    heading="All Staff Members"
                                     countText={countText}
                                     filters={[
+                                        {
+                                            icon: "bi-layers",
+                                            value: categoryFilter,
+                                            onChange: (e) => setCategoryFilter(e.target.value),
+                                            options: [
+                                                { value: "all", label: "All Categories" },
+                                                { value: "staff", label: "Teaching Staff" },
+                                                { value: "admin", label: "Administrators" },
+                                                { value: "counselor", label: "Counselors" },
+                                            ],
+                                        },
                                         {
                                             icon: "bi-funnel",
                                             value: roleFilter,
@@ -216,6 +285,12 @@ export default function Staff() {
                                             onClick={() => openProfile(s)}
                                         />
                                     ))}
+                                    {filteredStaff.length === 0 && (
+                                        <div className="staff-empty-state">
+                                            <i className="bi bi-people"></i>
+                                            <p>No staff members found matching the current filter.</p>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -228,25 +303,27 @@ export default function Staff() {
             {/* Create New Staff — Slide-Over Drawer */}
             <SlideDrawer
                 isOpen={isDrawerOpen}
-                onClose={() => { setIsDrawerOpen(false); setForm({ title: "", firstName: "", lastName: "", email: "", phone: "", address: "", role: "", programme: "", status: "Active" }); }}
+                onClose={() => {
+                    setIsDrawerOpen(false);
+                    setForm({ title: "", firstName: "", lastName: "", email: "", phone: "", address: "", role: "", programme: "", status: "Active" });
+                }}
                 title="Create New Staff"
                 icon="bi-person-plus-fill"
-                intro="Complete the form below to add a new staff member."
+                intro="Complete the form below to add a new staff member. Choose their role — Admins and Counselors will appear on their respective pages as well."
             >
                 <form className="form-page-form" onSubmit={handleAdd}>
                     <div className="form-section">
                         <div className="form-section-title">
                             <i className="bi bi-person-vcard"></i>
-                            <span>Staff Basic Info</span>
+                            <span>Basic Info</span>
                         </div>
                         <FormSelect
                             label="Select Title"
                             id="staffTitle"
-                            required
                             value={form.title}
                             onChange={(e) => setForm({ ...form, title: e.target.value })}
                             placeholder="Select here"
-                            options={["Mr", "Mrs", "Miss", "Dr"]}
+                            options={["Mr", "Mrs", "Miss", "Dr", "Prof"]}
                         />
                         <FormInput
                             label="First Name"
@@ -281,7 +358,6 @@ export default function Staff() {
                         <FormInput
                             label="Home Address"
                             id="staffAddress"
-                            required
                             value={form.address}
                             onChange={(e) => setForm({ ...form, address: e.target.value })}
                         />
@@ -289,26 +365,37 @@ export default function Staff() {
                     <div className="form-section">
                         <div className="form-section-title">
                             <i className="bi bi-mortarboard-fill"></i>
-                            <span>Teaching Info</span>
+                            <span>Role & Assignment</span>
                         </div>
                         <FormSelect
                             label="Select Role"
                             id="staffRole"
                             required
                             value={form.role}
-                            onChange={(e) => setForm({ ...form, role: e.target.value })}
+                            onChange={(e) => setForm({ ...form, role: e.target.value, programme: "" })}
                             placeholder="Select here"
-                            options={["Tutor", "Lecturer", "Senior Lecturer", "Technologist"]}
+                            options={ALL_ROLES}
                         />
-                        <FormSelect
-                            label="Select Programme"
-                            id="staffProgramme"
-                            required
-                            value={form.programme}
-                            onChange={(e) => setForm({ ...form, programme: e.target.value })}
-                            placeholder="Select here"
-                            options={PROGRAMMES}
-                        />
+                        {form.role && (
+                            <div className="staff-role-hint">
+                                <i className={`bi ${getCategoryFromRole(form.role) === "admin" ? "bi-person-badge-fill" : getCategoryFromRole(form.role) === "counselor" ? "bi-chat-heart-fill" : "bi-easel2-fill"}`}></i>
+                                <span>
+                                    This member will appear under{" "}
+                                    <strong>{categoryLabel[getCategoryFromRole(form.role)] || "Staff"}</strong>
+                                </span>
+                            </div>
+                        )}
+                        {roleNeedsProgramme && (
+                            <FormSelect
+                                label="Select Programme"
+                                id="staffProgramme"
+                                required
+                                value={form.programme}
+                                onChange={(e) => setForm({ ...form, programme: e.target.value })}
+                                placeholder="Select here"
+                                options={PROGRAMMES}
+                            />
+                        )}
                         <FormSelect
                             label="Select Status"
                             id="staffStatus"
@@ -347,6 +434,14 @@ export default function Staff() {
                 onSaveEdit={handleSaveEdit}
                 editFields={STAFF_EDIT_FIELDS}
             />
+
+            {createdStaffModal && (
+                <AlertModal
+                    message="Staff Account Created Successfully!"
+                    subMessage={`An account has been created for ${createdStaffModal.fullName} with the role of "${createdStaffModal.role}". They can now access the staff portal by navigating to the login page and clicking "Forgot Password" with their email address (${createdStaffModal.email}) to set their own secure password.`}
+                    onClose={() => setCreatedStaffModal(null)}
+                />
+            )}
         </div>
     );
 }

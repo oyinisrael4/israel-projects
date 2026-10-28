@@ -925,3 +925,765 @@
         display: none;
     }
 }
+
+/* =========================================================
+   PARENT DASHBOARD: ADD STUDENT BUTTON STYLES
+   ========================================================= */
+.parent-summary-action-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.parent-add-student-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 20px;
+    background: linear-gradient(135deg, var(--primary-color, #003495) 0%, #1e40af 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-family: sub-title-font, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 52, 149, 0.25);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.parent-add-student-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 52, 149, 0.35);
+    background: linear-gradient(135deg, #1e40af 0%, var(--primary-color, #003495) 100%);
+}
+
+.parent-add-student-btn:active {
+    transform: translateY(0);
+}
+
+.parent-add-student-btn-sm {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    background: var(--input-bg-color, #f1f5f9);
+    color: var(--primary-color, #003495);
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-family: sub-title-font, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.parent-add-student-btn-sm:hover {
+    background: var(--primary-color, #003495);
+    color: #ffffff;
+    border-color: var(--primary-color, #003495);
+}
+
+/* Notice box for Counselor/Admin when creating parent */
+.parent-portal-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 10px;
+    color: #1e3a8a;
+    font-family: body-font, sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 16px 0;
+}
+
+.parent-portal-notice i {
+    font-size: 20px;
+    color: #2563eb;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.parent-portal-notice strong {
+    display: block;
+    font-family: sub-title-font, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 2px;
+    color: #1e40af;
+}
+
+.parent-portal-notice p {
+    margin: 0;
+    color: #3b82f6;
+}
+
+/* =========================================================
+   PARENT PORTAL AUTHENTICATION PAGES (LOGIN, FORGOT, RESET)
+   Modern, Sleek, Glassmorphic & Highly Responsive
+   ========================================================= */
+
+.pp-auth-wrapper {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(135deg, #f0f4f9 0%, #e2e8f0 50%, #f8fafc 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: body-font, sans-serif;
+}
+
+.pp-auth-wrapper-centered {
+    flex-direction: column;
+}
+
+/* Ambient gradient background blobs */
+.pp-auth-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.55;
+    animation: ppBlobFloat 14s infinite alternate ease-in-out;
+}
+
+.pp-auth-blob-1 {
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(0, 52, 149, 0.35) 0%, rgba(30, 64, 175, 0.1) 70%);
+    top: -80px;
+    left: -80px;
+}
+
+.pp-auth-blob-2 {
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(237, 28, 36, 0.25) 0%, rgba(249, 115, 22, 0.08) 70%);
+    bottom: -60px;
+    right: -60px;
+    animation-delay: -5s;
+}
+
+.pp-auth-blob-3 {
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.25) 0%, rgba(99, 102, 241, 0.05) 70%);
+    top: 40%;
+    left: 45%;
+    animation-delay: -9s;
+}
+
+@keyframes ppBlobFloat {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -20px) scale(1.06); }
+    100% { transform: translate(-20px, 25px) scale(0.96); }
+}
+
+/* Two-column Auth Card (Login) */
+.pp-auth-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 960px;
+    min-height: 560px;
+    background: #ffffff;
+    border-radius: 20px;
+    display: flex;
+    overflow: hidden;
+    box-shadow: 0 20px 60px -15px rgba(15, 23, 42, 0.15), 0 0 0 1px rgba(226, 232, 240, 0.8);
+}
+
+/* Hero panel (Left side) */
+.pp-auth-hero {
+    position: relative;
+    width: 45%;
+    background: linear-gradient(145deg, #002566 0%, #003495 55%, #1e40af 100%);
+    color: #ffffff;
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.pp-auth-hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.pp-auth-logo-row img {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+    background: #ffffff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.pp-auth-hero h1 {
+    font-family: title-font, sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin: 28px 0 14px;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+}
+
+.pp-auth-hero p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 28px;
+}
+
+.pp-auth-features {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.pp-auth-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.pp-auth-feature-item i {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #60a5fa;
+    flex-shrink: 0;
+}
+
+/* Background decorative circles on hero */
+.pp-auth-hero-shapes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.pp-hero-shape-circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pp-hero-shape-c1 {
+    width: 320px;
+    height: 320px;
+    bottom: -80px;
+    right: -80px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+}
+
+.pp-hero-shape-c2 {
+    width: 200px;
+    height: 200px;
+    top: 20px;
+    right: -60px;
+}
+
+/* Form panel (Right side) */
+.pp-auth-form-panel {
+    position: relative;
+    z-index: 2;
+    width: 55%;
+    padding: 48px 48px;
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+}
+
+.pp-auth-form-inner {
+    width: 100%;
+}
+
+.pp-auth-form-header {
+    margin-bottom: 24px;
+}
+
+.pp-auth-icon-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #eff6ff;
+    color: var(--primary-color, #003495);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 10px rgba(0, 52, 149, 0.08);
+}
+
+.pp-auth-icon-badge-green {
+    background: #f0fdf4;
+    color: #16a34a;
+    box-shadow: 0 4px 10px rgba(22, 163, 74, 0.1);
+}
+
+.pp-auth-form-header h2 {
+    font-family: title-font, sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 6px;
+    letter-spacing: -0.3px;
+}
+
+.pp-auth-form-header p {
+    font-size: 13.5px;
+    color: #64748b;
+    margin: 0;
+}
+
+.pp-auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.pp-auth-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.pp-auth-field label {
+    font-family: sub-title-font, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.pp-auth-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.pp-auth-input-wrap i:first-child {
+    position: absolute;
+    left: 14px;
+    color: #94a3b8;
+    font-size: 16px;
+    pointer-events: none;
+    transition: color 0.2s ease;
+}
+
+.pp-auth-input-wrap input {
+    width: 100%;
+    height: 48px;
+    padding: 0 16px 0 42px;
+    background: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    font-family: body-font, sans-serif;
+    font-size: 14px;
+    color: #0f172a;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.pp-auth-input-wrap input:focus {
+    background: #ffffff;
+    border-color: var(--primary-color, #003495);
+    box-shadow: 0 0 0 4px rgba(0, 52, 149, 0.1);
+}
+
+.pp-auth-input-wrap input:focus ~ i:first-child,
+.pp-auth-input-wrap input:focus + i:first-child {
+    color: var(--primary-color, #003495);
+}
+
+.pp-auth-password-toggle {
+    position: absolute;
+    right: 14px;
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.pp-auth-password-toggle:hover {
+    color: #334155;
+}
+
+.pp-auth-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+}
+
+.pp-auth-remember {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #475569;
+    cursor: pointer;
+    user-select: none;
+}
+
+.pp-auth-remember input {
+    accent-color: var(--primary-color, #003495);
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pp-auth-forgot-link {
+    color: var(--primary-color, #003495);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.pp-auth-forgot-link:hover {
+    color: #1e40af;
+    text-decoration: underline;
+}
+
+.pp-auth-submit-btn {
+    width: 100%;
+    height: 48px;
+    background: linear-gradient(135deg, var(--primary-color, #003495) 0%, #1e40af 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-family: sub-title-font, sans-serif;
+    font-size: 14.5px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 52, 149, 0.28);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.pp-auth-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 52, 149, 0.38);
+    background: linear-gradient(135deg, #1e40af 0%, var(--primary-color, #003495) 100%);
+}
+
+.pp-auth-submit-btn:active {
+    transform: translateY(0);
+}
+
+.pp-auth-divider {
+    height: 1px;
+    background: #e2e8f0;
+    margin: 20px 0 16px;
+}
+
+.pp-auth-new-parent {
+    text-align: center;
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 12px;
+}
+
+.pp-auth-new-parent strong {
+    color: #0f172a;
+}
+
+.pp-auth-new-parent a {
+    color: var(--primary-color, #003495);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.pp-auth-new-parent a:hover {
+    text-decoration: underline;
+}
+
+.pp-auth-back-link {
+    text-align: center;
+}
+
+.pp-auth-back-link a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.pp-auth-back-link a:hover {
+    color: var(--primary-color, #003495);
+}
+
+/* ── Centered Single-Card (Forgot Password & Reset Password) ── */
+.pp-auth-single-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 480px;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px 36px;
+    box-shadow: 0 20px 60px -15px rgba(15, 23, 42, 0.15), 0 0 0 1px rgba(226, 232, 240, 0.8);
+    display: flex;
+    flex-direction: column;
+}
+
+.pp-auth-single-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.pp-auth-single-logo {
+    height: 34px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+.pp-auth-single-header h2 {
+    font-family: title-font, sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 8px 0 6px;
+}
+
+.pp-auth-single-header p {
+    font-size: 13.5px;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Success State Box */
+.pp-auth-success-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.pp-auth-success-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #dcfce7;
+    color: #16a34a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin-bottom: 16px;
+    animation: ppScaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes ppScaleIn {
+    0% { transform: scale(0.4); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.pp-auth-demo-otp {
+    background: #f1f5f9;
+    border: 1px dashed #cbd5e1;
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-size: 13px;
+    color: #334155;
+    margin: 16px 0;
+    width: 100%;
+}
+
+.pp-auth-demo-otp code {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--primary-color, #003495);
+    letter-spacing: 2px;
+    background: #ffffff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 6px;
+}
+
+.pp-auth-secondary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 46px;
+    border: 1.5px solid #cbd5e1;
+    background: #ffffff;
+    color: #334155;
+    border-radius: 10px;
+    font-family: sub-title-font, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 10px;
+    transition: all 0.2s ease;
+}
+
+.pp-auth-secondary-btn:hover {
+    background: #f8fafc;
+    border-color: #94a3b8;
+    color: #0f172a;
+}
+
+.pp-auth-error-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    color: #b91c1c;
+    font-size: 13px;
+}
+
+/* =========================================================
+   PARENT PORTAL AUTH RESPONSIVE STYLES (MOBILE EXCELLENCE)
+   ========================================================= */
+
+@media (max-width: 860px) {
+    .pp-auth-card {
+        flex-direction: column;
+        max-width: 520px;
+        min-height: auto;
+    }
+
+    .pp-auth-hero {
+        width: 100%;
+        padding: 36px 32px 28px;
+    }
+
+    .pp-auth-hero h1 {
+        font-size: 26px;
+        margin: 18px 0 10px;
+    }
+
+    .pp-auth-hero p {
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+
+    .pp-auth-features {
+        display: none; /* Hide bullets on medium tablet to keep form prominent */
+    }
+
+    .pp-auth-form-panel {
+        width: 100%;
+        padding: 36px 32px;
+    }
+}
+
+@media (max-width: 520px) {
+    .pp-auth-wrapper {
+        padding: 16px 12px;
+        align-items: flex-start;
+    }
+
+    .pp-auth-card {
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .pp-auth-hero {
+        padding: 24px 20px;
+        background: linear-gradient(135deg, #002566 0%, #003495 100%);
+    }
+
+    .pp-auth-logo-row img {
+        height: 28px;
+        padding: 4px 8px;
+    }
+
+    .pp-auth-hero h1 {
+        font-size: 21px;
+        margin: 14px 0 6px;
+    }
+
+    .pp-auth-hero p {
+        font-size: 12.5px;
+        margin-bottom: 0;
+        line-height: 1.45;
+    }
+
+    .pp-auth-form-panel {
+        padding: 28px 20px 24px;
+    }
+
+    .pp-auth-form-header h2 {
+        font-size: 20px;
+    }
+
+    .pp-auth-form-header p {
+        font-size: 12.5px;
+    }
+
+    .pp-auth-single-card {
+        padding: 28px 20px;
+        border-radius: 16px;
+    }
+
+    .pp-auth-single-header h2 {
+        font-size: 20px;
+    }
+
+    .pp-auth-input-wrap input {
+        height: 44px;
+        font-size: 13.5px;
+    }
+
+    .pp-auth-submit-btn {
+        height: 44px;
+        font-size: 14px;
+    }
+
+    .pp-auth-options {
+        flex-direction: row;
+        font-size: 12px;
+    }
+
+    .pp-auth-new-parent {
+        font-size: 12px;
+    }
+}
+

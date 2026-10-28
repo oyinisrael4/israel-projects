@@ -4,6 +4,8 @@ import TopBar from "../../components/TopBar";
 import PageFooter from "../../components/PageFooter";
 import StatusBadge from "../../components/StatusBadge";
 import PaymentModal from "./PaymentModal";
+import SlideDrawer from "../../components/SlideDrawer";
+import { FormInput, FormSelect } from "../../components/FormField";
 import student1 from "../../assets/icon-images/student-1.png";
 import student2 from "../../assets/icon-images/student-2.png";
 import profile1 from "../../assets/icon-images/profile-1.png";
@@ -18,7 +20,15 @@ const PARENT_PROFILE = {
     avatar: profile1,
 };
 
-const LINKED_STUDENTS = [
+const PROGRAMMES = [
+    "Hardware & Networking", "Desktop Publishing (MS Office Suite)", "MasterMind Series (MIS)",
+    "CCNA / CCNP", "IT Essentials", "Diploma in .NET Technologies", "Diploma in Web Development",
+    "Data Analysis", "Diploma in Java", "Diploma in Python", "Java with DevOps",
+    "Graphics Design", "UI/UX Design", "Project Management (PMP)", "Multimedia",
+    "Game Development", "CyberOps", "Certified Ethical Hacking",
+];
+
+const INITIAL_STUDENTS = [
     { sn: 1, img: student1, name: "Arlene McCoy", sid: "AD33578", programme: "Web Development", status: "Active" },
     { sn: 2, img: student2, name: "Wade Warren", sid: "AD45231", programme: "Data Analysis", status: "Active" },
 ];
@@ -27,22 +37,48 @@ const PARENT_NAV = [
     { id: "dashboard", to: "/parent-portal/dashboard", icon: "bi-speedometer2", label: "Dashboard" },
     { id: "student", to: "/parent-portal/student", icon: "bi-people-fill", label: "Student" },
     { id: "payment", to: "/parent-portal/payment", icon: "bi-cash-coin", label: "Payment" },
-    { id: "logout", to: "/login", icon: "bi-power", label: "Log-Out" },
+    { id: "logout", to: "/parent-portal/login", icon: "bi-power", label: "Log-Out" },
 ];
 
 export default function ParentDashboard() {
-    const [activeTab, setActiveTab] = useState("dashboard"); // "dashboard" | "profile"
+    const [activeTab, setActiveTab] = useState("dashboard");
     const [searchValue, setSearchValue] = useState("");
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [paymentStudent, setPaymentStudent] = useState(null);
     const [isPayModalOpen, setIsPayModalOpen] = useState(false);
+    const [linkedStudents, setLinkedStudents] = useState(INITIAL_STUDENTS);
+    const [isAddStudentOpen, setIsAddStudentOpen] = useState(false);
+    const [studentForm, setStudentForm] = useState({ firstName: "", lastName: "", programme: "", status: "Active" });
 
     function openPayment(student) {
         setPaymentStudent(student);
         setIsPayModalOpen(true);
     }
 
-    const filteredStudents = LINKED_STUDENTS.filter((s) => {
+    function handleAddStudent(e) {
+        e.preventDefault();
+        const { firstName, lastName, programme, status } = studentForm;
+        if (!firstName || !lastName || !programme) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+        const fullName = `${firstName} ${lastName}`;
+        const newSn = linkedStudents.length + 1;
+        const newSid = "AD" + (10000 + newSn);
+        const newStudent = {
+            sn: newSn,
+            img: student1,
+            name: fullName,
+            sid: newSid,
+            programme,
+            status,
+        };
+        setLinkedStudents((prev) => [...prev, newStudent]);
+        setStudentForm({ firstName: "", lastName: "", programme: "", status: "Active" });
+        setIsAddStudentOpen(false);
+    }
+
+    const filteredStudents = linkedStudents.filter((s) => {
         const q = searchValue.trim().toLowerCase();
         return (
             !q ||
@@ -76,7 +112,7 @@ export default function ParentDashboard() {
                 <div className="dashboard-content-container">
                     <div className="dashboard-content-wrapper">
 
-                        {/* Top Portal Bar with Tabs (Matches Reference Image) */}
+                        {/* Top Portal Bar with Tabs */}
                         <div className="parent-portal-top-bar">
                             <h2 className="parent-portal-brand-tag">PARENT/GUARDIAN PORTAL</h2>
                             <div className="parent-portal-tabs">
@@ -99,9 +135,7 @@ export default function ParentDashboard() {
                             </div>
                         </div>
 
-                        {/* =========================================================
-                            TAB 1: DASHBOARD VIEW
-                            ========================================================= */}
+                        {/* ─── TAB 1: DASHBOARD VIEW ─── */}
                         {activeTab === "dashboard" && (
                             <>
                                 <div className="parent-sub-heading">
@@ -109,7 +143,7 @@ export default function ParentDashboard() {
                                     <span>Dashboard</span>
                                 </div>
 
-                                {/* Summary Overview Bar (Matches Reference Image) */}
+                                {/* Summary Overview Bar — phone replaced with Add Student */}
                                 <div className="parent-summary-card">
                                     <div className="parent-summary-inner">
                                         <div className="parent-summary-left">
@@ -132,14 +166,21 @@ export default function ParentDashboard() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="parent-summary-phone-wrap">
-                                            <p className="parent-summary-phone-label">Phone Number</p>
-                                            <h4 className="parent-summary-phone-value">{PARENT_PROFILE.phone}</h4>
+                                        {/* Add Student button replaces phone number */}
+                                        <div className="parent-summary-action-wrap">
+                                            <button
+                                                type="button"
+                                                className="parent-add-student-btn"
+                                                onClick={() => setIsAddStudentOpen(true)}
+                                            >
+                                                <i className="bi bi-person-plus-fill"></i>
+                                                <span>Add Student</span>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* STUDENT Table Card (Where list of suggestions was in reference image) */}
+                                {/* STUDENT Table Card */}
                                 <div className="roster-panel-card">
                                     <div className="roster-panel-header">
                                         <div className="roster-panel-heading">
@@ -151,6 +192,14 @@ export default function ParentDashboard() {
                                                 {filteredStudents.length} student{filteredStudents.length !== 1 ? "s" : ""} linked
                                             </p>
                                         </div>
+                                        <button
+                                            type="button"
+                                            className="parent-add-student-btn-sm"
+                                            onClick={() => setIsAddStudentOpen(true)}
+                                        >
+                                            <i className="bi bi-plus-lg"></i>
+                                            <span>Add Student</span>
+                                        </button>
                                     </div>
 
                                     <div className="roster-table-wrapper">
@@ -194,7 +243,7 @@ export default function ParentDashboard() {
                                                 {filteredStudents.length === 0 && (
                                                     <tr>
                                                         <td colSpan={5} className="table-empty-cell">
-                                                            No linked students found.
+                                                            No students linked yet. Click <strong>Add Student</strong> to register your children.
                                                         </td>
                                                     </tr>
                                                 )}
@@ -205,9 +254,7 @@ export default function ParentDashboard() {
                             </>
                         )}
 
-                        {/* =========================================================
-                            TAB 2: MY PROFILE VIEW (Matches 4th Reference Image)
-                            ========================================================= */}
+                        {/* ─── TAB 2: MY PROFILE VIEW ─── */}
                         {activeTab === "profile" && (
                             <>
                                 <div className="parent-sub-heading">
@@ -237,7 +284,7 @@ export default function ParentDashboard() {
                                     </div>
                                 </div>
 
-                                {/* Main My Profile Panel (No Update Profile Button) */}
+                                {/* Main My Profile Panel */}
                                 <div className="parent-profile-panel">
                                     <div className="parent-profile-panel-heading">
                                         <i className="bi bi-person-circle"></i>
@@ -252,51 +299,27 @@ export default function ParentDashboard() {
                                             </div>
                                         </div>
 
-                                        {/* Profile Details (Read-only / Clean layout) */}
+                                        {/* Profile Details */}
                                         <div className="parent-profile-form">
                                             <div className="form-field">
                                                 <label>USERNAME: *</label>
-                                                <input
-                                                    type="text"
-                                                    readOnly
-                                                    value={PARENT_PROFILE.username}
-                                                />
+                                                <input type="text" readOnly value={PARENT_PROFILE.username} />
                                             </div>
-
                                             <div className="form-field">
                                                 <label>FULL NAME: *</label>
-                                                <input
-                                                    type="text"
-                                                    readOnly
-                                                    value={PARENT_PROFILE.name}
-                                                />
+                                                <input type="text" readOnly value={PARENT_PROFILE.name} />
                                             </div>
-
                                             <div className="form-field">
                                                 <label>EMAIL ADDRESS: *</label>
-                                                <input
-                                                    type="email"
-                                                    readOnly
-                                                    value={PARENT_PROFILE.email}
-                                                />
+                                                <input type="email" readOnly value={PARENT_PROFILE.email} />
                                             </div>
-
                                             <div className="form-field">
                                                 <label>PHONE NUMBER: *</label>
-                                                <input
-                                                    type="tel"
-                                                    readOnly
-                                                    value={PARENT_PROFILE.phone}
-                                                />
+                                                <input type="tel" readOnly value={PARENT_PROFILE.phone} />
                                             </div>
-
                                             <div className="form-field">
                                                 <label>RELATIONSHIP: *</label>
-                                                <input
-                                                    type="text"
-                                                    readOnly
-                                                    value={PARENT_PROFILE.relationship}
-                                                />
+                                                <input type="text" readOnly value={PARENT_PROFILE.relationship} />
                                             </div>
                                         </div>
                                     </div>
@@ -315,6 +338,67 @@ export default function ParentDashboard() {
                 onClose={() => setIsPayModalOpen(false)}
                 student={paymentStudent}
             />
+
+            {/* Add Student — Slide-Over Drawer */}
+            <SlideDrawer
+                isOpen={isAddStudentOpen}
+                onClose={() => {
+                    setIsAddStudentOpen(false);
+                    setStudentForm({ firstName: "", lastName: "", programme: "", status: "Active" });
+                }}
+                title="Add Student"
+                icon="bi-person-plus-fill"
+                intro="Register a child you want to enrol. Fill in their details below."
+            >
+                <form className="form-page-form" onSubmit={handleAddStudent}>
+                    <div className="form-section">
+                        <div className="form-section-title">
+                            <i className="bi bi-person-vcard"></i>
+                            <span>Student Basic Info</span>
+                        </div>
+                        <FormInput
+                            label="First Name"
+                            id="ppStudentFirstName"
+                            required
+                            value={studentForm.firstName}
+                            onChange={(e) => setStudentForm({ ...studentForm, firstName: e.target.value })}
+                        />
+                        <FormInput
+                            label="Last Name"
+                            id="ppStudentLastName"
+                            required
+                            value={studentForm.lastName}
+                            onChange={(e) => setStudentForm({ ...studentForm, lastName: e.target.value })}
+                        />
+                    </div>
+                    <div className="form-section">
+                        <div className="form-section-title">
+                            <i className="bi bi-mortarboard-fill"></i>
+                            <span>Academic Info</span>
+                        </div>
+                        <FormSelect
+                            label="Select Programme"
+                            id="ppStudentProgramme"
+                            required
+                            value={studentForm.programme}
+                            onChange={(e) => setStudentForm({ ...studentForm, programme: e.target.value })}
+                            placeholder="Select here"
+                            options={PROGRAMMES}
+                        />
+                        <FormSelect
+                            label="Select Status"
+                            id="ppStudentStatus"
+                            value={studentForm.status}
+                            onChange={(e) => setStudentForm({ ...studentForm, status: e.target.value })}
+                            options={["Active", "Inactive"]}
+                        />
+                    </div>
+                    <button type="submit" className="form-page-submit-btn">
+                        <i className="bi bi-check-lg"></i>
+                        <span>Add Student</span>
+                    </button>
+                </form>
+            </SlideDrawer>
         </div>
     );
 }
