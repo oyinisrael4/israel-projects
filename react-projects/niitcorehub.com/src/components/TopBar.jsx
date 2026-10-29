@@ -36,6 +36,14 @@ export default function TopBar({
     const displayName = userFullName || (profileName && profileName !== "Admin" && profileName !== "Jone Copper" ? profileName : "Israel Oyinlola");
     const displayRole = user?.roleName || (profileRole && profileRole !== "Administrator" ? profileRole : "Super Admin");
 
+    const topbarInitials = (() => {
+        const name = displayName || "";
+        const parts = name.trim().split(/\s+/);
+        if (!name) return "?";
+        if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+        return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    })();
+
     const filteredNavItems = isCounselor
         ? navItems.filter((i) => !["admin", "staff", "payments", "report"].includes(i.id))
         : navItems;
@@ -111,11 +119,10 @@ export default function TopBar({
                         aria-expanded={isDropdownOpen}
                         aria-haspopup="true"
                     >
-                        {profileAvatar ? (
-                            <img src={profileAvatar} alt={profileName} className="topbar-profile-avatar" />
-                        ) : (
-                            <i className="bi bi-person-circle topbar-profile-fallback-icon"></i>
-                        )}
+                        {/* Initials avatar — always shows real user initials */}
+                        <div className="initials-avatar initials-avatar-topbar" aria-label={displayName}>
+                            {topbarInitials}
+                        </div>
                         {/* Tiny active indicator ring */}
                         <span className="topbar-profile-online-dot"></span>
                     </button>
@@ -126,11 +133,9 @@ export default function TopBar({
                             {/* Profile header inside dropdown */}
                             <div className="topbar-dropdown-header">
                                 <div className="topbar-dropdown-avatar-wrap">
-                                    {profileAvatar ? (
-                                        <img src={profileAvatar} alt={displayName} />
-                                    ) : (
-                                        <i className="bi bi-person-circle"></i>
-                                    )}
+                                    <div className="initials-avatar initials-avatar-dropdown" aria-label={displayName}>
+                                        {topbarInitials}
+                                    </div>
                                 </div>
                                 <div className="topbar-dropdown-user-info">
                                     <p className="topbar-dropdown-name">{displayName}</p>

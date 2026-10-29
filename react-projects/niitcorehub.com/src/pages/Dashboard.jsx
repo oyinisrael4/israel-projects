@@ -7,8 +7,6 @@ import PageFooter from "../components/PageFooter";
 import StatusBadge from "../components/StatusBadge";
 import { useAuth } from "../context/AuthContext";
 import { useStaffData } from "../context/StaffDataContext";
-import teacherAvatar from "../assets/icon-images/teacher-avatar.png";
-import adminAvatar from "../assets/icon-images/admin-avatar.png";
 import profile1 from "../assets/icon-images/profile-1.png";
 import profile2 from "../assets/icon-images/profile-2.png";
 import profile3 from "../assets/icon-images/profile-3.png";
@@ -33,18 +31,18 @@ const ADMIN_NAV = [
 ];
 
 const NOTICES = [
-    { img: profile1, name: "Admin", text: "Lorem Ipsum is simply dummy text of the printing and typesetti" },
-    { img: profile2, name: "Kathryn Murphy", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry." },
-    { img: profile3, name: "Admin", text: "Lorem Ipsum is simply dummy text of the printing and typesetti" },
-    { img: profile4, name: "John Doe", text: "Lorem Ipsum dolor sit amet consectetur adipisicing elit." },
+    { img: profile1, name: "Admin", text: "Hardware & Networking class moves to Lab 2 effective Friday 3 Oct 2026.", date: "01 Oct 2026" },
+    { img: profile2, name: "Kathryn Murphy", text: "Parents\u2019 meeting holds on Saturday 11 Oct 2026 at 10 AM in the Main Hall.", date: "08 Oct 2026" },
+    { img: profile3, name: "Admin", text: "Mid-term assessments begin Monday 13 Oct 2026 — all students must present their ID cards.", date: "10 Oct 2026" },
+    { img: profile4, name: "Israel Oyinlola", text: "Web Development Diploma project submissions close on 31 Oct 2026. Late work will not be accepted.", date: "22 Oct 2026" },
 ];
 
 const EVENTS = [
-    { time: "09:00 - 09:45", ampm: "AM", title: "Marketing Strategy Kickoff", lead: "Robert Fox", cls: "events-panel-item-primary" },
-    { time: "11:15 - 12:00", ampm: "AM", title: "Product Design Brainstorm", lead: "Leslie Alexander", cls: "events-panel-item-secondary" },
-    { time: "02:00 - 03:00", ampm: "PM", title: "Client Feedback Review", lead: "Courtney Henry", cls: "events-panel-item-black" },
-    { time: "04:15 - 05:00", ampm: "PM", title: "Sprint Planning & Task Allocation", lead: "Eleanor Pena", cls: "events-panel-item-primary" },
-    { time: "01:15 - 02:00", ampm: "PM", title: "Client Feedback Review", lead: "John", cls: "events-panel-item-secondary" },
+    { time: "09:00 - 10:00", ampm: "AM", title: "Hardware & Networking Lab Session", lead: "Leslie Alexander", cls: "events-panel-item-primary" },
+    { time: "11:00 - 12:00", ampm: "AM", title: "Web Development Project Review", lead: "Courtney Henry", cls: "events-panel-item-secondary" },
+    { time: "01:00 - 02:00", ampm: "PM", title: "Data Analysis Practical Test", lead: "Eleanor Pena", cls: "events-panel-item-black" },
+    { time: "02:30 - 04:00", ampm: "PM", title: "CyberOps & Ethical Hacking Workshop", lead: "Robert Fox", cls: "events-panel-item-primary" },
+    { time: "04:00 - 05:00", ampm: "PM", title: "Staff Progress Meeting", lead: "Israel Oyinlola", cls: "events-panel-item-secondary" },
 ];
 
 const STUDENTS = [
@@ -65,6 +63,13 @@ const LEAVES = [
     { title: "Medical Leave", status: "Accepted" },
 ];
 
+function getInitials(name) {
+    if (!name) return "??";
+    const parts = name.trim().split(/\s+/);
+    if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+
 export default function Dashboard() {
     const { user } = useAuth();
     const { allStaff } = useStaffData();
@@ -73,15 +78,23 @@ export default function Dashboard() {
     // Compute real counts from existing staff, students, parents, and payments data
     const staffCount = allStaff ? allStaff.length : 11;
 
-    const studentsCount = (() => {
+    const allStudents = (() => {
         try {
             const saved = localStorage.getItem("niit_students_data");
-            if (saved) return JSON.parse(saved).length;
+            if (saved) return JSON.parse(saved);
         } catch {
             // Ignore
         }
-        return STUDENTS.length;
+        return STUDENTS;
     })();
+
+    const studentsCount = allStudents.length;
+
+    // Derive attendance counts from student statuses:
+    // Active → Present, Inactive → Absent, any other → Half Day
+    const presentCount = allStudents.filter((s) => s.status === "Active").length;
+    const absentCount = allStudents.filter((s) => s.status === "Inactive").length;
+    const halfDayCount = allStudents.length - presentCount - absentCount;
 
     const parentsCount = (() => {
         try {
@@ -115,6 +128,7 @@ export default function Dashboard() {
         : "Israel Oyinlola";
     const loggedInRole = user?.roleName || user?.role || "Super Admin";
     const loggedInEmail = user?.emailAddress || "oyinisrael3@gmail.com";
+    const loggedInInitials = getInitials(loggedInName);
 
     return (
         <div className="app-layout-container">
@@ -125,7 +139,6 @@ export default function Dashboard() {
                     searchPlaceholder="Search"
                     searchValue={searchValue}
                     onSearchChange={(e) => setSearchValue(e.target.value)}
-                    profileAvatar={adminAvatar}
                     profileName={loggedInName}
                     profileRole={loggedInRole}
                     navItems={ADMIN_NAV}
@@ -145,7 +158,9 @@ export default function Dashboard() {
                         <div className="stats-row-container">
                             <div className="teacher-profile-card">
                                 <div className="teacher-profile-card-image">
-                                    <img src={teacherAvatar} alt={loggedInName} />
+                                    <div className="initials-avatar initials-avatar-large" aria-label={loggedInName}>
+                                        {loggedInInitials}
+                                    </div>
                                 </div>
                                 <h3 className="teacher-profile-card-name">{loggedInName}</h3>
                                 <p className="teacher-profile-card-meta">{loggedInRole}</p>
@@ -173,9 +188,9 @@ export default function Dashboard() {
                                 <div className="attendance-card-body">
                                     <div className="attendance-legend-list">
                                         {[
-                                            { cls: "attendance-legend-icon-present", count: 200, label: "Present" },
-                                            { cls: "attendance-legend-icon-half", count: 300, label: "Half Day" },
-                                            { cls: "attendance-legend-icon-absent", count: 100, label: "Absent" },
+                                            { cls: "attendance-legend-icon-present", count: presentCount, label: "Present" },
+                                            { cls: "attendance-legend-icon-half", count: halfDayCount, label: "Half Day" },
+                                            { cls: "attendance-legend-icon-absent", count: absentCount, label: "Absent" },
                                         ].map((item) => (
                                             <div className="attendance-legend-item" key={item.label}>
                                                 <i className={`bi bi-circle-fill attendance-legend-icon ${item.cls}`}></i>
@@ -206,7 +221,7 @@ export default function Dashboard() {
                                             <div className="notice-panel-item-text">
                                                 <h4>{item.name}</h4>
                                                 <p>{item.text}</p>
-                                                <span>25 Jan 2024</span>
+                                                <span>{item.date}</span>
                                             </div>
                                         </div>
                                     ))}

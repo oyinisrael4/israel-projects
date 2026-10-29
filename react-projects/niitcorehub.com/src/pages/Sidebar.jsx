@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
 import niitLogo from "../assets/icon-images/niit-logo.png";
-import adminAvatar from "../assets/icon-images/admin-avatar.png";
-import admin4 from "../assets/icon-images/admin-4.png";
 import { useAuth } from "../context/AuthContext";
+
+function getInitials(name) {
+    if (!name) return "??";
+    const parts = name.trim().split(/\s+/);
+    if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
 
 /**
  * Shared Sidebar component used across all dashboard pages.
@@ -23,7 +28,7 @@ export default function Sidebar({ activePage = "" }) {
         : "Israel Oyinlola";
 
     const displayRole = user?.roleName || "Super Admin";
-    const avatarImg = adminAvatar;
+    const displayInitials = getInitials(displayName);
 
     // Full administrative navigation list
     const allNavItems = [
@@ -54,7 +59,9 @@ export default function Sidebar({ activePage = "" }) {
 
             <div className="sidebar-profile-card">
                 <div className="sidebar-profile-card-image">
-                    <img src={avatarImg} alt={displayName} />
+                    <div className="initials-avatar initials-avatar-sidebar" aria-label={displayName}>
+                        {displayInitials}
+                    </div>
                 </div>
                 <div className="sidebar-profile-card-text">
                     <h4>{displayName}</h4>
