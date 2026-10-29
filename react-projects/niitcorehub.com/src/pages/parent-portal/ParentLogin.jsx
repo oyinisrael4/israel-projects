@@ -8,7 +8,13 @@ export default function ParentLogin() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        // No authentication for now — clicking login goes straight to dashboard
+        const parentSession = {
+            email: form.email || "adunola.ojo@gmail.com",
+            name: "Mrs. Adunola Ojo",
+            loggedIn: true,
+            loginTime: new Date().toISOString(),
+        };
+        localStorage.setItem("parentSession", JSON.stringify(parentSession));
         navigate("/parent-portal/dashboard");
     }
 

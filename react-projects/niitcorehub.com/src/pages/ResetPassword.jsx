@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import niitLogo from "../assets/icon-images/niit-logo.png";
 import { useAuth } from "../context/AuthContext";
 import AlertModal from "../components/AlertModal";
@@ -8,12 +8,19 @@ import ButtonComponent from "../components/ButtonComponent";
 import ErrorAlert from "../components/ErrorAlert";
 
 export default function ResetPassword() {
-    const getData = JSON.parse(sessionStorage.getItem("resetPasswordDataSession") || {});
+    const navigate = useNavigate();
+    const getData = JSON.parse(sessionStorage.getItem("resetPasswordDataSession") || "{}");
     const { resetPassword } = useAuth();
     const [modal, setModal] = useState(false);
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState("");
     const [apiError, setApiError] = useState("");
+
+    useEffect(() => {
+        if (!getData || !getData.data) {
+            navigate("/forgot-password", { replace: true });
+        }
+    }, [getData, navigate]);
 
     const [formData, setFormData] = useState({
         otpCode: "",
@@ -89,7 +96,7 @@ export default function ResetPassword() {
             setLoading(true);
 
             const responseData = await resetPassword(
-                getData?.data.staffId,
+                getData?.data?.staffId,
                 formData.otpCode.trim(),
                 formData.newpassword,
                 formData.confirmPassword
@@ -134,8 +141,8 @@ export default function ResetPassword() {
                             </div>
 
                             <div className="reset-otp-banner">
-                                {getData?.data.otpCode} <br/>
-                                An OTP has been sent to your email address <strong>{getData?.data.emailAddress}</strong>. Enter the OTP code and your new password below.
+                                {getData?.data?.otpCode && <>{getData.data.otpCode} <br /></>}
+                                An OTP has been sent to your email address <strong>{getData?.data?.emailAddress || "your registered email"}</strong>. Enter the OTP code and your new password below.
                             </div>
 
                             <form className="login-form" onSubmit={handleResetPassword}>

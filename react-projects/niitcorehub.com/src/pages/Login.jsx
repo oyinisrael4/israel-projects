@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import niitLogo from "../assets/icon-images/niit-logo.png";
 import { useAuth } from "../context/AuthContext";
@@ -8,11 +8,17 @@ import ButtonComponent from "../components/ButtonComponent";
 import ErrorAlert from "../components/ErrorAlert";
 
 export default function Login() {
-    const { login } = useAuth();
+    const { login, loginAsDemo } = useAuth();
+    const navigate = useNavigate();
     const [modal, setModal] = useState(false);
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState("");
     const [apiError, setApiError] = useState("");
+
+    const handleDemoLogin = () => {
+        loginAsDemo();
+        navigate("/dashboard");
+    };
 
     const [formData, setFormData] = useState({
         emailAddress: "",
@@ -173,6 +179,16 @@ export default function Login() {
                                     btnAction={loading}
                                     className="login-submit-btn"
                                 />
+
+                                <button
+                                    type="button"
+                                    className="login-demo-btn"
+                                    onClick={handleDemoLogin}
+                                    title="Use demo account"
+                                >
+                                    <i className="bi bi-person-check-fill"></i>
+                                    <span>Use demo account</span>
+                                </button>
                             </form>
 
                             <div className="login-social-row">

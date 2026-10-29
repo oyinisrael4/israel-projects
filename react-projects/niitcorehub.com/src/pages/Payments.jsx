@@ -168,7 +168,7 @@ export default function Payments() {
                     searchValue={searchValue}
                     onSearchChange={(e) => setSearchValue(e.target.value)}
                     profileAvatar={adminAvatar}
-                    profileName="Isreal Oyinlola"
+                    profileName="Israel Oyinlola"
                     profileRole="Super Admin"
                     navItems={ADMIN_NAV}
                     activePage="payments"

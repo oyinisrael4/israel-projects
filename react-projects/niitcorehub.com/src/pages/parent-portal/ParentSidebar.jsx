@@ -12,10 +12,15 @@ export default function ParentSidebar({ activePage = "", isOpen = false, onClose
         { id: "dashboard", to: "/parent-portal/dashboard", icon: "bi-speedometer2", label: "Dashboard" },
         { id: "student", to: "/parent-portal/student", icon: "bi-people-fill", label: "Student" },
         { id: "payment", to: "/parent-portal/payment", icon: "bi-cash-coin", label: "Payment" },
-        { id: "logout", to: "/login", icon: "bi-power", label: "Log-Out" },
+        { id: "logout", to: "/parent-portal/login", icon: "bi-power", label: "Log-Out" },
     ];
 
-    const handleLinkClick = () => {
+    const handleLinkClick = (id) => {
+        if (id === "logout") {
+            localStorage.removeItem("parentSession");
+            localStorage.removeItem("parentUser");
+            localStorage.removeItem("niit_parent_session");
+        }
         if (onClose) onClose();
     };
 
@@ -69,7 +74,7 @@ export default function ParentSidebar({ activePage = "", isOpen = false, onClose
                                 <Link
                                     className="sidebar-nav-link"
                                     to={item.to}
-                                    onClick={handleLinkClick}
+                                    onClick={() => handleLinkClick(item.id)}
                                 >
                                     <i className={`bi ${item.icon}`}></i>
                                     <span>{item.label}</span>

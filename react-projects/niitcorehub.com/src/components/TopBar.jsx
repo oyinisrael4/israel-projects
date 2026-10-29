@@ -10,13 +10,14 @@ export default function TopBar({
     searchValue = "",
     onSearchChange,
     profileAvatar,
-    profileName = "Isreal Oyinlola",
+    profileName = "Israel Oyinlola",
     profileRole = "Super Admin",
     navItems = [],
     activePage = "",
     onMenuClick,
 }) {
     const { user, logout } = useAuth();
+    const isDemo = Boolean(user?.isDemo || (user?.staffId && String(user.staffId).startsWith("DEMO")));
     const isCounselor =
         (user?.roleName || "").toLowerCase().includes("counselor") ||
         (user?.role || "").toLowerCase().includes("counselor");
@@ -32,7 +33,7 @@ export default function TopBar({
         ? `${formattedFirstName} ${formattedLastName}`.trim()
         : null;
 
-    const displayName = userFullName || (profileName && profileName !== "Admin" && profileName !== "Jone Copper" ? profileName : "Isreal Oyinlola");
+    const displayName = userFullName || (profileName && profileName !== "Admin" && profileName !== "Jone Copper" ? profileName : "Israel Oyinlola");
     const displayRole = user?.roleName || (profileRole && profileRole !== "Administrator" ? profileRole : "Super Admin");
 
     const filteredNavItems = isCounselor
@@ -90,6 +91,11 @@ export default function TopBar({
 
             {/* Right-side actions */}
             <div className="topbar-actions-wrapper">
+                {isDemo && (
+                    <span className="topbar-demo-badge" title="Demo mode active">
+                        <i className="bi bi-shield-check"></i> Demo mode
+                    </span>
+                )}
                 {/* Notification Bell */}
                 <button className="topbar-icon-btn topbar-notification-btn" title="Notifications">
                     <i className="bi bi-bell-fill"></i>

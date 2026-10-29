@@ -28,19 +28,21 @@ export const AuthProvider = ({ children }) => {
         const cleanEmail = (emailAddress || "").trim().toLowerCase();
         const cleanPassword = (password || "").trim();
 
-        // Real database super admin account details
-        const isSuperAdminCreds = cleanEmail === "oyinisrael3@gmail.com" && cleanPassword === "12345678";
+        // Local development demo login only — enabled exclusively in dev mode via .env
+        const demoEmail = import.meta.env.DEV ? (import.meta.env.VITE_DEMO_EMAIL || "").trim().toLowerCase() : "";
+        const demoPassword = import.meta.env.DEV ? (import.meta.env.VITE_DEMO_PASSWORD || "").trim() : "";
+        const isDemoLogin = Boolean(import.meta.env.DEV && demoEmail && demoPassword && cleanEmail === demoEmail && cleanPassword === demoPassword);
 
-        const superAdminUser = {
-            staffId: "STAFF20261012053631",
-            firstName: "Isreal",
+        const demoUser = isDemoLogin ? {
+            staffId: "DEMO_STAFF_001",
+            firstName: "Israel",
             lastName: "Oyinlola",
-            emailAddress: "oyinisrael3@gmail.com",
+            emailAddress: demoEmail,
             roleName: "Super Admin",
             role: "Super Admin",
             statusName: "Active",
             lastLogin: new Date().toLocaleString(),
-        };
+        } : null;
 
         try {
             const response = await api.post("auth/sign-in.php", {
@@ -53,13 +55,13 @@ export const AuthProvider = ({ children }) => {
 
             if (responseData?.success === true) {
                 const userData = responseData.data || responseData.user || {};
-                const token = responseData.accessToken || userData.staffId || "STAFF20261012053631";
+                const token = responseData.accessToken || userData.staffId || userData.id;
 
                 const resolvedUser = {
                     ...userData,
                     firstName: userData.firstName
                         ? userData.firstName.charAt(0).toUpperCase() + userData.firstName.slice(1)
-                        : "Isreal",
+                        : "Israel",
                     lastName: userData.lastName
                         ? userData.lastName.charAt(0).toUpperCase() + userData.lastName.slice(1)
                         : "Oyinlola",
@@ -68,7 +70,9 @@ export const AuthProvider = ({ children }) => {
                     statusName: userData.statusName || "Active",
                 };
 
-                localStorage.setItem("accessToken", token);
+                if (token) {
+                    localStorage.setItem("accessToken", token);
+                }
                 localStorage.setItem("user", JSON.stringify(resolvedUser));
                 sessionStorage.setItem("userSession", JSON.stringify(responseData));
 
@@ -76,31 +80,31 @@ export const AuthProvider = ({ children }) => {
                 return responseData;
             }
 
-            // Fallback for valid Super Admin login if backend returns failure or custom format
-            if (isSuperAdminCreds) {
-                localStorage.setItem("accessToken", superAdminUser.staffId);
-                localStorage.setItem("user", JSON.stringify(superAdminUser));
-                sessionStorage.setItem("userSession", JSON.stringify({ success: true, data: superAdminUser }));
-                setUser(superAdminUser);
+            // Fallback for demo login in local development
+            if (isDemoLogin && demoUser) {
+                localStorage.setItem("accessToken", demoUser.staffId);
+                localStorage.setItem("user", JSON.stringify(demoUser));
+                sessionStorage.setItem("userSession", JSON.stringify({ success: true, data: demoUser }));
+                setUser(demoUser);
                 return {
                     success: true,
                     message: "STAFF LOGIN SUCCESSFUL",
-                    data: superAdminUser,
+                    data: demoUser,
                 };
             }
 
             return responseData;
         } catch (err) {
-            // If backend is unreachable or protected by WAF security check, authenticate valid Super Admin
-            if (isSuperAdminCreds) {
-                localStorage.setItem("accessToken", superAdminUser.staffId);
-                localStorage.setItem("user", JSON.stringify(superAdminUser));
-                sessionStorage.setItem("userSession", JSON.stringify({ success: true, data: superAdminUser }));
-                setUser(superAdminUser);
+            // Local development demo fallback when backend is unreachable
+            if (isDemoLogin && demoUser) {
+                localStorage.setItem("accessToken", demoUser.staffId);
+                localStorage.setItem("user", JSON.stringify(demoUser));
+                sessionStorage.setItem("userSession", JSON.stringify({ success: true, data: demoUser }));
+                setUser(demoUser);
                 return {
                     success: true,
                     message: "STAFF LOGIN SUCCESSFUL",
-                    data: superAdminUser,
+                    data: demoUser,
                 };
             }
             throw err;
@@ -119,8 +123,8 @@ export const AuthProvider = ({ children }) => {
         setUser(updated);
     };
 
-    // SIGN UP
-    const signUp = async (fullName, emailAddress, phoneNumber, password) => {
+    // SIGN UP (Client-side demo only: stores registration details in sessionStorage; no backend endpoint)
+    const signUp = (fullName, emailAddress, phoneNumber, password) => {
         sessionStorage.setItem("userSignUpSession", JSON.stringify({ fullName, emailAddress, phoneNumber }));
         return {
             success: true,
@@ -135,11 +139,14 @@ export const AuthProvider = ({ children }) => {
                 emailAddress,
             });
             return response.data;
-        } catch {
+        } catch (err) {
+            const errorMessage =
+                err.response?.data?.message ||
+                err.message ||
+                "Unable to process forgot password request. Please try again.";
             return {
-                success: true,
-                message: "OTP sent to your email address.",
-                data: { otpCode: "123456" },
+                success: false,
+                message: errorMessage,
             };
         }
     };
@@ -154,12 +161,43 @@ export const AuthProvider = ({ children }) => {
                 confirmPassword,
             });
             return response.data;
-        } catch {
+        } catch (err) {
+            const errorMessage =
+                err.response?.data?.message ||
+                err.message ||
+                "Unable to reset your password. Please try again.";
             return {
-                success: true,
-                message: "Password reset successfully.",
+                success: false,
+                message: errorMessage,
             };
         }
+    };
+
+    // DEMO LOGIN (Item 1b: Signs in "Demo Admin" locally without backend call)
+    const loginAsDemo = () => {
+        const demoUser = {
+            staffId: "DEMO_ADMIN_001",
+            firstName: "Demo",
+            lastName: "Admin",
+            name: "Demo Admin",
+            emailAddress: "demo.admin@niitcorehub.local",
+            roleName: "Super Admin",
+            role: "Super Admin",
+            statusName: "Active",
+            isDemo: true,
+            lastLogin: new Date().toLocaleString(),
+        };
+
+        localStorage.setItem("accessToken", demoUser.staffId);
+        localStorage.setItem("user", JSON.stringify(demoUser));
+        sessionStorage.setItem("userSession", JSON.stringify({ success: true, data: demoUser, isDemo: true }));
+
+        setUser(demoUser);
+        return {
+            success: true,
+            message: "Signed in as Demo Admin",
+            data: demoUser,
+        };
     };
 
     // LOGOUT
@@ -174,6 +212,7 @@ export const AuthProvider = ({ children }) => {
         user,
         loading,
         login,
+        loginAsDemo,
         signUp,
         forgotPassword,
         resetPassword,

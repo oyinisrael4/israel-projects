@@ -1687,3 +1687,84 @@
     }
 }
 
+/* =========================================================
+   PARENT PORTAL RESPONSIVE MEDIA QUERIES (1024px and 768px)
+   ========================================================= */
+
+@media (max-width: 1024px) {
+    .pp-dash-stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 16px;
+    }
+
+    .parent-two-col,
+    .pp-dashboard-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .pp-table-wrapper,
+    .marks-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .marks-table {
+        min-width: 650px;
+    }
+}
+
+@media (max-width: 768px) {
+    .pp-dash-stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px;
+    }
+
+    .pp-profile-card,
+    .pp-student-detail-card {
+        flex-direction: column;
+    }
+
+    .pp-table-wrapper,
+    .marks-table-wrapper {
+        width: 100%;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        display: block;
+    }
+
+    .marks-table {
+        min-width: 620px;
+    }
+
+    .pp-auth-wrapper {
+        padding: 16px 12px;
+    }
+
+    .pp-auth-card {
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .pp-auth-hero {
+        display: none;
+    }
+
+    .pp-auth-form-panel {
+        width: 100% !important;
+        padding: 28px 18px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .pp-dash-stats-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .pp-auth-form-panel {
+        padding: 24px 14px !important;
+    }
+}
+
+

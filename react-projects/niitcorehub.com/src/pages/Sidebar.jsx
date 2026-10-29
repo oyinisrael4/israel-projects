@@ -20,7 +20,7 @@ export default function Sidebar({ activePage = "" }) {
 
     const displayName = user?.firstName
         ? `${user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1).toLowerCase()} ${user.lastName ? user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1).toLowerCase() : ""}`.trim()
-        : "Isreal Oyinlola";
+        : "Israel Oyinlola";
 
     const displayRole = user?.roleName || "Super Admin";
     const avatarImg = adminAvatar;

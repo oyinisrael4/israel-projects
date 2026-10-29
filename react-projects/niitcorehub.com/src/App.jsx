@@ -18,11 +18,12 @@ import ParentResetPassword from "./pages/parent-portal/ParentResetPassword";
 import ParentDashboard from "./pages/parent-portal/ParentDashboard";
 import ParentStudent from "./pages/parent-portal/ParentStudent";
 import ParentPayment from "./pages/parent-portal/ParentPayment";
+import ProtectedRoute, { ParentProtectedRoute } from "./components/ProtectedRoute";
 
-import './index.css';
-import './assets/styles/mainStyles.css';
-import './assets/styles/paymentLink.css';
-import './assets/styles/parentPortal.css';
+import "./index.css";
+import "./assets/styles/mainStyles.css";
+import "./assets/styles/paymentLink.css";
+import "./assets/styles/parentPortal.css";
 // Bootstrap Icons CSS is loaded via <link> in index.html to avoid Vite scanning its docs/ folder
 
 import { createBrowserRouter, Navigate } from "react-router-dom";
@@ -42,7 +43,11 @@ export const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <Dashboard />
+        element: (
+            <ProtectedRoute>
+                <Dashboard />
+            </ProtectedRoute>
+        )
     },
     {
         path: "/sign-up",
@@ -58,15 +63,27 @@ export const router = createBrowserRouter([
     },
     {
         path: "/admin",
-        element: <Admin />
+        element: (
+            <ProtectedRoute>
+                <Admin />
+            </ProtectedRoute>
+        )
     },
     {
         path: "/students",
-        element: <Students />
+        element: (
+            <ProtectedRoute>
+                <Students />
+            </ProtectedRoute>
+        )
     },
     {
         path: "/staff",
-        element: <Staff />
+        element: (
+            <ProtectedRoute>
+                <Staff />
+            </ProtectedRoute>
+        )
     },
     {
         path: "/instructor",
@@ -74,15 +91,27 @@ export const router = createBrowserRouter([
     },
     {
         path: "/counselor",
-        element: <Counselor />
+        element: (
+            <ProtectedRoute>
+                <Counselor />
+            </ProtectedRoute>
+        )
     },
     {
         path: "/parents",
-        element: <Parents />
+        element: (
+            <ProtectedRoute>
+                <Parents />
+            </ProtectedRoute>
+        )
     },
     {
         path: "/payments",
-        element: <Payments />
+        element: (
+            <ProtectedRoute>
+                <Payments />
+            </ProtectedRoute>
+        )
     },
     {
         path: "/payment-link",
@@ -90,11 +119,19 @@ export const router = createBrowserRouter([
     },
     {
         path: "/programme",
-        element: <Programme />
+        element: (
+            <ProtectedRoute>
+                <Programme />
+            </ProtectedRoute>
+        )
     },
     {
         path: "/referrals",
-        element: <Referrals />
+        element: (
+            <ProtectedRoute>
+                <Referrals />
+            </ProtectedRoute>
+        )
     },
     // ── Parent Portal Auth ────────────────────────────────────────────────────
     {
@@ -116,14 +153,26 @@ export const router = createBrowserRouter([
     // ── Parent Portal App ─────────────────────────────────────────────────────
     {
         path: "/parent-portal/dashboard",
-        element: <ParentDashboard />
+        element: (
+            <ParentProtectedRoute>
+                <ParentDashboard />
+            </ParentProtectedRoute>
+        )
     },
     {
         path: "/parent-portal/student",
-        element: <ParentStudent />
+        element: (
+            <ParentProtectedRoute>
+                <ParentStudent />
+            </ParentProtectedRoute>
+        )
     },
     {
         path: "/parent-portal/payment",
-        element: <ParentPayment />
+        element: (
+            <ParentProtectedRoute>
+                <ParentPayment />
+            </ParentProtectedRoute>
+        )
     },
 ]);

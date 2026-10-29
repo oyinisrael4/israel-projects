@@ -5,6 +5,8 @@ import PageHeading from "../components/PageHeading";
 import StatCard from "../components/StatCard";
 import PageFooter from "../components/PageFooter";
 import StatusBadge from "../components/StatusBadge";
+import { useAuth } from "../context/AuthContext";
+import { useStaffData } from "../context/StaffDataContext";
 import teacherAvatar from "../assets/icon-images/teacher-avatar.png";
 import adminAvatar from "../assets/icon-images/admin-avatar.png";
 import profile1 from "../assets/icon-images/profile-1.png";
@@ -28,13 +30,6 @@ const ADMIN_NAV = [
     { id: "referrals", to: "/referrals", icon: "bi-arrow-repeat", label: "Referrals" },
     { id: "payments", to: "/payments", icon: "bi-cash-coin", label: "Payments" },
     { id: "logout", to: "/login", icon: "bi-power", label: "Log-Out" },
-];
-
-const STATS = [
-    { icon: "bi-person-fill", label: "Total Students", value: "3,500", variant: "primary" },
-    { icon: "bi-journal-check", label: "Total Staffs", value: "3,500", variant: "secondary" },
-    { icon: "bi-mortarboard-fill", label: "Total Programmes", value: "3,500", variant: "black" },
-    { icon: "bi-wallet2", label: "Total Revenue", value: "3,500", variant: "footer" },
 ];
 
 const NOTICES = [
@@ -71,7 +66,55 @@ const LEAVES = [
 ];
 
 export default function Dashboard() {
+    const { user } = useAuth();
+    const { allStaff } = useStaffData();
     const [searchValue, setSearchValue] = useState("");
+
+    // Compute real counts from existing staff, students, parents, and payments data
+    const staffCount = allStaff ? allStaff.length : 11;
+
+    const studentsCount = (() => {
+        try {
+            const saved = localStorage.getItem("niit_students_data");
+            if (saved) return JSON.parse(saved).length;
+        } catch {
+            // Ignore
+        }
+        return STUDENTS.length;
+    })();
+
+    const parentsCount = (() => {
+        try {
+            const saved = localStorage.getItem("niit_parents_data");
+            if (saved) return JSON.parse(saved).length;
+        } catch {
+            // Ignore
+        }
+        return 5;
+    })();
+
+    const paymentsCount = (() => {
+        try {
+            const saved = localStorage.getItem("niit_payments_data");
+            if (saved) return JSON.parse(saved).length;
+        } catch {
+            // Ignore
+        }
+        return 5;
+    })();
+
+    const stats = [
+        { icon: "bi-person-fill", label: "Total Students", value: studentsCount.toLocaleString(), variant: "primary" },
+        { icon: "bi-journal-check", label: "Total Staffs", value: staffCount.toLocaleString(), variant: "secondary" },
+        { icon: "bi-house-heart-fill", label: "Total Parents", value: parentsCount.toLocaleString(), variant: "black" },
+        { icon: "bi-wallet2", label: "Total Payments", value: paymentsCount.toLocaleString(), variant: "footer" },
+    ];
+
+    const loggedInName = user
+        ? `${user.firstName || ""} ${user.lastName || ""}`.trim() || user.name || "Israel Oyinlola"
+        : "Israel Oyinlola";
+    const loggedInRole = user?.roleName || user?.role || "Super Admin";
+    const loggedInEmail = user?.emailAddress || "oyinisrael3@gmail.com";
 
     return (
         <div className="app-layout-container">
@@ -83,8 +126,8 @@ export default function Dashboard() {
                     searchValue={searchValue}
                     onSearchChange={(e) => setSearchValue(e.target.value)}
                     profileAvatar={adminAvatar}
-                    profileName="Isreal Oyinlola"
-                    profileRole="Super Admin"
+                    profileName={loggedInName}
+                    profileRole={loggedInRole}
                     navItems={ADMIN_NAV}
                     activePage="dashboard"
                 />
@@ -102,18 +145,18 @@ export default function Dashboard() {
                         <div className="stats-row-container">
                             <div className="teacher-profile-card">
                                 <div className="teacher-profile-card-image">
-                                    <img src={teacherAvatar} alt="Courtney Henry" />
+                                    <img src={teacherAvatar} alt={loggedInName} />
                                 </div>
-                                <h3 className="teacher-profile-card-name">Courtney Henry</h3>
-                                <p className="teacher-profile-card-meta">Class: 1-A, V-B</p>
-                                <p className="teacher-profile-card-meta">Physics</p>
+                                <h3 className="teacher-profile-card-name">{loggedInName}</h3>
+                                <p className="teacher-profile-card-meta">{loggedInRole}</p>
+                                <p className="teacher-profile-card-meta">{loggedInEmail}</p>
                                 <button className="btn teacher-profile-card-btn" title="Edit Profile">
                                     <span>Edit Profile</span>
                                 </button>
                             </div>
 
                             <div className="stat-card-grid">
-                                {STATS.map((s) => (
+                                {stats.map((s) => (
                                     <StatCard key={s.label} icon={s.icon} label={s.label} value={s.value} variant={s.variant} />
                                 ))}
                             </div>

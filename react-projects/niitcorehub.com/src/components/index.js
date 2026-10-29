@@ -8,3 +8,4 @@ export { default as RosterFilter } from "./RosterFilter";
 export { default as SlideDrawer } from "./SlideDrawer";
 export { default as StatCard } from "./StatCard";
 export { default as StatusBadge } from "./StatusBadge";
+export { default as ProtectedRoute, ParentProtectedRoute } from "./ProtectedRoute";

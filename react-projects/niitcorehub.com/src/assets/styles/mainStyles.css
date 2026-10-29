@@ -242,6 +242,29 @@
     color: var(--white-color);
 }
 
+.login-page-wrapper .login-card .login-form-panel .login-form-inner .login-form .login-demo-btn {
+    height: 44px;
+    border: 1.5px dashed var(--primary-color);
+    border-radius: 24px;
+    background: transparent;
+    font-family: sub-title-font;
+    font-size: 13px;
+    color: var(--primary-color);
+    cursor: pointer;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+}
+
+.login-page-wrapper .login-card .login-form-panel .login-form-inner .login-form .login-demo-btn:hover {
+    background: rgba(43, 76, 216, 0.08);
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+}
+
 .login-page-wrapper .login-card .login-form-panel .login-form-inner .login-social-row {
     display: flex;
     align-items: center;
@@ -602,6 +625,27 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
+}
+
+.app-layout-container .main-content-wrapper .topbar-wrapper .topbar-actions-wrapper .topbar-demo-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    color: #b45309;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.app-layout-container .main-content-wrapper .topbar-wrapper .topbar-actions-wrapper .topbar-demo-badge i {
+    font-size: 13px;
+    color: #b45309;
 }
 
 .app-layout-container .main-content-wrapper .topbar-wrapper .topbar-actions-wrapper .topbar-icon-btn {
@@ -5907,6 +5951,277 @@ select.student-modal-field-input {
     padding: 6px 12px;
     font-size: 12px;
     white-space: nowrap;
+}
+
+/* =========================================================
+   RESPONSIVE MEDIA QUERIES (1024px and 768px)
+   ========================================================= */
+
+@media (max-width: 1024px) {
+    html,
+    body {
+        overflow-x: hidden;
+    }
+
+    /* Sidebar: compact width on small laptops / tablets */
+    .app-layout-container .sidebar-wrapper:not(.parent-sidebar-wrapper) {
+        width: 220px;
+        padding: 20px 14px;
+        gap: 16px;
+    }
+
+    .app-layout-container .sidebar-wrapper .sidebar-profile-card {
+        padding: 8px 10px;
+    }
+
+    .app-layout-container .sidebar-wrapper .sidebar-nav-wrapper .sidebar-nav-list .sidebar-nav-item .sidebar-nav-link {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    .app-layout-container .main-content-wrapper .dashboard-content-container {
+        padding: 20px 20px;
+    }
+
+    /* Stats row: wrap so cards don't squish */
+    .app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .stats-row-container {
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .stats-row-container .teacher-profile-card {
+        width: 230px;
+        flex-shrink: 0;
+    }
+
+    .app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .stats-row-container .stat-card-grid {
+        flex: 1;
+        min-width: 280px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .stats-row-container .attendance-card {
+        flex: 1 1 100%;
+        min-width: 100%;
+    }
+
+    /* Grids drop to fewer columns */
+    .app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .panels-row-container {
+        grid-template-columns: 1fr;
+    }
+
+    .roster-panel-card .people-card-grid,
+    .people-card-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .programme-grid-container {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* Tables scroll horizontally inside a wrapper */
+    .roster-table-wrapper,
+    .marks-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+@media (max-width: 768px) {
+    html,
+    body {
+        overflow-x: hidden;
+        height: auto;
+    }
+
+    .app-layout-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100vw;
+    }
+
+    /* Sidebar: collapses on mobile for staff portal */
+    .app-layout-container .sidebar-wrapper:not(.parent-sidebar-wrapper) {
+        display: none !important;
+    }
+
+    .app-layout-container .main-content-wrapper {
+        width: 100%;
+        max-width: 100vw;
+        height: auto;
+        overflow-y: visible;
+        overflow-x: hidden;
+    }
+
+    .app-layout-container .main-content-wrapper .topbar-wrapper {
+        padding: 12px 16px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .app-layout-container .main-content-wrapper .dashboard-content-container {
+        padding: 16px 14px;
+        width: 100%;
+        max-width: 100vw;
+        box-sizing: border-box;
+    }
+
+    /* Dashboard stats stack vertically */
+    .app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .stats-row-container {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .stats-row-container .teacher-profile-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .stats-row-container .stat-card-grid {
+        width: 100%;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .stats-row-container .attendance-card {
+        width: 100%;
+    }
+
+    .app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .stats-row-container .attendance-card .attendance-card-body {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+
+    /* Grids drop to single column */
+    .roster-panel-card .people-card-grid,
+    .people-card-grid,
+    .programme-grid-container {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Tables scroll horizontally inside a wrapper */
+    .roster-table-wrapper,
+    .marks-table-wrapper {
+        width: 100%;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        display: block;
+        margin: 0;
+    }
+
+    .roster-table-wrapper .marks-table,
+    .marks-table-wrapper .marks-table {
+        min-width: 650px;
+    }
+
+    .roster-panel-header {
+        flex-direction: column;
+        align-items: stretch !important;
+        gap: 12px;
+    }
+
+    .roster-panel-actions {
+        flex-direction: column;
+        align-items: stretch !important;
+        width: 100%;
+    }
+
+    .roster-filter-wrapper {
+        width: 100%;
+    }
+
+    .roster-filter-wrapper .roster-filter-select {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Login card stacks on phones */
+    .login-page-wrapper {
+        padding: 16px 12px;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .login-page-wrapper .login-card {
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+        min-height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .login-page-wrapper .login-card .login-form-panel {
+        width: 100%;
+        padding: 28px 20px;
+        box-sizing: border-box;
+    }
+
+    .login-page-wrapper .login-card .login-hero-panel {
+        position: relative;
+        height: 130px;
+        order: -1;
+        inset: auto;
+        width: 100%;
+    }
+
+    .login-page-wrapper .login-card .login-hero-panel .login-hero-shape {
+        clip-path: none;
+    }
+
+    .login-page-wrapper .login-card .login-hero-panel .login-hero-content {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 100%;
+        height: 100%;
+        padding: 18px 20px;
+        box-sizing: border-box;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .login-page-wrapper .login-card .login-hero-panel .login-hero-content h2 {
+        font-size: 22px;
+    }
+
+    .login-page-wrapper .login-card .login-hero-panel .login-hero-content p {
+        font-size: 12px;
+        margin-top: 4px;
+        line-height: 1.4;
+    }
+
+    .login-page-wrapper .login-card .login-form-panel .login-form-inner .login-social-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .login-page-wrapper .login-card .login-form-panel .login-form-inner .login-social-row .login-social-wrapper {
+        width: 100%;
+    }
+
+    .login-page-wrapper .login-card .login-form-panel .login-form-inner .login-social-row .login-social-wrapper .login-social-btn {
+        flex: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .app-layout-container .main-content-wrapper .dashboard-content-container .dashboard-content-wrapper .stats-row-container .stat-card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .login-page-wrapper .login-card .login-form-panel {
+        padding: 24px 16px;
+    }
 }
 
 
