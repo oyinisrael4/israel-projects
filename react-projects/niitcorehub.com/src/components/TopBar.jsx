@@ -9,6 +9,7 @@ export default function TopBar({
     searchPlaceholder = "Search",
     searchValue = "",
     onSearchChange,
+    showSearch = false,
     profileAvatar,
     profileName = "Israel Oyinlola",
     profileRole = "Super Admin",
@@ -86,16 +87,18 @@ export default function TopBar({
                 </button>
             )}
 
-            {/* Search */}
-            <div className="topbar-search-box">
-                <i className="bi bi-search"></i>
-                <input
-                    type="text"
-                    placeholder={searchPlaceholder}
-                    value={searchValue}
-                    onChange={onSearchChange}
-                />
-            </div>
+            {/* Search (only shown if explicit showSearch flag is true) */}
+            {showSearch && (
+                <div className="topbar-search-box">
+                    <i className="bi bi-search"></i>
+                    <input
+                        type="text"
+                        placeholder={searchPlaceholder}
+                        value={searchValue}
+                        onChange={onSearchChange}
+                    />
+                </div>
+            )}
 
             {/* Right-side actions */}
             <div className="topbar-actions-wrapper">

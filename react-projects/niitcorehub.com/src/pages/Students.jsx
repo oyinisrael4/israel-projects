@@ -190,8 +190,14 @@ export default function Students() {
 
                         <PageHeading
                             icon="bi-people-fill"
-                            tag="Students"
+                            title="Students"
                             description="Manage student admissions, programmes, and contact details across the institute."
+                            searchValue={searchValue}
+                            onSearchChange={(e) => setSearchValue(e.target.value)}
+                            searchPlaceholder="Search Students Here..."
+                            actionLabel="ADD NEW STUDENT"
+                            actionIcon="bi-plus-square"
+                            onAction={() => setIsDrawerOpen(true)}
                         />
 
                         <div className="page-section-wrapper">
@@ -207,8 +213,6 @@ export default function Students() {
                                             options: allProgrammes.map((p) => ({ value: p, label: p === "all" ? "All Programmes" : p })),
                                         },
                                     ]}
-                                    addLabel="Create New Student"
-                                    onAdd={() => setIsDrawerOpen(true)}
                                 />
 
                                 <div className="roster-table-wrapper">

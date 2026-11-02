@@ -120,8 +120,11 @@ export default function Referrals() {
 
                         <PageHeading
                             icon="bi-arrow-repeat"
-                            tag="Referrals"
+                            title="Referrals"
                             description="View all student referrals made through counselors. Referrals are automatically recorded when a student registers via a counselor's payment link."
+                            searchValue={searchValue}
+                            onSearchChange={(e) => setSearchValue(e.target.value)}
+                            searchPlaceholder="Search Referrals Here..."
                         />
 
                         <div className="page-section-wrapper">

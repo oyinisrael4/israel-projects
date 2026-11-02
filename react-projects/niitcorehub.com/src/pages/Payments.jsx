@@ -179,8 +179,19 @@ export default function Payments() {
 
                         <PageHeading
                             icon="bi-cash-coin"
-                            tag="Payments"
+                            title="Payments"
                             description="Track student payments, generate payment links, and manage tuition records."
+                            searchValue={searchValue}
+                            onSearchChange={(e) => setSearchValue(e.target.value)}
+                            searchPlaceholder="Search Payments Here..."
+                            actionLabel="ADD NEW PAYMENT"
+                            actionIcon="bi-plus-square"
+                            onAction={() => {
+                                setStudentIdInput("");
+                                setFetchedStudent(null);
+                                setFetchError("");
+                                setIsAddModalOpen(true);
+                            }}
                         />
 
                         <div className="page-section-wrapper">
@@ -201,13 +212,6 @@ export default function Payments() {
                                             ],
                                         },
                                     ]}
-                                    addLabel="Add Payment"
-                                    onAdd={() => {
-                                        setStudentIdInput("");
-                                        setFetchedStudent(null);
-                                        setFetchError("");
-                                        setIsAddModalOpen(true);
-                                    }}
                                 />
 
                                 <div className="roster-table-wrapper">

@@ -428,7 +428,7 @@ export function init() {
     // Elements
     const gridContainer = document.getElementById("programmeGrid");
     const countText = document.getElementById("programmeCount");
-    const searchInput = document.querySelector(".topbar-search-box input");
+    const searchInput = document.querySelector(".page-heading-search input") || document.querySelector(".topbar-search-box input");
 
     // Modal elements
     const detailModal = document.getElementById("programmeDetailModal");

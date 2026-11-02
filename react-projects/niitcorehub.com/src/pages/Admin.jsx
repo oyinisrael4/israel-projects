@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import TopBar from "../components/TopBar";
 import PageHeading from "../components/PageHeading";
@@ -32,6 +33,7 @@ const ADMIN_EDIT_FIELDS = [
 ];
 
 export default function Admin() {
+    const navigate = useNavigate();
     const { user } = useAuth();
     const isCounselor =
         (user?.roleName || "").toLowerCase().includes("counselor") ||
@@ -111,9 +113,15 @@ export default function Admin() {
                     <div className="dashboard-content-wrapper">
 
                         <PageHeading
-                            icon="bi-person-badge-fill"
-                            tag="Admin"
-                            description="View and manage administrator accounts, roles, and access across the institute. To add new admins, go to the Staff page and select an Admin role."
+                            icon="bi-people-fill"
+                            title="Administrators"
+                            description="Manage administrator accounts with ease. Assign roles, control access, and oversee activities to keep operations secure and well-organized."
+                            searchValue={searchValue}
+                            onSearchChange={(e) => setSearchValue(e.target.value)}
+                            searchPlaceholder="Search Staff Here..."
+                            actionLabel="ADD NEW STAFF"
+                            actionIcon="bi-plus-square"
+                            onAction={() => navigate("/staff")}
                         />
 
                         <div className="admin-info-banner">

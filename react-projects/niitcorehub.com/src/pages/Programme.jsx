@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import TopBar from "../components/TopBar";
 import PageHeading from "../components/PageHeading";
@@ -20,6 +20,8 @@ const ADMIN_NAV = [
 ];
 
 export default function Programme() {
+    const [searchValue, setSearchValue] = useState("");
+
     useEffect(() => {
         init();
     }, []);
@@ -43,8 +45,23 @@ export default function Programme() {
 
                         <PageHeading
                             icon="bi-list-ul"
-                            tag="Programmes"
-                            description="Manage course curriculum, pricing, duration, and student enrollments."
+                            title="Academic Programmes"
+                            description="Manage course curriculum, pricing, duration, and student enrollments across the institute."
+                            searchValue={searchValue}
+                            onSearchChange={(e) => {
+                                setSearchValue(e.target.value);
+                                const input = document.querySelector(".page-heading-search input");
+                                if (input) {
+                                    input.dispatchEvent(new Event("input", { bubbles: true }));
+                                }
+                            }}
+                            searchPlaceholder="Search Programmes Here..."
+                            actionLabel="ADD NEW PROGRAMME"
+                            actionIcon="bi-plus-square"
+                            onAction={() => {
+                                const addBtn = document.getElementById("addProgrammeBtn");
+                                if (addBtn) addBtn.click();
+                            }}
                         />
 
                         <div className="page-section-wrapper">

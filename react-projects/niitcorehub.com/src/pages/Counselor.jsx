@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import TopBar from "../components/TopBar";
 import PageHeading from "../components/PageHeading";
@@ -32,6 +33,7 @@ const COUNSELOR_EDIT_FIELDS = [
 ];
 
 export default function Counselor() {
+    const navigate = useNavigate();
     const { counselorMembers, updateStaffMember } = useStaffData();
     const [searchValue, setSearchValue] = useState("");
     const [statusFilter, setStatusFilter] = useState("all");
@@ -98,8 +100,14 @@ export default function Counselor() {
 
                         <PageHeading
                             icon="bi-chat-heart-fill"
-                            tag="Counselor"
-                            description="View and oversee student counselors across the institute. Counselors are registered from the Staff page by selecting the Counselor role."
+                            title="Counselors"
+                            description="View and oversee student counselors across the institute. Counselors guide students, handle admissions, and share referral links."
+                            searchValue={searchValue}
+                            onSearchChange={(e) => setSearchValue(e.target.value)}
+                            searchPlaceholder="Search Counselors Here..."
+                            actionLabel="ADD NEW STAFF"
+                            actionIcon="bi-plus-square"
+                            onAction={() => navigate("/staff")}
                         />
 
                         <div className="admin-info-banner">

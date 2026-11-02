@@ -214,8 +214,14 @@ export default function Parents() {
 
                         <PageHeading
                             icon="bi-house-heart-fill"
-                            tag="Parents"
-                            description="Manage parent and guardian contacts. The parent will receive their portal login via email and can add their children themselves."
+                            title="Parents & Guardians"
+                            description="Manage parent and guardian contacts across the institute. The parent will receive their portal login via email and can add their children themselves."
+                            searchValue={searchValue}
+                            onSearchChange={(e) => setSearchValue(e.target.value)}
+                            searchPlaceholder="Search Parents Here..."
+                            actionLabel="ADD NEW PARENT"
+                            actionIcon="bi-plus-square"
+                            onAction={() => setIsDrawerOpen(true)}
                         />
 
                         <div className="page-section-wrapper">
@@ -236,8 +242,6 @@ export default function Parents() {
                                             ],
                                         },
                                     ]}
-                                    addLabel="Add Parent"
-                                    onAdd={() => setIsDrawerOpen(true)}
                                 />
 
                                 <div className="roster-table-wrapper">

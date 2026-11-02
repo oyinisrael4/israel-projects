@@ -229,8 +229,14 @@ export default function Staff() {
 
                         <PageHeading
                             icon="bi-easel2-fill"
-                            tag="Staff"
+                            title="Staff"
                             description="Manage all staff members including tutors, lecturers, administrators, and counselors."
+                            searchValue={searchValue}
+                            onSearchChange={(e) => setSearchValue(e.target.value)}
+                            searchPlaceholder="Search Staff Here..."
+                            actionLabel="ADD NEW STAFF"
+                            actionIcon="bi-plus-square"
+                            onAction={() => setIsDrawerOpen(true)}
                         />
 
                         <div className="page-section-wrapper">
@@ -267,8 +273,6 @@ export default function Staff() {
                                             ],
                                         },
                                     ]}
-                                    addLabel="Create New Staff"
-                                    onAdd={() => setIsDrawerOpen(true)}
                                 />
 
                                 <div className="people-card-grid">

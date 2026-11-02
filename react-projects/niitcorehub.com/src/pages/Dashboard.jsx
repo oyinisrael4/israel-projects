@@ -5,6 +5,7 @@ import PageHeading from "../components/PageHeading";
 import StatCard from "../components/StatCard";
 import PageFooter from "../components/PageFooter";
 import StatusBadge from "../components/StatusBadge";
+import CustomDropdown from "../components/CustomDropdown";
 import { useAuth } from "../context/AuthContext";
 import { useStaffData } from "../context/StaffDataContext";
 import profile1 from "../assets/icon-images/profile-1.png";
@@ -74,6 +75,7 @@ export default function Dashboard() {
     const { user } = useAuth();
     const { allStaff } = useStaffData();
     const [searchValue, setSearchValue] = useState("");
+    const [leaveFilter, setLeaveFilter] = useState("Yearly");
 
     // Compute real counts from existing staff, students, parents, and payments data
     const staffCount = allStaff ? allStaff.length : 11;
@@ -150,9 +152,11 @@ export default function Dashboard() {
 
                         <PageHeading
                             icon="bi-grid-1x2-fill"
-                            tag="Dashboard"
                             title="Admin Dashboard"
                             description="Manage staffs, students, programmes, and everything else happening across the institute from one place."
+                            searchValue={searchValue}
+                            onSearchChange={(e) => setSearchValue(e.target.value)}
+                            searchPlaceholder="Search Dashboard Here..."
                         />
 
                         <div className="stats-row-container">
@@ -253,7 +257,9 @@ export default function Dashboard() {
                             <div className="marks-panel-card">
                                 <div className="panel-card-header">
                                     <h3 className="panel-card-title">Students</h3>
-                                    <i className="bi bi-three-dots-vertical panel-card-menu-icon"></i>
+                                    <button type="button" className="panel-card-menu-btn" title="More options" aria-label="More options">
+                                        <i className="bi bi-three-dots-vertical"></i>
+                                    </button>
                                 </div>
                                 <div className="marks-table-wrapper">
                                     <table className="marks-table">
@@ -302,10 +308,16 @@ export default function Dashboard() {
                             <div className="leave-panel-card">
                                 <div className="panel-card-header">
                                     <h3 className="panel-card-title">Leave Status</h3>
-                                    <select className="attendance-card-select">
-                                        <option>Yearly</option>
-                                        <option>Monthly</option>
-                                    </select>
+                                    <CustomDropdown
+                                        value={leaveFilter}
+                                        onChange={(e) => setLeaveFilter(e.target.value)}
+                                        options={[
+                                            { value: "Yearly", label: "Yearly" },
+                                            { value: "Monthly", label: "Monthly" },
+                                            { value: "Weekly", label: "Weekly" },
+                                        ]}
+                                        minWidth="110px"
+                                    />
                                 </div>
                                 <div className="leave-panel-list">
                                     {LEAVES.map((leave, i) => (
