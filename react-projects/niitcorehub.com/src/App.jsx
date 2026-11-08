@@ -2,6 +2,8 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import Branches from "./pages/Branches";
+import BranchDetails from "./pages/BranchDetails";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
 import Students from "./pages/Students";
@@ -40,6 +42,22 @@ export const router = createBrowserRouter([
     {
         path: "/sign-in",
         element: <Login />
+    },
+    {
+        path: "/branches",
+        element: (
+            <ProtectedRoute>
+                <Branches />
+            </ProtectedRoute>
+        )
+    },
+    {
+        path: "/branches/:branchId",
+        element: (
+            <ProtectedRoute>
+                <BranchDetails />
+            </ProtectedRoute>
+        )
     },
     {
         path: "/dashboard",

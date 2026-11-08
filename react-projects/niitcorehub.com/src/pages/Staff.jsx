@@ -15,6 +15,7 @@ import { useStaffData } from "../context/StaffDataContext";
 import { useAuth } from "../context/AuthContext";
 
 const ADMIN_NAV = [
+    { id: "branches", to: "/branches", icon: "bi-building-fill", label: "Branches" },
     { id: "dashboard", to: "/dashboard", icon: "bi-grid-1x2-fill", label: "Dashboard" },
     { id: "admin", to: "/admin", icon: "bi-person-badge-fill", label: "Admin" },
     { id: "counselor", to: "/counselor", icon: "bi-chat-heart-fill", label: "Counselor" },
