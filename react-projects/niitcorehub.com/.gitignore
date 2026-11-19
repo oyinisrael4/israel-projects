@@ -29,3 +29,7 @@ responsive-tests
 *.njsproj
 *.sln
 *.sw?
+
+# Report assets
+report-assets/
+
